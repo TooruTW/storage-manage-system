@@ -5,7 +5,7 @@
 - Tailwind CSS for layout
 - React Router for routing management
 - TanStack Query for server state management
-- Redux RTK for client state management
+- Zustand for client state management
 
 ## Git Convention
 

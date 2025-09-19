@@ -7,8 +7,8 @@ export const routers = [
     element: <App />,
     children: [
       {
-        path: "/test",
-        element: <div>Test</div>,
+        path: "/home",
+        element: <div>Home</div>,
       },
       {
         path: "/about",
