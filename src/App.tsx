@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Link, Outlet } from "react-router-dom";
+import { useFetchTest } from "./hooks/useFetchTest";
+import { useEffect } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { data, isLoading } = useFetchTest();
+  useEffect(() => {
+    if (isLoading) return;
+    console.log(data);
+  }, [data, isLoading]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="bg-gray-500 w-full h-full min-h-screen flex justify-center items-center flex-col gap-4">
+      <h1 className="text-3xl font-bold underline">This is Tailwind Test</h1>
+      <div className="flex gap-4">
+        <Link to="/home">Home</Link>
+        <Link to="/about">About</Link>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+      <Outlet />
+    </div>
+  );
 }
 
-export default App
+export default App;
