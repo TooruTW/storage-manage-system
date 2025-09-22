@@ -25,7 +25,7 @@ const ButtonContainer = () => {
   return (
     <div className="flex gap-2">
       {buttonList.map((button) => (
-        <Button variant="homePage" key={button.label} onClick={() => navigate(button.path)}>
+        <Button key={button.label} onClick={() => navigate(button.path)}>
           {button.label}
         </Button>
       ))}
