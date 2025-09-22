@@ -9,7 +9,7 @@ export const routers = [
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <Home />,        
       },
       {
         path: "/dashboard",
