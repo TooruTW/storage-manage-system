@@ -1,4 +1,5 @@
 import Layout from "../components/layout";
+import Home from "../components/views/Home";
 
 
 export const routers = [
@@ -8,7 +9,7 @@ export const routers = [
     children: [
       {
         index: true,
-        element: <div>Home</div>,
+        element: <Home />,
       },
       {
         path: "/dashboard",
