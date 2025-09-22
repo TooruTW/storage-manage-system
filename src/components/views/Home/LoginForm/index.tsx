@@ -4,6 +4,7 @@ import { EyeClosed } from "lucide-react";
 import { Eye } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TextContent from "./TextContent";
 
 type Inputs = {
   account: string;
@@ -28,13 +29,7 @@ const LoginForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-5 p-6 rounded-md border-1 border-primary/20 box-shadow-md min-w-75"
     >
-      <div className="flex flex-col gap-3">
-        <h2 className="text-h2 font-bold">登入</h2>
-        <div className="text-label text-primary/60">
-          <p>請輸入帳號密碼</p>
-          <p>如需新增帳號，請聯絡管理員</p>
-        </div>
-      </div>
+      <TextContent />
 
       <label htmlFor="account" className="flex flex-col gap-1">
         <span className="text-label">帳號</span>
@@ -53,7 +48,7 @@ const LoginForm = () => {
       <label htmlFor="password" className="flex flex-col gap-1 ">
         <span className="text-label">密碼</span>
 
-        <div className="border-2 rounded-md px-2 py-1 relative focus-within:border-primary/30"> 
+        <div className="border-2 rounded-md px-2 py-1 relative focus-within:border-primary/30">
           <input
             className=" focus:outline-none"
             type={isPasswordVisible ? "text" : "password"}

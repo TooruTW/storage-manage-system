@@ -9,9 +9,6 @@ const loginButtonList = [
   {
     label: "儀表板",
     path: "/dashboard",
-    onClick: () => {
-      console.log("open dashboard");
-    },
   },
   {
     label: "資料庫",
