@@ -1,36 +1,29 @@
 const unLoginButtonList = [
   {
     label: "登入",
-    onClick: () => {
-      console.log("open login form");
-    },
+    path: "/home/login",
   },
 ];
 
 const loginButtonList = [
   {
     label: "儀表板",
+    path: "/dashboard",
     onClick: () => {
       console.log("open dashboard");
     },
   },
   {
     label: "資料庫",
-    onClick: () => {
-      console.log("open database");
-    },
+    path: "/database",
   },
   {
     label: "新增",
-    onClick: () => {
-      console.log("open create");
-    },
+    path: "/create",
   },
   {
     label: "登出",
-    onClick: () => {
-      console.log("open logout");
-    },
+    path: "/home",
   },
 ];
 

@@ -1,6 +1,5 @@
 import "dayjs/locale/zh-tw";
 import TimeComponent from "./TimeComponent";
-import ButtonContainer from "./ButtonContainer";
 import MainImage from "./MainImage";
 import { Outlet } from "react-router-dom";
 const Home = () => {
@@ -10,7 +9,6 @@ const Home = () => {
       <MainImage />
       <TimeComponent />
       <Outlet />
-      <ButtonContainer />
     </div>
   );
 };
