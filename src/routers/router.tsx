@@ -1,20 +1,27 @@
-import App from "../App";
+import Layout from "../components/layout";
 
 
 export const routers = [
   {
     path: "/",
-    element: <App />,
+    element: <Layout />,
     children: [
       {
-        path: "/home",
+        index: true,
         element: <div>Home</div>,
       },
       {
-        path: "/about",
+        path: "/dashboard",
         element: <div>About</div>,
       },
+      {
+        path:"/database",
+        element: <div>Database</div>,
+      },
+      {
+        path:"/create",
+        element: <div>Create</div>,
+      }
     ],
-  }
-
+  },
 ];
