@@ -3,7 +3,9 @@ import { Header } from "./Header";
 
 const Layout = () => {
     const location = useLocation();
-    const isOpen = location.pathname !== "/";
+    const viewUrl = location.pathname.split("/")[1];
+    const isOpen = viewUrl !== "home";
+    
 
   return (
     <div className="min-h-screen flex flex-col w-full px-12">
