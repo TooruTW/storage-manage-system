@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+
+@theme{
+    --text-paragraph: 16px;
+    --text-paragraph-small: 14px;
+
+    --text-label: 12px;
+
+}

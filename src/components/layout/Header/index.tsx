@@ -40,7 +40,7 @@ export const Header = () => {
       <Box strokeWidth={1} />
       {/* Date and Time */}
       <div>
-        <p>
+        <p className="text-label">
           <span>
             民國<span> {time.year} </span>年<span> {time.month} </span>月
             <span> {time.date} </span> 日 <span>（{time.week}）</span>
