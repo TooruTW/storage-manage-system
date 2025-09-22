@@ -1,12 +1,15 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 
 const Layout = () => {
+    const location = useLocation();
+    const isOpen = location.pathname !== "/";
+
   return (
     <div className="min-h-screen flex flex-col w-full px-12">
-      <div className="w-full py-4">
+      {isOpen && <div className="w-full py-4">
         <Header />
-      </div>
+      </div>}
       <main className="w-full">
         <Outlet />
       </main>
