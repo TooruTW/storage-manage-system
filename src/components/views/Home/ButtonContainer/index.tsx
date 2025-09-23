@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { unLoginButtonList, loginButtonList } from "./constants";
 import { useNavigate } from "react-router-dom";
@@ -19,11 +18,17 @@ const ButtonContainer = () => {
   }, [isLogin]);
 
   return (
-    <div className="flex gap-2">
-      {buttonList.map((button) => (
-        <Button key={button.label} onClick={() => navigate(button.path)}>
+    <div className="flex w-fit max-lg:w-1/3 max-lg:min-w-75 gap-2 max-lg:flex-col max-lg:gap-7">
+      {buttonList.map((button, index) => (
+        <button
+          key={button.label}
+          onClick={() => navigate(button.path)}
+          className={`w-fit p-4 max-lg:w-full text-primary-foreground rounded-md max-lg:py-4 cascade-btn-${
+            100 - index * 10
+          }`}
+        >
           {button.label}
-        </Button>
+        </button>
       ))}
     </div>
   );

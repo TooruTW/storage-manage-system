@@ -72,10 +72,10 @@ const LoginForm = () => {
       </label>
 
       <div className="flex justify-between">
-        <Button variant="cancel" type="button">
+        <Button variant="cancel" className="max-lg:w-1/2" type="button" onClick={() => navigate("/home")}>
           取消
         </Button>
-        <Button type="submit">登入</Button>
+        <Button className="max-lg:w-1/2" type="submit">登入</Button>
       </div>
     </form>
   );
