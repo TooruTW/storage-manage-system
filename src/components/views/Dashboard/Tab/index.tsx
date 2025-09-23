@@ -13,8 +13,8 @@ const Tab = () => {
         <div
           key={item.id}
           className={`rounded-md px-3 py-2 border-2 ${
-            timeRange === item.id && "bg-primary-foreground"
-          } hover:bg-primary-foreground box-shadow-md cursor-pointer `}
+            timeRange === item.id && "bg-primary-foreground shadow-xs"
+          } hover:bg-primary-foreground cursor-pointer `}
           onClick={() => navigate(`/dashboard/${item.id}`)}
         >
           {item.label}
