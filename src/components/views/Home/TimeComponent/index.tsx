@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Time } from "../../layout/Header/type";
+import { Time } from "@/components/layout/Header/type";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-tw";
 import { useEffect } from "react";

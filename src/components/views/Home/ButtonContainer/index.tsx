@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ButtonList } from "./type";
 
 const ButtonContainer = () => {
-  const isLogin = useRef(false);
+  const isLogin = useRef(true);
 
   const navigate = useNavigate();
   const [buttonList, setButtonList] = useState<ButtonList[]>([]);

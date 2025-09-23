@@ -1,7 +1,7 @@
 import "dayjs/locale/zh-tw";
-import TimeComponent from "./TimeComponent";
 import MainImage from "./MainImage";
 import { Outlet, useLocation } from "react-router-dom";
+import TimeComponent from "./TimeComponent";
 
 const Home = () => {
   const location = useLocation();

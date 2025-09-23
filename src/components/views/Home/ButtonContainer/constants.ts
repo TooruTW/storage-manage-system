@@ -8,7 +8,7 @@ const unLoginButtonList = [
 const loginButtonList = [
   {
     label: "儀表板",
-    path: "/dashboard",
+    path: "/dashboard/month/purchaseAmount",
   },
   {
     label: "資料庫",
