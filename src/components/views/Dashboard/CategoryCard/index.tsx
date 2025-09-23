@@ -1,21 +1,29 @@
 import { DollarSign } from "lucide-react";
-import { useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-const FakeCategoryList: AssceptProps[] = [
-  { id: "purchaseAmount", lable: "進貨額", value: 100 },
-  { id: "salesAmount", lable: "營業額", value: 200 },
+const FakeCategoryList: AcceptProps[] = [
+  { id: "purchaseAmount", label: "進貨額", value: 100 },
+  { id: "salesAmount", label: "營業額", value: 200 },
 ];
 
-type AssceptProps = {
+type AcceptProps = {
   id: "purchaseAmount" | "salesAmount";
-  lable: "進貨額" | "營業額";
+  label: "進貨額" | "營業額";
   value: number;
 };
 
 const CategoryCard = () => {
-  const [currentCategory, setCurrentCategory] = useState<
-    "purchaseAmount" | "salesAmount"
-  >("purchaseAmount");
+  const { category } = useParams();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const switchCategory = (category: "purchaseAmount" | "salesAmount") => {
+    const currentPath = location.pathname.split("/");
+    currentPath[3] = category;
+    const newPath = currentPath.join("/");
+    navigate(newPath);
+  };
 
   return (
     <div className="w-full flex gap-7">
@@ -23,15 +31,15 @@ const CategoryCard = () => {
         <div
           key={item.id}
           className={`w-full rounded-md p-6 shadow-xs cursor-pointer ${
-            currentCategory === item.id
+            category === item.id
               ? "bg-primary/20"
               : "border-2 border-primary/10"
           }`}
-          onClick={() => setCurrentCategory(item.id)}
+          onClick={() => switchCategory(item.id)}
         >
           <div>
             <p className="text-paragraph-small flex items-center justify-between">
-              {item.lable}
+              {item.label}
               <DollarSign size={16} className="text-muted-foreground" />
             </p>
           </div>
