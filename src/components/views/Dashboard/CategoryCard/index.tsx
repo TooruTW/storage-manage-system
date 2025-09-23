@@ -1,16 +1,12 @@
 import { DollarSign } from "lucide-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { CategoryProps } from "./type";
 
-const FakeCategoryList: AcceptProps[] = [
+const FakeCategoryList: CategoryProps[] = [
   { id: "purchaseAmount", label: "進貨額", value: 100 },
   { id: "salesAmount", label: "營業額", value: 200 },
 ];
 
-type AcceptProps = {
-  id: "purchaseAmount" | "salesAmount";
-  label: "進貨額" | "營業額";
-  value: number;
-};
 
 const CategoryCard = () => {
   const { category } = useParams();
@@ -18,7 +14,7 @@ const CategoryCard = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const switchCategory = (category: "purchaseAmount" | "salesAmount") => {
+  const switchCategory = (category: CategoryProps["id"]) => {
     const currentPath = location.pathname.split("/");
     currentPath[3] = category;
     const newPath = currentPath.join("/");

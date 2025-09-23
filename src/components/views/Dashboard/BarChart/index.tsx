@@ -29,10 +29,13 @@ const BarChart = () => {
     const [ timeRangeText, setTimeRangeText ] = useState("");
     const [ categoryText, setCategoryText ] = useState("");
 
+    // convert timeRange and category to text
     useEffect(()=>{
         setTimeRangeText(timeRange === "month" ? "月度" : timeRange === "quarter" ? "季度" : "年度");
         setCategoryText(category === "purchaseAmount" ? "進貨額" : "營業額");
+
     },[timeRange, category])
+
   return (
     <div className="w-full h-140 flex flex-col gap-6 border-2 rounded-md p-6 shadow-xs">
       <p className="text-paragraph text-primary/80">{timeRangeText} {categoryText}</p>
