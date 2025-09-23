@@ -3,6 +3,7 @@ export type Time = {
   month: string;
   date: string;
   week: string;
-  hour: number;
-  minute: number;
+  hour?: number;
+  minute?: number;
+  time?: string;
 };

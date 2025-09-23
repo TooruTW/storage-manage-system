@@ -1,5 +1,7 @@
-import Layout from "../components/layout";
-
+import ButtonContainer from "@/components/views/Home/ButtonContainer";
+import Layout from "@/components/layout";
+import Home from "@/components/views/Home";
+import LoginForm from "@/components/views/Home/LoginForm";
 
 export const routers = [
   {
@@ -7,21 +9,25 @@ export const routers = [
     element: <Layout />,
     children: [
       {
-        index: true,
-        element: <div>Home</div>,
+        path: "/home",
+        element: <Home />,
+        children: [
+          { index: true, element: <ButtonContainer /> },
+          { path: "login", element: <LoginForm /> },
+        ],
       },
       {
         path: "/dashboard",
         element: <div>About</div>,
       },
       {
-        path:"/database",
+        path: "/database",
         element: <div>Database</div>,
       },
       {
-        path:"/create",
+        path: "/create",
         element: <div>Create</div>,
-      }
+      },
     ],
   },
 ];
