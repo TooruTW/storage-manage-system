@@ -18,7 +18,7 @@ export const routers = [
         ],
       },
       {
-        path: "/dashboard",
+        path: "/dashboard/:timeRange",
         element: <Dashboard/>,
       },
       {

@@ -1,5 +1,11 @@
+import Tab from "./Tab";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <Tab />
+    </div>
+  );
 };
 
 export default Dashboard;
