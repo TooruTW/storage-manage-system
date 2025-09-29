@@ -8,11 +8,11 @@ const Layout = () => {
     
 
   return (
-    <div className="h-screen flex flex-col w-full px-12 overflow-y-scroll">
+    <div className="h-screen flex flex-col w-full px-12">
       {isOpen && <div className="w-full py-4">
         <Header />
       </div>}
-      <main className="w-full h-full flex justify-center ">
+      <main className="w-full h-full flex justify-center">
         <Outlet />
       </main>
     </div>

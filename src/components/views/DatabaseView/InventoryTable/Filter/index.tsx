@@ -45,8 +45,8 @@ const Filter = ({
       type="text"
       value={(columnFilterValue ?? "") as string}
       onChange={(e) => column.setFilterValue(e.target.value)}
-      placeholder={`Search...`}
-      className="w-36 border shadow rounded"
+      placeholder={`搜尋...`}
+      className="w-36 border shadow rounded px-4 py-1"
     />
   );
 };

@@ -6,15 +6,16 @@ import InventoryTable from "../InventoryTable";
 const CenterSection = () => {
   const { tab } = useParams();
   return (
-    <div className="rounded-xl border border-primary/10 shadow-md w-full p-6">
-      <div className=" flex justify-between items-center">
-        <h2 className="text-h2 font-normal">{TABS_CONSTANTS.find((item) => item.id === tab)?.label}</h2>
-        <div>
-          <input type="Search" />
-        </div>
+    <div className="rounded-xl border border-primary/10 shadow-md w-full p-6 h-full flex flex-col overflow-hidden">
+      <div className=" flex justify-between items-center mb-4">
+        <h2 className="text-h2 font-normal">
+          {TABS_CONSTANTS.find((item) => item.id === tab)?.label}
+        </h2>
       </div>
       {/* <ExampleTable /> */}
-      <InventoryTable />
+      <div className="flex-1 overflow-y-auto">
+        <InventoryTable />
+      </div>
     </div>
   );
 };
