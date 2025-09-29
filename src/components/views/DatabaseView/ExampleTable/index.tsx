@@ -39,10 +39,9 @@ const ExampleTable = () => {
   });
 
   return (
-    <div className="p-2">
-      <div className="h-2" />
-      <table>
-        <thead>
+    <div className=" w-full">
+      <table className="w-full">
+        <thead className="w-full">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
@@ -67,7 +66,7 @@ const ExampleTable = () => {
             </tr>
           ))}
         </thead>
-        <tbody>
+        <tbody className="w-full">
           {table.getRowModel().rows.map((row) => {
             return (
               <tr key={row.id}>
@@ -86,7 +85,6 @@ const ExampleTable = () => {
           })}
         </tbody>
       </table>
-      <div className="h-2" />
 
       <div>{table.getRowModel().rows.length} Rows</div>
     </div>

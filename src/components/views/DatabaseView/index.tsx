@@ -1,7 +1,15 @@
-import ExampleTable from "./ExampleTable";
+import Tabs from "./Tabs";
+import CenterSection from "./CenterSection";
 
 const DatabaseView = () => {
-  return <ExampleTable />;
+  return (
+    <div className="max-w-400 flex flex-col gap-7 items-center">
+      <div className="w-full">
+        <Tabs />
+      </div>
+      <CenterSection />
+    </div>
+  );
 };
 
 export default DatabaseView;
