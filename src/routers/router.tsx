@@ -23,7 +23,7 @@ export const routers = [
         element: <Dashboard/>,
       },
       {
-        path: "/database",
+        path: "/database/:tab",
         element: <DatabaseView/>,
       },
       {
