@@ -3,6 +3,7 @@ import Layout from "@/components/layout";
 import Home from "@/components/views/Home";
 import LoginForm from "@/components/views/Home/LoginForm";
 import Dashboard from "@/components/views/Dashboard";
+import DatabaseView from "@/components/views/DatabaseView";
 
 export const routers = [
   {
@@ -23,7 +24,7 @@ export const routers = [
       },
       {
         path: "/database",
-        element: <div>Database</div>,
+        element: <DatabaseView/>,
       },
       {
         path: "/create",
