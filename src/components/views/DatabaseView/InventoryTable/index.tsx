@@ -9,9 +9,11 @@ import {
 import { FAKE_DATA } from "./constants/data";
 import { columns } from "./Columns";
 import { Filter } from "./Filter";
+import { Button } from "@/components/ui/button";
 
 const InventoryTable = () => {
   const [data, setData] = useState(() => FAKE_DATA);
+  const [isEditing, setIsEditing] = useState(false);
 
   const table = useReactTable({
     data,
@@ -34,8 +36,8 @@ const InventoryTable = () => {
           })
         );
       },
+      isEditing,
     },
-    debugTable: true,
   });
 
   return (
@@ -66,10 +68,10 @@ const InventoryTable = () => {
             </tr>
           ))}
         </thead>
-        <tr>
-          <td colSpan={4} className="h-8"></td>
-        </tr>
         <tbody className="w-full">
+          <tr>
+            <td colSpan={4} className="h-8"></td>
+          </tr>
           {table.getRowModel().rows.map((row) => {
             return (
               <tr key={row.id}>
@@ -77,7 +79,9 @@ const InventoryTable = () => {
                   return (
                     <td
                       key={cell.id}
-                      className="border-y-2 border-primary/10 py-4"
+                      className={`${
+                        isEditing ? "border-2" : "border-y-2"
+                      }  border-primary/10 `}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -92,7 +96,15 @@ const InventoryTable = () => {
         </tbody>
       </table>
 
-      <div>{table.getRowModel().rows.length} Rows</div>
+      <div className="flex justify-between items-center mt-4">
+        <div>共 {table.getRowModel().rows.length} 筆資料</div>
+        <Button
+          className="active:scale-95 transition-all"
+          onClick={() => setIsEditing(!isEditing)}
+        >
+          {isEditing ? "完成" : "編輯"}
+        </Button>
+      </div>
     </div>
   );
 };

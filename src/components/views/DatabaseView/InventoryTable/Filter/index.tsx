@@ -1,12 +1,11 @@
 import { Column, Table } from "@tanstack/react-table";
-import { Person } from "../constants/data";
-
+import { Inventory } from "../type/dataType";
 const Filter = ({
   column,
   table,
 }: {
-  column: Column<Person, unknown>;
-  table: Table<Person>;
+  column: Column<Inventory, unknown>;
+  table: Table<Inventory>;
 }) => {
   const firstValue = table
     .getPreFilteredRowModel()
