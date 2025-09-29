@@ -1,6 +1,7 @@
-import ExampleTable from "../ExampleTable";
+// import ExampleTable from "../ExampleTable";
 import { useParams } from "react-router-dom";
 import { TABS_CONSTANTS } from "../Tabs/constants";
+import InventoryTable from "../InventoryTable";
 
 const CenterSection = () => {
   const { tab } = useParams();
@@ -12,7 +13,8 @@ const CenterSection = () => {
           <input type="Search" />
         </div>
       </div>
-      <ExampleTable />
+      {/* <ExampleTable /> */}
+      <InventoryTable />
     </div>
   );
 };

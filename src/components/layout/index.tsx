@@ -12,7 +12,7 @@ const Layout = () => {
       {isOpen && <div className="w-full py-4">
         <Header />
       </div>}
-      <main className="w-full h-full">
+      <main className="w-full h-full flex justify-center ">
         <Outlet />
       </main>
     </div>
