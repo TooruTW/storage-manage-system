@@ -4,6 +4,8 @@ import Home from "@/components/views/Home";
 import LoginForm from "@/components/views/Home/LoginForm";
 import Dashboard from "@/components/views/Dashboard";
 import DatabaseView from "@/components/views/DatabaseView";
+import InventoryTable from "@/components/views/DatabaseView/InventoryTable";
+import ExampleTable from "@/components/views/DatabaseView/ExampleTable";
 
 export const routers = [
   {
@@ -20,11 +22,61 @@ export const routers = [
       },
       {
         path: "/dashboard/:timeRange/:category",
-        element: <Dashboard/>,
+        element: <Dashboard />,
       },
       {
-        path: "/database/:tab",
-        element: <DatabaseView/>,
+        path: "/database",
+        element: <DatabaseView />,
+        children: [
+          {
+            path: "inventory",
+            element: <InventoryTable />,
+          },
+          {
+            path: "inbound",
+            element: (
+              <div className="p-4 text-center text-gray-500">
+                進貨管理功能開發中...
+              </div>
+            ),
+          },
+          {
+            path: "outbound",
+            element: (
+              <div className="p-4 text-center text-gray-500">
+                出貨管理功能開發中...
+              </div>
+            ),
+          },
+          {
+            path: "consignment",
+            element: (
+              <div className="p-4 text-center text-gray-500">
+                寄庫管理功能開發中...
+              </div>
+            ),
+          },
+          {
+            path: "customer",
+            element: (
+              <div className="p-4 text-center text-gray-500">
+                客戶管理功能開發中...
+              </div>
+            ),
+          },
+          {
+            path: "supplier",
+            element: (
+              <div className="p-4 text-center text-gray-500">
+                進貨商管理功能開發中...
+              </div>
+            ),
+          },
+          {
+            path: "example",
+            element: <ExampleTable />,
+          },
+        ],
       },
       {
         path: "/create",

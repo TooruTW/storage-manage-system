@@ -1,5 +1,6 @@
 import { Column, Table } from "@tanstack/react-table";
 import { Inventory } from "../type/dataType";
+
 const Filter = ({
   column,
   table,

@@ -1,9 +1,12 @@
 import { TABS_CONSTANTS } from "./constants";
-import { useParams, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Tabs = () => {
-  const { tab } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+  // 從路徑中取得當前的 tab
+  const currentTab = location.pathname.split("/").pop();
+
   return (
     <div
       className={`grid grid-cols-6 p-1 border-2 gap-2 rounded-md bg-primary/10 w-1/3`}
@@ -12,7 +15,8 @@ const Tabs = () => {
         <div
           key={item.id}
           className={`py-1 rounded-xl text-center px-2 flex items-center justify-center cursor-pointer ${
-            tab === item.id && "shadow-xs border-2 border-primary/10 bg-white"
+            currentTab === item.id &&
+            "shadow-xs border-2 border-primary/10 bg-white"
           }`}
           onClick={() => navigate(`/database/${item.id}`)}
         >

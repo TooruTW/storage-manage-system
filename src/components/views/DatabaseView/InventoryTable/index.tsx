@@ -15,6 +15,7 @@ const InventoryTable = () => {
   const [data, setData] = useState(() => FAKE_DATA);
   const [isEditing, setIsEditing] = useState(false);
 
+  // 表格設定及其額外功能
   const table = useReactTable({
     data,
     columns,
@@ -42,7 +43,7 @@ const InventoryTable = () => {
 
   return (
     <div
-      className={`w-full flex border-2 flex-col gap-4 ${
+      className={`w-full flex flex-col gap-4 ${
         isEditing && "bg-primary/10"
       }`}
     >
@@ -55,20 +56,25 @@ const InventoryTable = () => {
           {isEditing ? "完成" : "編輯"}
         </Button>
       </div>
+      {/* 表格 */}
       <div className="overflow-x-auto">
         <table className="w-full border-collapse min-w-full">
           <thead className="w-full">
+            {/* Header 組合 */}
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
+                {/* Header 組合內的 Header */}
                 {headerGroup.headers.map((header) => {
                   return (
                     <th key={header.id} colSpan={header.colSpan}>
                       {header.isPlaceholder ? null : (
                         <div className="flex justify-center items-center gap-4">
+                          {/* Header 內容 */}
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
+                          {/* 過濾器 */}
                           {header.column.getCanFilter() ? (
                             <div>
                               <Filter column={header.column} table={table} />
@@ -82,13 +88,17 @@ const InventoryTable = () => {
               </tr>
             ))}
           </thead>
+          {/* 表格內容 */}
           <tbody className="w-full">
+            {/* 表格內容的空行 */}
             <tr>
               <td colSpan={4} className="h-8"></td>
             </tr>
+            {/* 表格內容的行 */}
             {table.getRowModel().rows.map((row) => {
               return (
                 <tr key={row.id}>
+                  {/* 表格內容的行內的單元格 */}
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <td
@@ -97,6 +107,7 @@ const InventoryTable = () => {
                           isEditing ? "border-2" : "border-y-2"
                         }  border-primary/10 `}
                       >
+                        {/* 單元格內容 */}
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
