@@ -5,7 +5,6 @@ import LoginForm from "@/components/views/Home/LoginForm";
 import Dashboard from "@/components/views/Dashboard";
 import DatabaseView from "@/components/views/DatabaseView";
 import InventoryTable from "@/components/views/DatabaseView/InventoryTable";
-import ExampleTable from "@/components/views/DatabaseView/ExampleTable";
 import InboundTable from "@/components/views/DatabaseView/InboundTable";
 import OutboundTable from "@/components/views/DatabaseView/OutboundTable";
 import ConsignmentTable from "@/components/views/DatabaseView/ConsignmentTable";
@@ -56,10 +55,6 @@ export const routers = [
           {
             path: "supplier",
             element: <SupplierTable />,
-          },
-          {
-            path: "example",
-            element: <ExampleTable />,
           },
         ],
       },

@@ -1,4 +1,3 @@
-// import ExampleTable from "../ExampleTable";
 import { Outlet, useLocation } from "react-router-dom";
 import { TABS_CONSTANTS } from "../Tabs/constants";
 
@@ -14,7 +13,6 @@ const CenterSection = () => {
           {TABS_CONSTANTS.find((item) => item.id === currentTab)?.label}
         </h2>
       </div>
-      {/* <ExampleTable /> */}
       <div className="flex-1 overflow-y-auto">
         <Outlet />
       </div>
