@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import { CellType } from "../type/cellType";
+import { CellContext } from "@tanstack/react-table";
 
-
-// Give our default column cell renderer editing superpowers!
-const EditableCell = ({
+// 通用的可編輯單元格組件
+const EditableCell = <TData extends Record<string, unknown>>({
   getValue,
   row: { index },
   column: { id },
   table,
-}: CellType) => {
+}: CellContext<TData, unknown>) => {
   const initialValue = getValue();
+  const isEditing = table.options.meta?.isEditing || false;
+
   // We need to keep and update the state of the cell normally
   const [value, setValue] = useState(initialValue);
 
@@ -28,6 +29,10 @@ const EditableCell = ({
       value={value as string}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
+      className={`w-full text-center h-full py-4 ${
+        !isEditing ? "cursor-text" : "italic"
+      }`}
+      disabled={!isEditing}
     />
   );
 };

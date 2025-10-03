@@ -1,6 +1,6 @@
 import { createColumnHelper, ColumnDef } from "@tanstack/react-table";
 import { Person } from "./type/dataType";
-import EditableCell from "./EditableCell";
+import EditableCell from "../shared/EditableCell";
 
 const columnHelper = createColumnHelper<Person>();
 
