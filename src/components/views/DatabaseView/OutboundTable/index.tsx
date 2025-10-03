@@ -11,7 +11,7 @@ import { columns } from "./Columns";
 import { Filter } from "./Filter";
 import { Button } from "@/components/ui/button";
 
-const InboundTable = () => {
+const OutboundTable = () => {
   const [data, setData] = useState(() => FAKE_DATA);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -68,7 +68,7 @@ const InboundTable = () => {
                   return (
                     <th key={header.id} colSpan={header.colSpan}>
                       {header.isPlaceholder ? null : (
-                        <div className="flex justify-center items-center gap-4">
+                        <div className="flex flex-col justify-center items-center gap-1">
                           {/* Header 內容 */}
                           {flexRender(
                             header.column.columnDef.header,
@@ -125,4 +125,4 @@ const InboundTable = () => {
   );
 };
 
-export default InboundTable;
+export default OutboundTable;
