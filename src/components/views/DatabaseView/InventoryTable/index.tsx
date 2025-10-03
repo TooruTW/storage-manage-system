@@ -77,7 +77,7 @@ const InventoryTable = () => {
                           {/* 過濾器 */}
                           {header.column.getCanFilter() ? (
                             <div>
-                              <Filter column={header.column} table={table} />
+                              <Filter column={header.column} />
                             </div>
                           ) : null}
                         </div>
