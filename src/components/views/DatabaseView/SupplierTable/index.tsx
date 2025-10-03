@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { FAKE_DATA } from "./constants/data";
 import { columns } from "./Columns";
-import { Filter } from "./Filter";
+import { Filter } from "../shared";
 import { Button } from "@/components/ui/button";
 
 const SupplierTable = () => {

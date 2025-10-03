@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { FAKE_DATA } from "./constants/data";
 import { columns } from "./Columns";
-import { Filter } from "./Filter";
+import { Filter } from "../shared";
 import { Button } from "@/components/ui/button";
 
 const OutboundTable = () => {
@@ -43,9 +43,7 @@ const OutboundTable = () => {
 
   return (
     <div
-      className={`w-full flex flex-col gap-4 ${
-        isEditing && "bg-primary/10"
-      }`}
+      className={`w-full flex flex-col gap-4 ${isEditing && "bg-primary/10"}`}
     >
       <div className="flex justify-between items-center mt-4">
         <div>共 {table.getRowModel().rows.length} 筆資料</div>

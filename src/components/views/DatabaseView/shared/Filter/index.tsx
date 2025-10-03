@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Column } from "@tanstack/react-table";
-import { Custom } from "../type/dataType";
 
-const Filter = ({
+interface FilterProps<TData> {
+  column: Column<TData, unknown>;
+}
+
+const Filter = <TData extends Record<string, unknown>>({
   column,
-}: {
-  column: Column<Custom, unknown>;
-}) => {
+}: FilterProps<TData>) => {
   const columnFilterValue = column.getFilterValue();
   const [inputValue, setInputValue] = useState(
     (columnFilterValue ?? "") as string

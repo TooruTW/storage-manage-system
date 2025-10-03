@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { FAKE_DATA } from "./constants/data";
 import { columns } from "./Columns";
-import { Filter } from "./Filter";
+import { Filter } from "../shared";
 
 const ExampleTable = () => {
   const [data, setData] = useState(() => FAKE_DATA);
@@ -55,7 +55,7 @@ const ExampleTable = () => {
                         )}
                         {header.column.getCanFilter() ? (
                           <div>
-                            <Filter column={header.column} table={table} />
+                            <Filter column={header.column} />
                           </div>
                         ) : null}
                       </div>
