@@ -9,6 +9,7 @@ import ExampleTable from "@/components/views/DatabaseView/ExampleTable";
 import InboundTable from "@/components/views/DatabaseView/InboundTable";
 import OutboundTable from "@/components/views/DatabaseView/OutboundTable";
 import ConsignmentTable from "@/components/views/DatabaseView/ConsignmentTable";
+import CustomTable from "@/components/views/DatabaseView/CustomTable";
 
 export const routers = [
   {
@@ -49,11 +50,7 @@ export const routers = [
           },
           {
             path: "customer",
-            element: (
-              <div className="p-4 text-center text-gray-500">
-                客戶管理功能開發中...
-              </div>
-            ),
+            element: <CustomTable />,
           },
           {
             path: "supplier",
