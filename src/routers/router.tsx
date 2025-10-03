@@ -6,6 +6,7 @@ import Dashboard from "@/components/views/Dashboard";
 import DatabaseView from "@/components/views/DatabaseView";
 import InventoryTable from "@/components/views/DatabaseView/InventoryTable";
 import ExampleTable from "@/components/views/DatabaseView/ExampleTable";
+import InboundTable from "@/components/views/DatabaseView/InboundTable";
 
 export const routers = [
   {
@@ -34,11 +35,7 @@ export const routers = [
           },
           {
             path: "inbound",
-            element: (
-              <div className="p-4 text-center text-gray-500">
-                進貨管理功能開發中...
-              </div>
-            ),
+            element: <InboundTable />,
           },
           {
             path: "outbound",

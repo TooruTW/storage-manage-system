@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { Column } from "@tanstack/react-table";
-import { Inventory } from "../type/dataType";
+import { Inbound } from "../type/dataType";
 
-const Filter = ({
-  column,
-}: {
-  column: Column<Inventory, unknown>;
-}) => {
+const Filter = ({ column }: { column: Column<Inbound, unknown> }) => {
   const columnFilterValue = column.getFilterValue();
   const [inputValue, setInputValue] = useState(
     (columnFilterValue ?? "") as string
