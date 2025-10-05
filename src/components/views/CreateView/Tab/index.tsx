@@ -18,7 +18,7 @@ const Tab = () => {
       {CREATE_TAB_CONSTANTS.map((item) => (
         <div
           key={item.id}
-          className={`rounded-md px-3 py-2 border-2 text-center ${
+          className={`rounded-md px-3 py-1 border-2 text-center ${
               createTab === item.id && "bg-primary-foreground shadow-xs"
           } hover:bg-primary-foreground cursor-pointer `}
           onClick={() => switchCreateTab(item.id)}
