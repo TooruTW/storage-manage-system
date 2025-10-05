@@ -10,6 +10,7 @@ import OutboundTable from "@/components/views/DatabaseView/OutboundTable";
 import ConsignmentTable from "@/components/views/DatabaseView/ConsignmentTable";
 import CustomTable from "@/components/views/DatabaseView/CustomTable";
 import SupplierTable from "@/components/views/DatabaseView/SupplierTable";
+import CreateView from "@/components/views/CreateView";
 
 export const routers = [
   {
@@ -60,7 +61,7 @@ export const routers = [
       },
       {
         path: "/create",
-        element: <div>Create</div>,
+        element: <CreateView />,
       },
     ],
   },
