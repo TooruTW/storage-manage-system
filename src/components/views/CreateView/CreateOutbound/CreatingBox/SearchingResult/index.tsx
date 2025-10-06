@@ -4,7 +4,7 @@ import Results from "./Results";
 
 const SearchingResult = () => {
   const [currentTab, setCurrentTab] = useState<"all" | "purchaseHistory">(
-    "all"
+    "purchaseHistory"
   );
   return (
     <div className="flex flex-col gap-2 h-full  min-h-0">
