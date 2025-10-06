@@ -4,24 +4,26 @@ import StringCell from "../Cell/StringCell";
 import NumberCell from "../Cell/NumberCell";
 import MoneyCell from "../Cell/MoneyCell";
 import SelecterCell from "../Cell/SelecterCell";
+import CalcTotalCell from "../Cell/CalcTotalCell";
+import ReadOnlyCell from "../Cell/ReadOnlyCell";
 
 const columnHelper = createColumnHelper<CreateOutbound>();
 
 const columns = [
   columnHelper.accessor("customerName", {
-    cell: StringCell,
+    cell: ReadOnlyCell,
     header: "客戶名",
     enableColumnFilter: true,
     size: 120,
   }),
   columnHelper.accessor("productName", {
-    cell: StringCell,
+    cell: ReadOnlyCell,
     header: "商品名",
     enableColumnFilter: true,
     size: 200,
   }),
   columnHelper.accessor("unit", {
-    cell: StringCell,
+    cell: ReadOnlyCell,
     header: "單位",
     enableColumnFilter: false,
     size: 50,
@@ -32,7 +34,6 @@ const columns = [
     enableColumnFilter: false,
     size: 100,
   }),
-
   columnHelper.accessor("pricePerUnit", {
     cell: MoneyCell,
     header: "單位價格 $",
@@ -46,7 +47,7 @@ const columns = [
     size: 50,
   }),
   columnHelper.accessor("totalPrice", {
-    cell: MoneyCell,
+    cell: CalcTotalCell,
     header: "小計 $",
     enableColumnFilter: false,
     size: 100,
