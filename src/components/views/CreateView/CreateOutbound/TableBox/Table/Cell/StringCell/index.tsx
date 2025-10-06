@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { CellContext } from "@tanstack/react-table";
 
 // 通用的可編輯單元格組件
-const SelecterCell = <TData extends Record<string, unknown>>({
+const StringCell = <TData extends Record<string, unknown>>({
   getValue,
   row: { index },
   column: { id },
@@ -24,19 +24,13 @@ const SelecterCell = <TData extends Record<string, unknown>>({
   }, [initialValue]);
 
   return (
-    <select
-      value={value as "consignmentOut" | "consignmentIn" | "gift" | "costError" | ""}
+    <input
+      value={value as string}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
       className="w-full text-center h-full py-4 cursor-text"
-    >
-      <option value=""></option>
-      <option value="consignmentOut">出庫</option>
-      <option value="consignmentIn">寄庫</option>
-      <option value="gift">贈品</option>
-      <option value="costError">成本異常</option>
-    </select>
+    />
   );
 };
 
-export default SelecterCell;
+export default StringCell;

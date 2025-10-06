@@ -11,7 +11,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-15",
     totalPrice: 70000,
     netProfit: 20000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "李小華",
@@ -23,7 +23,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-16",
     totalPrice: 45000,
     netProfit: 10000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "張三豐",
@@ -35,7 +35,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-17",
     totalPrice: 114000,
     netProfit: 30000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "陳美麗",
@@ -59,7 +59,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-19",
     totalPrice: 32000,
     netProfit: 8000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "黃淑芬",
@@ -71,7 +71,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-20",
     totalPrice: 30000,
     netProfit: 8000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "劉建國",
@@ -83,7 +83,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-21",
     totalPrice: 50000,
     netProfit: 10000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "吳雅婷",
@@ -95,7 +95,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-22",
     totalPrice: 33000,
     netProfit: 9000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "鄭文傑",
@@ -107,7 +107,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-23",
     totalPrice: 24000,
     netProfit: 6000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "周美玲",
@@ -119,7 +119,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-24",
     totalPrice: 75000,
     netProfit: 15000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "蔡明哲",
@@ -131,7 +131,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-25",
     totalPrice: 45000,
     netProfit: 10000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "許雅芳",
@@ -143,7 +143,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-26",
     totalPrice: 25000,
     netProfit: 7000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "楊志偉",
@@ -155,7 +155,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-27",
     totalPrice: 26000,
     netProfit: 6000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "趙淑娟",
@@ -167,7 +167,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-28",
     totalPrice: 55000,
     netProfit: 10000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "孫建宏",
@@ -179,7 +179,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-29",
     totalPrice: 40000,
     netProfit: 10000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "馬麗華",
@@ -191,7 +191,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-01-30",
     totalPrice: 24000,
     netProfit: 6000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "朱志明",
@@ -203,7 +203,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-01",
     totalPrice: 16000,
     netProfit: 4000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "胡雅琳",
@@ -215,7 +215,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-02",
     totalPrice: 9000,
     netProfit: 2000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "郭文雄",
@@ -227,7 +227,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-03",
     totalPrice: 65000,
     netProfit: 15000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "何美惠",
@@ -239,7 +239,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-04",
     totalPrice: 16000,
     netProfit: 4000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "羅志祥",
@@ -251,7 +251,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-05",
     totalPrice: 22000,
     netProfit: 6000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "葉淑芬",
@@ -263,7 +263,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-06",
     totalPrice: 21000,
     netProfit: 6000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "鄧建華",
@@ -275,7 +275,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-07",
     totalPrice: 10000,
     netProfit: 2000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "蘇雅婷",
@@ -287,7 +287,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-08",
     totalPrice: 16000,
     netProfit: 4000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "梁志偉",
@@ -299,7 +299,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-09",
     totalPrice: 18000,
     netProfit: 4000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "馮美玲",
@@ -335,7 +335,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-12",
     totalPrice: 16500,
     netProfit: 4500,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "潘志明",
@@ -347,7 +347,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-13",
     totalPrice: 25000,
     netProfit: 7000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "范淑娟",
@@ -359,7 +359,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-14",
     totalPrice: 22000,
     netProfit: 6000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "方建宏",
@@ -371,7 +371,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-15",
     totalPrice: 32000,
     netProfit: 7000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "石麗華",
@@ -383,7 +383,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-16",
     totalPrice: 16000,
     netProfit: 4000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "白志明",
@@ -395,7 +395,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-17",
     totalPrice: 21000,
     netProfit: 6000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "田雅琳",
@@ -407,7 +407,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-18",
     totalPrice: 11000,
     netProfit: 3000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "史文雄",
@@ -419,7 +419,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-19",
     totalPrice: 19200,
     netProfit: 5200,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "金美惠",
@@ -431,7 +431,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-20",
     totalPrice: 17500,
     netProfit: 5000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "錢志祥",
@@ -443,7 +443,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-21",
     totalPrice: 8400,
     netProfit: 2400,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "孔淑芬",
@@ -455,7 +455,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-22",
     totalPrice: 13200,
     netProfit: 4200,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "毛建國",
@@ -467,7 +467,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-23",
     totalPrice: 10000,
     netProfit: 2800,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "邱雅婷",
@@ -479,7 +479,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-24",
     totalPrice: 8400,
     netProfit: 2400,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "秦志偉",
@@ -491,7 +491,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-25",
     totalPrice: 14400,
     netProfit: 4800,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "尤美玲",
@@ -503,7 +503,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-26",
     totalPrice: 10500,
     netProfit: 3000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "許建國",
@@ -515,7 +515,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-27",
     totalPrice: 14000,
     netProfit: 4000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "何雅芳",
@@ -527,7 +527,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-02-28",
     totalPrice: 8800,
     netProfit: 2800,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "呂志明",
@@ -539,7 +539,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-03-01",
     totalPrice: 8400,
     netProfit: 2400,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "施淑娟",
@@ -551,7 +551,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-03-02",
     totalPrice: 11000,
     netProfit: 3000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "張建宏",
@@ -563,7 +563,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-03-03",
     totalPrice: 10500,
     netProfit: 3000,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "孔麗華",
@@ -575,7 +575,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-03-04",
     totalPrice: 13200,
     netProfit: 4200,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "曹志明",
@@ -587,7 +587,7 @@ const FAKE_DATA: CreateOutbound[] = [
     shipmentDate: "2024-03-05",
     totalPrice: 11200,
     netProfit: 3200,
-    remark: null,
+    remark: "",
   },
   {
     customerName: "嚴雅琳",
