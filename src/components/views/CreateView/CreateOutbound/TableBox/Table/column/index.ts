@@ -1,11 +1,12 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { CreateOutbound } from "../type";
-import StringCell from "../Cell/StringCell";
 import NumberCell from "../Cell/NumberCell";
 import MoneyCell from "../Cell/MoneyCell";
 import SelecterCell from "../Cell/SelecterCell";
 import CalcTotalCell from "../Cell/CalcTotalCell";
 import ReadOnlyCell from "../Cell/ReadOnlyCell";
+import CalcProfitCell from "../Cell/CalcProfit";
+import DateCell from "../Cell/DateCell";
 
 const columnHelper = createColumnHelper<CreateOutbound>();
 
@@ -53,7 +54,7 @@ const columns = [
     size: 100,
   }),
   columnHelper.accessor("netProfit", {
-    cell: MoneyCell,
+    cell: CalcProfitCell,
     header: "損益 $",
     enableColumnFilter: false,
     size: 100,
@@ -65,7 +66,7 @@ const columns = [
     size: 100,
   }),
   columnHelper.accessor("shipmentDate", {
-    cell: StringCell,
+    cell: DateCell,
     header: "出貨日期",
     enableColumnFilter: true,
     size: 100,

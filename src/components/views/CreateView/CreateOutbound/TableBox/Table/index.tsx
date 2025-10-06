@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { columns } from "./column";
-import data from "./data/inedx";
+import data from "./data/index";
 import { CreateOutbound } from "./type";
 
 const Table = () => {
