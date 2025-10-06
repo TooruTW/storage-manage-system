@@ -2,12 +2,14 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Name from "./Name";
 import { FormDataType } from "./type";
 import Address from "./Address";
+import PhoneNumber from "./PhoneNumber";
 
 export default function App() {
   const {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm<FormDataType>();
   const onSubmit: SubmitHandler<FormDataType> = (data) => console.log(data);
@@ -24,6 +26,7 @@ export default function App() {
       {/* register your input into the hook by invoking the "register" function */}
       <Name register={register} errors={errors} />
       <Address register={register} errors={errors} />
+      <PhoneNumber register={register} errors={errors} control={control} />
       <input type="submit" />
     </form>
   );
