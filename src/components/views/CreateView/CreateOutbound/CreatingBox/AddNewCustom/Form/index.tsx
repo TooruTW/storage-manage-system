@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Name from "./Name";
 import { FormDataType } from "./type";
+import Address from "./Address";
 
 export default function App() {
   const {
@@ -22,7 +23,7 @@ export default function App() {
       <h2 className="text-h2">新增客戶</h2>
       {/* register your input into the hook by invoking the "register" function */}
       <Name register={register} errors={errors} />
-
+      <Address register={register} errors={errors} />
       <input type="submit" />
     </form>
   );
