@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { FAKE_CUSTOM_LIST } from "./constants/FAKE_CUSTOM_LIST";
+type SearchCustomProps = {
+  setIsAddNewCustom: (isAddNewCustom: boolean) => void;
+};
 
-const SearchCustom = () => {
+const SearchCustom = ({ setIsAddNewCustom }: SearchCustomProps) => {
   const [customList, setCustomList] = useState<string[]>([]);
   const [keyword, setKeyword] = useState<string>("");
   useEffect(() => {
@@ -12,7 +15,7 @@ const SearchCustom = () => {
 
   return (
     <>
-      <p className="text-label underline underline-offset-4 decoration-inherit text-right text-primary/50 hover:text-primary/70 cursor-pointer">
+      <p onClick={() => setIsAddNewCustom(true)} className="text-label underline underline-offset-4 decoration-inherit text-right text-primary/50 hover:text-primary/70 cursor-pointer">
         找不到客戶嗎？按此新增客戶
       </p>
       <div className="flex gap-2 w-full relative">
