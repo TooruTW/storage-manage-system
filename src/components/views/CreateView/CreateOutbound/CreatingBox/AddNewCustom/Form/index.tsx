@@ -20,14 +20,14 @@ export default function App() {
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col gap-2 bg-white rounded-md p-4 border-1 border-primary/10"
+      className="flex flex-col gap-4 bg-white rounded-md p-4 border-1 border-primary/10"
     >
       <h2 className="text-h2">新增客戶</h2>
       {/* register your input into the hook by invoking the "register" function */}
       <Name register={register} errors={errors} />
       <Address register={register} errors={errors} />
       <PhoneNumber register={register} errors={errors} control={control} />
-      <input type="submit" />
+      <input type="submit" className="bg-primary/20 hover:bg-primary/30 rounded-md px-2 py-1" />
     </form>
   );
 }

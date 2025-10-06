@@ -64,12 +64,12 @@ const PhoneNumber = ({ register, errors, control }: FormComponentProps) => {
       {/* 顯示格式錯誤訊息 */}
       {errors.landlinePhone?.type === "pattern" && (
         <span className="w-full text-center text-label text-destructive">
-          市話格式錯誤，請輸入正確格式
+          市話格式錯誤，請輸入正確格式 ex: 02-12345678
         </span>
       )}
       {errors.mobilePhone?.type === "pattern" && (
         <span className="w-full text-center text-label text-destructive">
-          手機格式錯誤，請輸入正確格式
+          手機格式錯誤，請輸入正確格式 ex: 0912-345-678
         </span>
       )}
 

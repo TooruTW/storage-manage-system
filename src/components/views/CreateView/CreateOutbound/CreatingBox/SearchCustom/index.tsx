@@ -22,7 +22,7 @@ const SearchCustom = ({ setIsAddNewCustom }: SearchCustomProps) => {
         <h2 className="text-h2">客戶：</h2>
         <input
           type="text"
-          className="border-b-1 border-primary/10 py-1 px-2 shadow-xs"
+          className="border-b-1 border-primary/10 py-1 px-2 shadow-xs w-full"
           placeholder="請輸入客戶名稱"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}

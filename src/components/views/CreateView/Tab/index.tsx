@@ -1,9 +1,10 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { CREATE_TAB_CONSTANTS } from "./constants";
 
 
 const Tab = () => {
-  const { createTab } = useParams();
+  const location = useLocation();
+  const createTab = location.pathname.split("/").pop();
   const navigate = useNavigate();
   const switchCreateTab = (createTab: "outbound" | "inbound" | "customer" | "supplier") => {
     const currentPath = location.pathname.split("/");
