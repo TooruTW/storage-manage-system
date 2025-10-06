@@ -9,7 +9,7 @@ const Tab = ({ currentTab, setCurrentTab }: TabProps) => {
 
   return (
     <div
-      className={`grid grid-cols-2 gap-2 p-1 border-2 rounded-md bg-primary/10 w-full`}
+      className="grid grid-cols-2 gap-2 p-1 border-2 rounded-md bg-primary/10 w-full "
     >
       {OUTBOUND_SEARCHING_TAB_CONSTANTS.map((item) => (
         <div

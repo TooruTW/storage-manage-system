@@ -13,22 +13,26 @@ const Results = ({ currentTab, keyword }: ResultsProps) => {
 
   useEffect(() => {
     if (currentTab === "all") {
-      setResults(FAKE_CONSTANTS_ALL.filter((result) => result.includes(keyword)));
+      setResults(
+        FAKE_CONSTANTS_ALL.filter((result) => result.includes(keyword))
+      );
     } else {
-      setResults(FAKE_CONSTANTS_PURCHASE_HISTORY.filter((result) => result.includes(keyword)));
+      setResults(
+        FAKE_CONSTANTS_PURCHASE_HISTORY.filter((result) =>
+          result.includes(keyword)
+        )
+      );
     }
   }, [currentTab, keyword]);
 
   return (
-    <div
-      className="grid grid-cols-1 overflow-y-auto h-full border-1 border-primary/10 rounded-md divide-y-1 divide-primary/10"
-    >
+    <ul className="flex flex-col overflow-y-auto border-1 border-primary/10 rounded-md h-160 divide-y-1 divide-primary/10">
       {results.map((result) => (
-        <h4 key={result} className="text-h4 text-center py-2">
+        <li key={result} className="text-paragraph text-center py-2 hover:bg-primary/10 cursor-pointer">
           {result}
-        </h4>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 

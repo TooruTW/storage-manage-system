@@ -3,11 +3,9 @@ import { Outlet } from "react-router-dom";
 
 const CreateView = () => {
   return (
-    <div className="h-full w-full flex flex-col justify-center gap-4 shadow-xs py-5 max-h-240">
+    <div className="h-full w-full flex flex-col gap-4 shadow-xs py-5">
       <Tab />
-      <div className="w-full h-full">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   );
 };

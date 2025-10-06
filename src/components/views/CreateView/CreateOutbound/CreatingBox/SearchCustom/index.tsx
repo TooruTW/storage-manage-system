@@ -14,7 +14,7 @@ const SearchCustom = ({ setIsAddNewCustom }: SearchCustomProps) => {
   }, [keyword]);
 
   return (
-    <>
+    <div className="">
       <p onClick={() => setIsAddNewCustom(true)} className="text-label underline underline-offset-4 decoration-inherit text-right text-primary/50 hover:text-primary/70 cursor-pointer">
         找不到客戶嗎？按此新增客戶
       </p>
@@ -40,7 +40,7 @@ const SearchCustom = ({ setIsAddNewCustom }: SearchCustomProps) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 

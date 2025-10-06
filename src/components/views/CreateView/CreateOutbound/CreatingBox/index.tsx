@@ -6,13 +6,15 @@ import AddNewCustom from "./AddNewCustom";
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
   return (
-    <div className="flex flex-col gap-2">
-    <h1 className="text-h1">出貨</h1>
-    <div className="border-1 border-primary rounded-md p-4 shadow-xs h-full text-nowrap flex flex-col gap-2  w-fit relative min-w-100 overflow-hidden">
-      <SearchCustom setIsAddNewCustom={setIsAddNewCustom} />
-      <SearchingResult />
-      {isAddNewCustom && <AddNewCustom setIsAddNewCustom={setIsAddNewCustom} />}
-    </div>
+    <div className="flex flex-col gap-2 h-full w-fit">
+      <h1 className="text-h1">出貨</h1>
+      <div className="border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative min-w-100 overflow-hidden">
+        <SearchCustom setIsAddNewCustom={setIsAddNewCustom} />
+        <SearchingResult />
+        {isAddNewCustom && (
+          <AddNewCustom setIsAddNewCustom={setIsAddNewCustom} />
+        )}
+      </div>
     </div>
   );
 };
