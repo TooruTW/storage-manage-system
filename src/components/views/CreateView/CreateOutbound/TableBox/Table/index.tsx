@@ -3,13 +3,32 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
+import { useState } from "react";
 import { columns } from "./column";
 import data from "./data/inedx";
+import { CreateOutbound } from "./type";
+
 const Table = () => {
+  const [tableData, setTableData] = useState<CreateOutbound[]>(data);
+
   const table = useReactTable({
-    data,
+    data: tableData,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      updateData: (rowIndex: number, columnId: string, value: unknown) => {
+        setTableData((prev) =>
+          prev.map((row, index) =>
+            index === rowIndex
+              ? {
+                  ...row,
+                  [columnId]: value,
+                }
+              : row
+          )
+        );
+      },
+    },
   });
   return (
     <div className="w-full h-220 px-4 overflow-y-auto">
