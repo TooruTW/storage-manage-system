@@ -18,7 +18,7 @@ const Table = () => {
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="">
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th key={header.id} style={{ width: header.getSize() }}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -34,7 +34,7 @@ const Table = () => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td key={cell.id} style={{ width: cell.column.getSize() }}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
