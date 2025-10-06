@@ -8,7 +8,7 @@ const CreatingBox = () => {
   return (
     <div className="flex flex-col gap-2 h-full w-fit">
       <h1 className="text-h1">出貨</h1>
-      <div className="border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative min-w-100 overflow-hidden">
+      <div className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden ${isAddNewCustom && "w-100"}`}>
         <SearchCustom setIsAddNewCustom={setIsAddNewCustom} />
         <SearchingResult />
         {isAddNewCustom && (
