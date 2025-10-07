@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { CreateOutbound } from "../components/views/CreateView/CreateOutbound/type";
+import { CreateOutbound } from "@/components/views/CreateView/CreateOutbound/type";
 import { getData } from "@/components/views/CreateView/CreateOutbound/TableBox/Table/data";
 
 type CreateOutboundStore = {
@@ -9,6 +9,7 @@ type CreateOutboundStore = {
   removeCreateOutbound: (index: number) => void;
   updateCreateOutbound: (index: number, updateOutbound: CreateOutbound) => void;
   resetCreateOutbound: () => void;
+  saveCreateOutbound: () => void;
 };
 
 const useCreateOutbound = create<CreateOutboundStore>((set, get) => ({

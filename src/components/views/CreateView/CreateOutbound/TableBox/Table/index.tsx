@@ -3,30 +3,25 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
-import { useState } from "react";
 import { columns } from "./column";
-import { getData } from "./data/index";
-import { CreateOutbound } from "../../type";
+import useCreateOutbound from "@/stores/useCreateOutbound";
 
 const Table = () => {
-  const [tableData, setTableData] = useState<CreateOutbound[]>(getData());
+  const { createOutbound, updateCreateOutbound, saveCreateOutbound } =
+    useCreateOutbound();
 
   const table = useReactTable({
-    data: tableData,
+    data: createOutbound,
     columns,
     getCoreRowModel: getCoreRowModel(),
     meta: {
       updateData: (rowIndex: number, columnId: string, value: unknown) => {
-        setTableData((prev) =>
-          prev.map((row, index) =>
-            index === rowIndex
-              ? {
-                  ...row,
-                  [columnId]: value,
-                }
-              : row
-          )
-        );
+        const updatedRow = {
+          ...createOutbound[rowIndex],
+          [columnId]: value,
+        };
+        updateCreateOutbound(rowIndex, updatedRow);
+        saveCreateOutbound();
       },
     },
   });
