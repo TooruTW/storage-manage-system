@@ -5,13 +5,40 @@ import AddNewCustom from "./AddNewCustom";
 import { useForm } from "react-hook-form";
 import { CreateOutbound } from "../type";
 import { SubmitHandler } from "react-hook-form";
+import dayjs from "dayjs";
+import { getData } from "../TableBox/Table/data";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
   const { handleSubmit, control, setValue } = useForm<CreateOutbound>();
 
+  const addDataToLocalStorage = (data: CreateOutbound) => {
+    const prevLocalStorageData = localStorage.getItem("createOutbound");
+    let newDataDate = dayjs().format("YYYY-MM-DD");
+    if (prevLocalStorageData && prevLocalStorageData.length > 0) {
+      const formateData = JSON.parse(prevLocalStorageData);
+      newDataDate = formateData[formateData.length - 1].shipmentDate;
+    }
+    const newData: CreateOutbound = {
+      customerName: data.customerName,
+      productName: data.productName,
+      unit: data.unit,
+      costPerUnit: data.costPerUnit,
+      quantity: 0,
+      pricePerUnit: 0,
+      shipmentDate: newDataDate,
+      totalPrice: 0,
+      netProfit: 0,
+      remark: "",
+    };
+    console.log(newData);
+    const newDataList = [newData, ...getData()];
+
+    localStorage.setItem("createOutbound", JSON.stringify(newDataList));
+  };
+
   const onSubmit: SubmitHandler<CreateOutbound> = (data) => {
-    console.log(data);
+    addDataToLocalStorage(data);
   };
 
   return (

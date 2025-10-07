@@ -5,11 +5,11 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { columns } from "./column";
-import data from "./data/index";
+import { getData } from "./data/index";
 import { CreateOutbound } from "../../type";
 
 const Table = () => {
-  const [tableData, setTableData] = useState<CreateOutbound[]>(data);
+  const [tableData, setTableData] = useState<CreateOutbound[]>(getData());
 
   const table = useReactTable({
     data: tableData,
