@@ -7,6 +7,7 @@ import CalcTotalCell from "../Cell/CalcTotalCell";
 import ReadOnlyCell from "../Cell/ReadOnlyCell";
 import CalcProfitCell from "../Cell/CalcProfit";
 import DateCell from "../Cell/DateCell";
+import DeleteCell from "../Cell/DeleteCell";
 
 const columnHelper = createColumnHelper<CreateOutbound>();
 
@@ -70,6 +71,12 @@ const columns = [
     header: "出貨日期",
     enableColumnFilter: true,
     size: 100,
+  }),
+  columnHelper.display({
+    id: "actions",
+    cell: DeleteCell,
+    header: "刪除",
+    size: 80,
   }),
 ];
 

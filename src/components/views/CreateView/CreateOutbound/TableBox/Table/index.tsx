@@ -47,7 +47,7 @@ const Table = () => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr key={row.id} className="relative">
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} style={{ width: cell.column.getSize() }}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
