@@ -16,7 +16,7 @@ const CreatingBox = () => {
     let newDataDate = dayjs().format("YYYY-MM-DD");
     const prevData = useCreateOutbound.getState().createOutbound;
 
-    if(prevData && prevData.length > 0){
+    if (prevData && prevData.length > 0) {
       newDataDate = prevData[prevData.length - 1].shipmentDate;
     }
 
@@ -42,9 +42,8 @@ const CreatingBox = () => {
   };
 
   return (
-    <form
+    <div
       className="flex flex-col gap-2 h-full w-fit"
-      onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-h1">出貨</h1>
       <div
@@ -52,16 +51,21 @@ const CreatingBox = () => {
           isAddNewCustom && "w-100"
         }`}
       >
-        <SearchCustom setIsAddNewCustom={setIsAddNewCustom} control={control} />
-        <SearchingResult
-          setValue={setValue}
-          onSubmit={handleSubmit(onSubmit)}
-        />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <SearchCustom
+            setIsAddNewCustom={setIsAddNewCustom}
+            control={control}
+          />
+          <SearchingResult
+            setValue={setValue}
+            onSubmit={handleSubmit(onSubmit)}
+          />
+        </form>
         {isAddNewCustom && (
           <AddNewCustom setIsAddNewCustom={setIsAddNewCustom} />
         )}
       </div>
-    </form>
+    </div>
   );
 };
 

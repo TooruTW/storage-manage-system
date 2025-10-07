@@ -8,13 +8,11 @@ export default function App() {
   const {
     register,
     handleSubmit,
-    watch,
     control,
     formState: { errors },
   } = useForm<FormDataType>();
   const onSubmit: SubmitHandler<FormDataType> = (data) => console.log(data);
 
-  console.log(watch("storeName")); // watch input value by passing the name of it
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
