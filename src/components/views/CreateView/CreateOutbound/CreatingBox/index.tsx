@@ -7,6 +7,8 @@ import { CreateOutbound } from "../type";
 import { SubmitHandler } from "react-hook-form";
 import dayjs from "dayjs";
 import useCreateOutbound from "@/stores/useCreateOutbound";
+import { Button } from "@/components/ui/button";
+import useLoading from "@/stores/useLoading";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
@@ -41,11 +43,25 @@ const CreatingBox = () => {
     addDataToLocalStorage(data);
   };
 
+  const handleUpload = async () => {
+    useLoading.getState().startLoading();
+    const data = useCreateOutbound.getState().createOutbound;
+    console.log("上傳");
+    console.log(data);
+
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    useCreateOutbound.getState().resetCreateOutbound();
+    useCreateOutbound.getState().saveCreateOutbound();
+    useLoading.getState().endLoading();
+  };
+
   return (
-    <div
-      className="flex flex-col gap-2 h-full w-fit"
-    >
-      <h1 className="text-h1">出貨</h1>
+    <div className="flex flex-col gap-2 h-full w-fit">
+      <div className=" flex items-center justify-between">
+        <h1 className="text-h1 ">出貨</h1>
+        <Button onClick={handleUpload}>上傳</Button>
+      </div>
       <div
         className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden ${
           isAddNewCustom && "w-100"
