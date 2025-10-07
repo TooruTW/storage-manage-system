@@ -27,7 +27,10 @@ export default function App() {
       <Name register={register} errors={errors} />
       <Address register={register} errors={errors} />
       <PhoneNumber register={register} errors={errors} control={control} />
-      <input type="submit" className="bg-primary/20 hover:bg-primary/30 rounded-md px-2 py-1" />
+      <input
+        type="submit"
+        className="bg-primary/20 hover:bg-primary/30 rounded-md px-2 py-1"
+      />
     </form>
   );
 }

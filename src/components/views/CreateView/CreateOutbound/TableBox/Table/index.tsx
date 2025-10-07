@@ -30,6 +30,7 @@ const Table = () => {
       },
     },
   });
+  
   return (
     <div className="w-full h-220 px-4 overflow-y-auto">
       <table className="w-full ">
