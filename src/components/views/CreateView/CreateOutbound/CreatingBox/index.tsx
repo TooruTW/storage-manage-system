@@ -8,12 +8,7 @@ import { SubmitHandler } from "react-hook-form";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<CreateOutbound>();
+  const { handleSubmit, control, setValue } = useForm<CreateOutbound>();
 
   const onSubmit: SubmitHandler<CreateOutbound> = (data) => {
     console.log(data);
@@ -31,7 +26,10 @@ const CreatingBox = () => {
         }`}
       >
         <SearchCustom setIsAddNewCustom={setIsAddNewCustom} control={control} />
-        <SearchingResult />
+        <SearchingResult
+          setValue={setValue}
+          onSubmit={handleSubmit(onSubmit)}
+        />
         {isAddNewCustom && (
           <AddNewCustom setIsAddNewCustom={setIsAddNewCustom} />
         )}

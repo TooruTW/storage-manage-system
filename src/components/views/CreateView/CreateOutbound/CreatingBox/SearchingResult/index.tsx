@@ -2,12 +2,20 @@ import { useState } from "react";
 import Tab from "./Tab";
 import Results from "./Results";
 import { Search } from "lucide-react";
+import { UseFormSetValue } from "react-hook-form";
+import { CreateOutbound } from "../../type";
 
-const SearchingResult = () => {
+type SearchingResultProps = {
+  setValue: UseFormSetValue<CreateOutbound>;
+  onSubmit: () => void;
+};
+
+const SearchingResult = ({ setValue, onSubmit }: SearchingResultProps) => {
   const [currentTab, setCurrentTab] = useState<"all" | "purchaseHistory">(
     "purchaseHistory"
   );
   const [keyword, setKeyword] = useState("");
+
   return (
     <div className="flex flex-col justify-between h-full min-h-0">
       <div className="relative">
@@ -20,8 +28,13 @@ const SearchingResult = () => {
           onChange={(e) => setKeyword(e.target.value)}
         />
       </div>
-        <Tab currentTab={currentTab} setCurrentTab={setCurrentTab} />
-        <Results currentTab={currentTab} keyword={keyword} />
+      <Tab currentTab={currentTab} setCurrentTab={setCurrentTab} />
+      <Results
+        currentTab={currentTab}
+        keyword={keyword}
+        setValue={setValue}
+        onSubmit={onSubmit}
+      />
     </div>
   );
 };
