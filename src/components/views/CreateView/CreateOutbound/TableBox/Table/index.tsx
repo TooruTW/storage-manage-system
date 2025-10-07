@@ -6,7 +6,7 @@ import {
 import { useState } from "react";
 import { columns } from "./column";
 import data from "./data/index";
-import { CreateOutbound } from "./type";
+import { CreateOutbound } from "../../type";
 
 const Table = () => {
   const [tableData, setTableData] = useState<CreateOutbound[]>(data);
@@ -30,7 +30,7 @@ const Table = () => {
       },
     },
   });
-  
+
   return (
     <div className="w-full h-220 px-4 overflow-y-auto">
       <table className="w-full ">

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CellContext } from "@tanstack/react-table";
-import { CreateOutbound } from "../../type";
+import { CreateOutbound } from "../../../../type";
 
 // 計算總價的單元格組件
 const CalcTotalCell = <TData extends Record<string, unknown>>({

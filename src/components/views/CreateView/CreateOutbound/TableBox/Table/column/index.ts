@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { CreateOutbound } from "../type";
+import { CreateOutbound } from "../../../type";
 import NumberCell from "../Cell/NumberCell";
 import MoneyCell from "../Cell/MoneyCell";
 import SelecterCell from "../Cell/SelecterCell";

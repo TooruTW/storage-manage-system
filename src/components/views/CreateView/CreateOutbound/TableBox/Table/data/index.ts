@@ -1,4 +1,4 @@
-import { CreateOutbound } from "../type";
+import { CreateOutbound } from "../../../type";
 
 // const FAKE_DATA: CreateOutbound[] = [
 //   {
