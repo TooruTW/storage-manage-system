@@ -13,6 +13,7 @@ import SupplierTable from "@/components/views/DatabaseView/SupplierTable";
 import CreateView from "@/components/views/CreateView";
 import { Navigate } from "react-router-dom";
 import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
+import CreateInbound from "@/components/views/CreateView/CreateInbound";
 
 export const routers = [
   {
@@ -79,7 +80,7 @@ export const routers = [
           },
           {
             path: "inbound",
-            element: <div>InboundCreate is coming soon</div>,
+            element: <CreateInbound />,
           },
           {
             path: "customer",
