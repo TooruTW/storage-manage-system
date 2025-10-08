@@ -14,7 +14,7 @@ const Tab = () => {
   };
   return (
     <div
-      className={`grid grid-cols-4 gap-2 p-1 border-2 rounded-md bg-primary/10 w-fit`}
+      className={`grid grid-cols-2 gap-2 p-1 border-2 rounded-md bg-primary/10 w-fit`}
     >
       {CREATE_TAB_CONSTANTS.map((item) => (
         <div

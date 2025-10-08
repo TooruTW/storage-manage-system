@@ -82,14 +82,7 @@ export const routers = [
             path: "inbound",
             element: <CreateInbound />,
           },
-          {
-            path: "customer",
-            element: <div>CustomerCreate is coming soon</div>,
-          },
-          {
-            path: "supplier",
-            element: <div>SupplierCreate is coming soon</div>,
-          },
+         
         ]
       },
     ],
