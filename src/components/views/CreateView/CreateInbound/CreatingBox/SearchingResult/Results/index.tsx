@@ -38,7 +38,7 @@ const Results = ({ keyword, setValue, onSubmit }: ResultsProps) => {
   };
 
   return (
-    <ul className="flex flex-col overflow-y-auto border-1 border-primary/10 rounded-md h-160 divide-y-1 divide-primary/10">
+    <ul className="flex flex-col overflow-y-auto border-1 border-primary/10 rounded-md h-150 divide-y-1 divide-primary/10">
       {results.map((result) => (
         <li
           key={result.productName}

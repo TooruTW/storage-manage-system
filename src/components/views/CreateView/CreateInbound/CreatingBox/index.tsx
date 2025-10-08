@@ -12,8 +12,10 @@ import dayjs from "dayjs";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
-  const { handleSubmit, control, setValue } = useForm<CreateInbound>();
+  const { handleSubmit, control, setValue, formState } =
+    useForm<CreateInbound>();
 
+  // 新增資料到本地儲存
   const addDataToLocalStorage = (data: CreateInbound) => {
     let newDataDate = dayjs().format("YYYY-MM-DD");
     const prevData = useCreateInbound.getState().createInbound;
@@ -37,10 +39,12 @@ const CreatingBox = () => {
     useCreateInbound.getState().saveCreateInbound();
   };
 
+  // 提交表單
   const onSubmit: SubmitHandler<CreateInbound> = (data) => {
     addDataToLocalStorage(data);
   };
 
+  // 上傳資料
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateInbound.getState().createInbound;
@@ -72,6 +76,7 @@ const CreatingBox = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <SearchSupplier
             control={control}
+            error={formState.errors.supplierName}
           />
           <SearchingResult
             setValue={setValue}
