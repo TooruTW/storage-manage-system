@@ -31,19 +31,19 @@ const columns = [
   }),
   columnHelper.accessor("quantity", {
     cell: NumberCell,
-    header: "數量",
+    header: "數量 ",
     enableColumnFilter: false,
     size: 50,
   }),
   columnHelper.accessor("pricePerUnit", {
     cell: MoneyCell,
-    header: "單價",
+    header: "單價 $",
     enableColumnFilter: false,
     size: 100,
   }),
   columnHelper.accessor("totalPrice", {
     cell: CalcTotalCell,
-    header: "小計",
+    header: "小計 $",
     enableColumnFilter: false,
     size: 100,
   }),

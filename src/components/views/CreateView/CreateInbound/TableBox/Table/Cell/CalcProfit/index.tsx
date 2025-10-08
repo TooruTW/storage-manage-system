@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CellContext } from "@tanstack/react-table";
-import { CreateOutbound } from "../../../../type";
+import { CreateInbound } from "../../../../type";
 
 // 計算總價的單元格組件
 const CalcProfitCell = <TData extends Record<string, unknown>>({
@@ -22,27 +22,31 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
   }
 
   // 從原始數據獲取數量和單價
-  const rowData = original as unknown as CreateOutbound;
+  const rowData = original as unknown as CreateInbound;
   const quantity = rowData?.quantity || 0;
-  const costPerUnit = rowData?.costPerUnit || 0;
+  const pricePerUnit = rowData?.pricePerUnit || 0;
   const totalPrice = rowData?.totalPrice || 0;
 
   // 計算總價
-  const calculatedTotalCost = calculateTotal(quantity, costPerUnit, totalPrice);
+  const calculatedTotalCost = calculateTotal(
+    quantity,
+    pricePerUnit,
+    totalPrice
+  );
 
   // We need to keep and update the state of the cell normally
   const [value, setValue] = useState<string>(formatValue(calculatedTotalCost));
 
   // 當數量或單價改變時，重新計算總價
   useEffect(() => {
-    const newTotal = calculateTotal(quantity, costPerUnit, totalPrice);
+    const newTotal = calculateTotal(quantity, pricePerUnit, totalPrice);
     setValue(formatValue(newTotal));
 
     // 更新表格數據中的 totalPrice
     if (table.options.meta?.updateData) {
       table.options.meta.updateData(index, id, newTotal);
     }
-  }, [quantity, costPerUnit, totalPrice, index, id, table]);
+  }, [quantity, pricePerUnit, totalPrice, index, id, table]);
 
   return (
     <div

@@ -1,48 +1,38 @@
 import { useEffect, useState } from "react";
-import {
-  FAKE_CONSTANTS_ALL,
-  FAKE_CONSTANTS_PURCHASE_HISTORY,
-} from "./FAKE_CONSTANTS";
+import { FAKE_CONSTANTS_ALL } from "./FAKE_CONSTANTS";
 import { UseFormSetValue } from "react-hook-form";
-import { CreateOutbound } from "../../../type";
+import { CreateInbound } from "../../../type";
 
 type ResultsProps = {
-  currentTab: "all" | "purchaseHistory";
   keyword: string;
-  setValue: UseFormSetValue<CreateOutbound>;
+  setValue: UseFormSetValue<CreateInbound>;
   onSubmit: () => void;
 };
 
 type ProductItem = {
   productName: string;
   unit: string;
-  costPerUnit: number;
 };
 
-const Results = ({ currentTab, keyword, setValue, onSubmit }: ResultsProps) => {
+const Results = ({ keyword, setValue, onSubmit }: ResultsProps) => {
   const [results, setResults] = useState<ProductItem[]>([]);
 
   useEffect(() => {
-    if (currentTab === "all") {
+    if (keyword === "") {
+      setResults(FAKE_CONSTANTS_ALL);
+    } else {
       setResults(
         FAKE_CONSTANTS_ALL.filter((result) =>
           result.productName.includes(keyword)
         )
       );
-    } else {
-      setResults(
-        FAKE_CONSTANTS_PURCHASE_HISTORY.filter((result) =>
-          result.productName.includes(keyword)
-        )
-      );
     }
-  }, [currentTab, keyword]);
+  }, [keyword]);
 
   const handleClickItem = (item: ProductItem) => {
     // 填入商品名稱、單位和成本單價
     setValue("productName", item.productName);
     setValue("unit", item.unit);
-    setValue("costPerUnit", item.costPerUnit);
     // 自動提交表單
     onSubmit();
   };

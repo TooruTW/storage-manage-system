@@ -1,16 +1,16 @@
 import { CellContext } from "@tanstack/react-table";
 import { Trash2 } from "lucide-react";
-import useCreateOutbound from "@/stores/useCreateOutbound";
+import useCreateInbound from "@/stores/useCreateInbound";
 
 // 刪除按鈕單元格組件
 const DeleteCell = <TData extends Record<string, unknown>>({
   row,
 }: CellContext<TData, unknown>) => {
-  const { removeCreateOutbound, saveCreateOutbound } = useCreateOutbound();
+  const { removeCreateInbound, saveCreateInbound } = useCreateInbound();
 
   const handleDelete = () => {
-    removeCreateOutbound(row.index);
-    saveCreateOutbound();
+    removeCreateInbound(row.index);
+    saveCreateInbound();
   };
 
   return (

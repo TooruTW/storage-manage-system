@@ -1,75 +1,76 @@
 import { useState } from "react";
 import SearchingResult from "./SearchingResult";
-import SearchCustom from "./SearchCustom";
-import AddNewCustom from "./AddNewCustom";
+import SearchSupplier from "./SearchSupplier";
+import AddNewSupplier from "./AddNewSupplier";
 import { useForm } from "react-hook-form";
-import { CreateOutbound } from "../type";
+import { CreateInbound } from "../type";
 import { SubmitHandler } from "react-hook-form";
-import dayjs from "dayjs";
-import useCreateOutbound from "@/stores/useCreateOutbound";
+import useCreateInbound from "@/stores/useCreateInbound";
 import { Button } from "@/components/ui/button";
 import useLoading from "@/stores/useLoading";
+import dayjs from "dayjs";
 
 const CreatingBox = () => {
-  const [isAddNewCustom, setIsAddNewCustom] = useState(false);
-  const { handleSubmit, control, setValue } = useForm<CreateOutbound>();
+  const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
+  const { handleSubmit, control, setValue } = useForm<CreateInbound>();
 
-  const addDataToLocalStorage = (data: CreateOutbound) => {
+  const addDataToLocalStorage = (data: CreateInbound) => {
     let newDataDate = dayjs().format("YYYY-MM-DD");
-    const prevData = useCreateOutbound.getState().createOutbound;
+    const prevData = useCreateInbound.getState().createInbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].shipmentDate;
+      newDataDate = prevData[prevData.length - 1].lastInboundDate;
     }
 
-    const newData: CreateOutbound = {
-      customerName: data.customerName,
+    const newData: CreateInbound = {
+      supplierName: data.supplierName,
       productName: data.productName,
       unit: data.unit,
-      costPerUnit: data.costPerUnit,
       quantity: 0,
       pricePerUnit: 0,
-      shipmentDate: newDataDate,
       totalPrice: 0,
-      netProfit: 0,
       remark: "",
+      lastInboundDate: newDataDate,
     };
 
-    useCreateOutbound.getState().addCreateOutbound(newData);
-    useCreateOutbound.getState().saveCreateOutbound();
+    useCreateInbound.getState().addCreateInbound(newData);
+    useCreateInbound.getState().saveCreateInbound();
   };
 
-  const onSubmit: SubmitHandler<CreateOutbound> = (data) => {
+  const onSubmit: SubmitHandler<CreateInbound> = (data) => {
     addDataToLocalStorage(data);
   };
 
   const handleUpload = async () => {
     useLoading.getState().startLoading();
-    const data = useCreateOutbound.getState().createOutbound;
+    const data = useCreateInbound.getState().createInbound;
     console.log("上傳");
     console.log(data);
 
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    useCreateOutbound.getState().resetCreateOutbound();
-    useCreateOutbound.getState().saveCreateOutbound();
+    useCreateInbound.getState().resetCreateInbound();
+    useCreateInbound.getState().saveCreateInbound();
     useLoading.getState().endLoading();
   };
 
   return (
     <div className="flex flex-col gap-2 h-full w-fit">
       <div className=" flex items-center justify-between">
-        <h1 className="text-h1 ">出貨</h1>
+        <h1 className="text-h1 ">進貨</h1>
         <Button onClick={handleUpload}>上傳</Button>
       </div>
       <div
-        className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden ${
-          isAddNewCustom && "w-100"
-        }`}
+        className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden w-100`}
       >
+        <p
+          onClick={() => setIsAddNewSupplier(true)}
+          className="text-label underline underline-offset-4 decoration-inherit text-right text-primary/50 hover:text-primary/70 cursor-pointer"
+        >
+          找不到進貨商嗎？按此新增進貨商
+        </p>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <SearchCustom
-            setIsAddNewCustom={setIsAddNewCustom}
+          <SearchSupplier
             control={control}
           />
           <SearchingResult
@@ -77,8 +78,8 @@ const CreatingBox = () => {
             onSubmit={handleSubmit(onSubmit)}
           />
         </form>
-        {isAddNewCustom && (
-          <AddNewCustom setIsAddNewCustom={setIsAddNewCustom} />
+        {isAddNewSupplier && (
+          <AddNewSupplier setIsAddNewSupplier={setIsAddNewSupplier} />
         )}
       </div>
     </div>
