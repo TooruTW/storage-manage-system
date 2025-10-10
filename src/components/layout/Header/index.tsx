@@ -3,6 +3,7 @@ import { Box } from "lucide-react";
 import type { Time } from "./type";
 import dayjs from "dayjs";
 import converter from "number-to-chinese-words";
+import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [time, setTime] = useState<Time>({
@@ -13,7 +14,7 @@ export const Header = () => {
     hour: 0,
     minute: 0,
   });
-
+  const navigate = useNavigate();
   const updateTime = () => {
     const now = dayjs();
     const year = converter.toWords(now.year() - 1911);
@@ -37,7 +38,7 @@ export const Header = () => {
 
   return (
     <div className="flex items-center justify-start gap-4">
-      <Box strokeWidth={1} />
+      <Box className="cursor-pointer" strokeWidth={1} onClick={() => navigate("/home")}/>
       {/* Date and Time */}
       <div>
         <p className="text-label">

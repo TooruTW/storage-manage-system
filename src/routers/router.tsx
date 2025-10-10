@@ -15,12 +15,14 @@ import { Navigate } from "react-router-dom";
 import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
 import CreateInbound from "@/components/views/CreateView/CreateInbound";
 import MobileDatabaseView from "@/components/views/MobileDatabaseView";
-
+import Logout from "@/components/views/Logout";
+  
 export const routers = [
   {
     path: "/",
     element: <Layout />,
     children: [
+      { index: true, element: <Navigate to="/home" replace /> },
       {
         path: "/home",
         element: <Home />,
@@ -28,6 +30,10 @@ export const routers = [
           { index: true, element: <ButtonContainer /> },
           { path: "login", element: <LoginForm /> },
         ],
+      },
+      {
+        path: "/logout",
+        element: <Logout />,
       },
       {
         path: "/dashboard/:timeRange/:category",
@@ -87,8 +93,7 @@ export const routers = [
             path: "inbound",
             element: <CreateInbound />,
           },
-         
-        ]
+        ],
       },
     ],
   },
