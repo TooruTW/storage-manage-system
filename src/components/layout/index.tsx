@@ -10,7 +10,7 @@ const Layout = () => {
   const { loading } = useLoading();
 
   return (
-    <div className="h-screen flex flex-col w-full px-12">
+    <div className="h-screen flex flex-col w-full px-12 max-md:px-4">
       {isOpen && (
         <div className="w-full py-4 h-fit">
           <Header />
