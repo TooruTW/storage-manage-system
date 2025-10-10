@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { unLoginButtonList, loginButtonList, mobileLoginButtonList } from "./constants";
 import { useNavigate } from "react-router-dom";
 import { ButtonList } from "./type";
+import { useAccountStore } from "@/stores/useAccountState";
 
 const ButtonContainer = () => {
-  const isLogin = useRef(true);
-
+  const isLogin = useAccountStore.getState().isLogin;
   const navigate = useNavigate();
   const [buttonList, setButtonList] = useState<ButtonList[]>([]);
   const [isMobile, setIsMobile] = useState(false);
@@ -14,7 +14,7 @@ const ButtonContainer = () => {
     setIsMobile(media);
   }, []);
   useEffect(() => {
-    if (!isLogin.current) {
+    if (!isLogin) {
       setButtonList(unLoginButtonList);
     } else {
       if (isMobile) {
