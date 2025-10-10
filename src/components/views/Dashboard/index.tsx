@@ -4,7 +4,7 @@ import BarChart from "./BarChart";
 
 const Dashboard = () => {
   return (
-    <div className="h-full flex flex-col justify-center gap-7 shadow-xs">
+    <div className="h-full w-full flex flex-col justify-center gap-7 shadow-xs">
       <Tab />
       <CategoryCard />
       <BarChart />

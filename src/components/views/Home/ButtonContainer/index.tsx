@@ -1,21 +1,29 @@
-import { useEffect, useRef, useState } from "react";
-import { unLoginButtonList, loginButtonList } from "./constants";
+import { useEffect, useState } from "react";
+import { unLoginButtonList, loginButtonList, mobileLoginButtonList } from "./constants";
 import { useNavigate } from "react-router-dom";
 import { ButtonList } from "./type";
+import { useAccountStore } from "@/stores/useAccountState";
 
 const ButtonContainer = () => {
-  const isLogin = useRef(true);
-
+  const isLogin = useAccountStore.getState().isLogin;
   const navigate = useNavigate();
   const [buttonList, setButtonList] = useState<ButtonList[]>([]);
-
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    if (!isLogin.current) {
+    const media = navigator.userAgent.includes("Mobile");
+    setIsMobile(media);
+  }, []);
+  useEffect(() => {
+    if (!isLogin) {
       setButtonList(unLoginButtonList);
     } else {
-      setButtonList(loginButtonList);
+      if (isMobile) {
+        setButtonList(mobileLoginButtonList);
+      } else {
+        setButtonList(loginButtonList);
+      }
     }
-  }, [isLogin]);
+  }, [isLogin, isMobile]);
 
   return (
     <div className="flex w-fit max-lg:w-1/3 max-lg:min-w-75 gap-2 max-lg:flex-col max-lg:gap-7">

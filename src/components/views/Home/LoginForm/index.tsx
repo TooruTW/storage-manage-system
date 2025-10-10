@@ -5,6 +5,8 @@ import { Eye } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextContent from "./TextContent";
+import { useAccountStore } from "@/stores/useAccountState";
+import dayjs from "dayjs";
 
 type Inputs = {
   account: string;
@@ -18,8 +20,17 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm<Inputs>();
   const navigate = useNavigate();
+
+  const handleLogin = (data: Inputs) => {
+    // 與後端確認後登入驗證，驗證成功後登入
+    useAccountStore.getState().setIsLogin(true);
+    useAccountStore.getState().setUser(data.account);
+    useAccountStore.getState().setLastLogin(dayjs().format("YYYY-MM-DD HH:mm:ss"));
+  };
+
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
+    handleLogin(data);
     navigate("/home");
   };
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
