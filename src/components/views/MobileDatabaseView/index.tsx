@@ -27,7 +27,7 @@ const MobileDatabaseView = () => {
         <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
       <SearchArea object={object} setObject={setObject} product={product} setProduct={setProduct} />
-      <ResultArea />
+      <ResultArea object={object} product={product} />
       <ArrowLeft className="size-10 absolute left-0 bottom-4 rounded-full bg-primary/10 p-2 shadow-md" />
     </div>
   );
