@@ -3,7 +3,7 @@ import SearchArea from "./SearchArea";
 import ResultArea from "./ResultArea";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MobileDatabaseView = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ const MobileDatabaseView = () => {
   useEffect(()=>{
     setIsOpen(false);
   },[tab])
-    
+  const navigate = useNavigate();
 
   return (
     <div className="h-full w-full flex flex-col gap-4 relative">
@@ -28,7 +28,7 @@ const MobileDatabaseView = () => {
       </div>
       <SearchArea object={object} setObject={setObject} product={product} setProduct={setProduct} />
       <ResultArea object={object} product={product} />
-      <ArrowLeft className="size-10 absolute left-0 bottom-4 rounded-full bg-primary/10 p-2 shadow-md" />
+      <ArrowLeft className="size-10 absolute left-0 bottom-4 rounded-full bg-primary/10 p-2 shadow-md" onClick={() => navigate("/home")}/>
     </div>
   );
 };
