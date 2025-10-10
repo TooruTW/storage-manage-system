@@ -68,7 +68,7 @@ export const routers = [
         ],
       },
       {
-        path: "/mobile-database",
+        path: "/mobile-database/:tab",
         element: <MobileDatabaseView />,
       },
       {
