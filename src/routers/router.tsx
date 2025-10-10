@@ -14,6 +14,7 @@ import CreateView from "@/components/views/CreateView";
 import { Navigate } from "react-router-dom";
 import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
 import CreateInbound from "@/components/views/CreateView/CreateInbound";
+import MobileDatabaseView from "@/components/views/MobileDatabaseView";
 
 export const routers = [
   {
@@ -65,6 +66,10 @@ export const routers = [
             element: <SupplierTable />,
           },
         ],
+      },
+      {
+        path: "/mobile-database/:tab",
+        element: <MobileDatabaseView />,
       },
       {
         path: "/create",
