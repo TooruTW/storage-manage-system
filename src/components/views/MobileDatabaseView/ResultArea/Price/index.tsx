@@ -23,7 +23,7 @@ const Price = ({ object, product }: PriceProps) => {
       {data.map(
         (item) => {
           return (
-            <li className="w-full flex gap-2 items-center  rounded-md border-1 border-primary/10 p-2">
+            <li key={item.productName} className="w-full flex gap-2 items-center  rounded-md border-1 border-primary/10 p-2">
               <div className="w-1/5 text-balance">
                 {item.customerName.split(" ").map((item) => (
                   <p key={item}>{item}</p>
@@ -46,7 +46,7 @@ const Price = ({ object, product }: PriceProps) => {
                     <span className="self-end">$ {item.costPerUnit}</span>
                   </div>
                   <div className="flex justify-end items-center">
-                    <p className="text-label">{item.lastInboundDate}</p>
+                    <p className="text-label">{item.lastOutboundDate}</p>
                   </div>
                 </div>
               </div>

@@ -7,7 +7,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "包",
     costPerUnit: 350,
     pricePerUnit: 450,
-    lastInboundDate: "2025-10-05",
+    lastOutboundDate: "2025-10-05",
   },
   {
     customerName: "台北 信義商行",
@@ -15,7 +15,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 280,
     pricePerUnit: 380,
-    lastInboundDate: "2025-10-03",
+    lastOutboundDate: "2025-10-03",
   },
   {
     customerName: "台中 建國百貨",
@@ -23,7 +23,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 420,
     pricePerUnit: 550,
-    lastInboundDate: "2025-10-07",
+    lastOutboundDate: "2025-10-07",
   },
   {
     customerName: "台南 中正行",
@@ -31,7 +31,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "提",
     costPerUnit: 180,
     pricePerUnit: 250,
-    lastInboundDate: "2025-10-01",
+    lastOutboundDate: "2025-10-01",
   },
   {
     customerName: "桃園 大同商行",
@@ -39,7 +39,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 520,
     pricePerUnit: 680,
-    lastInboundDate: "2025-10-04",
+    lastOutboundDate: "2025-10-04",
   },
   {
     customerName: "新北 文化行",
@@ -47,7 +47,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 380,
     pricePerUnit: 500,
-    lastInboundDate: "2025-10-06",
+    lastOutboundDate: "2025-10-06",
   },
   {
     customerName: "台中 復興百貨",
@@ -55,7 +55,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 290,
     pricePerUnit: 390,
-    lastInboundDate: "2025-10-02",
+    lastOutboundDate: "2025-10-02",
   },
   {
     customerName: "高雄 三民行",
@@ -63,7 +63,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 160,
     pricePerUnit: 220,
-    lastInboundDate: "2025-10-08",
+    lastOutboundDate: "2025-10-08",
   },
   {
     customerName: "台北 南港商行",
@@ -71,7 +71,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 450,
     pricePerUnit: 600,
-    lastInboundDate: "2025-10-05",
+    lastOutboundDate: "2025-10-05",
   },
   {
     customerName: "新竹 東門行",
@@ -79,7 +79,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 340,
     pricePerUnit: 450,
-    lastInboundDate: "2025-10-03",
+    lastOutboundDate: "2025-10-03",
   },
   {
     customerName: "台南 永康商行",
@@ -87,7 +87,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 280,
     pricePerUnit: 380,
-    lastInboundDate: "2025-10-09",
+    lastOutboundDate: "2025-10-09",
   },
   {
     customerName: "基隆 仁愛行",
@@ -95,7 +95,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 220,
     pricePerUnit: 300,
-    lastInboundDate: "2025-10-01",
+    lastOutboundDate: "2025-10-01",
   },
   {
     customerName: "高雄 鳳山百貨",
@@ -103,7 +103,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 380,
     pricePerUnit: 500,
-    lastInboundDate: "2025-10-07",
+    lastOutboundDate: "2025-10-07",
   },
   {
     customerName: "台北 松山行",
@@ -111,7 +111,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 420,
     pricePerUnit: 560,
-    lastInboundDate: "2025-10-04",
+    lastOutboundDate: "2025-10-04",
   },
   {
     customerName: "嘉義 中山商行",
@@ -119,7 +119,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "提",
     costPerUnit: 180,
     pricePerUnit: 250,
-    lastInboundDate: "2025-10-06",
+    lastOutboundDate: "2025-10-06",
   },
   {
     customerName: "屏東 潮州行",
@@ -127,7 +127,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 560,
     pricePerUnit: 720,
-    lastInboundDate: "2025-10-02",
+    lastOutboundDate: "2025-10-02",
   },
   {
     customerName: "桃園 中壢商行",
@@ -135,7 +135,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 640,
     pricePerUnit: 850,
-    lastInboundDate: "2025-10-08",
+    lastOutboundDate: "2025-10-08",
   },
   {
     customerName: "台中 西屯百貨",
@@ -143,7 +143,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 320,
     pricePerUnit: 450,
-    lastInboundDate: "2025-10-05",
+    lastOutboundDate: "2025-10-05",
   },
   {
     customerName: "新北 板橋行",
@@ -151,7 +151,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 280,
     pricePerUnit: 380,
-    lastInboundDate: "2025-10-03",
+    lastOutboundDate: "2025-10-03",
   },
   {
     customerName: "台南 安平商行",
@@ -159,7 +159,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 480,
     pricePerUnit: 650,
-    lastInboundDate: "2025-10-09",
+    lastOutboundDate: "2025-10-09",
   },
   {
     customerName: "花蓮 中華行",
@@ -167,7 +167,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 420,
     pricePerUnit: 560,
-    lastInboundDate: "2025-10-01",
+    lastOutboundDate: "2025-10-01",
   },
   {
     customerName: "宜蘭 羅東百貨",
@@ -175,7 +175,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 360,
     pricePerUnit: 480,
-    lastInboundDate: "2025-10-07",
+    lastOutboundDate: "2025-10-07",
   },
   {
     customerName: "苗栗 竹南行",
@@ -183,7 +183,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 520,
     pricePerUnit: 700,
-    lastInboundDate: "2025-10-04",
+    lastOutboundDate: "2025-10-04",
   },
   {
     customerName: "彰化 員林商行",
@@ -191,7 +191,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 280,
     pricePerUnit: 380,
-    lastInboundDate: "2025-10-06",
+    lastOutboundDate: "2025-10-06",
   },
   {
     customerName: "台北 大安行",
@@ -199,7 +199,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 440,
     pricePerUnit: 590,
-    lastInboundDate: "2025-10-02",
+    lastOutboundDate: "2025-10-02",
   },
   {
     customerName: "雲林 斗六百貨",
@@ -207,7 +207,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "袋",
     costPerUnit: 240,
     pricePerUnit: 330,
-    lastInboundDate: "2025-10-08",
+    lastOutboundDate: "2025-10-08",
   },
   {
     customerName: "南投 草屯行",
@@ -215,7 +215,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 380,
     pricePerUnit: 520,
-    lastInboundDate: "2025-10-05",
+    lastOutboundDate: "2025-10-05",
   },
   {
     customerName: "台東 關山商行",
@@ -223,7 +223,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 320,
     pricePerUnit: 450,
-    lastInboundDate: "2025-10-03",
+    lastOutboundDate: "2025-10-03",
   },
   {
     customerName: "高雄 左營行",
@@ -231,7 +231,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 280,
     pricePerUnit: 380,
-    lastInboundDate: "2025-10-09",
+    lastOutboundDate: "2025-10-09",
   },
   {
     customerName: "新竹 竹北百貨",
@@ -239,7 +239,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 560,
     pricePerUnit: 750,
-    lastInboundDate: "2025-10-01",
+    lastOutboundDate: "2025-10-01",
   },
   {
     customerName: "台中 豐原行",
@@ -247,7 +247,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 220,
     pricePerUnit: 300,
-    lastInboundDate: "2025-10-07",
+    lastOutboundDate: "2025-10-07",
   },
   {
     customerName: "桃園 龍潭商行",
@@ -255,7 +255,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 180,
     pricePerUnit: 250,
-    lastInboundDate: "2025-10-04",
+    lastOutboundDate: "2025-10-04",
   },
   {
     customerName: "台北 內湖行",
@@ -263,7 +263,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 420,
     pricePerUnit: 560,
-    lastInboundDate: "2025-10-06",
+    lastOutboundDate: "2025-10-06",
   },
   {
     customerName: "新北 三重百貨",
@@ -271,7 +271,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 520,
     pricePerUnit: 700,
-    lastInboundDate: "2025-10-02",
+    lastOutboundDate: "2025-10-02",
   },
   {
     customerName: "台南 新營行",
@@ -279,7 +279,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 360,
     pricePerUnit: 490,
-    lastInboundDate: "2025-10-08",
+    lastOutboundDate: "2025-10-08",
   },
   {
     customerName: "高雄 小港商行",
@@ -287,7 +287,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 380,
     pricePerUnit: 520,
-    lastInboundDate: "2025-10-05",
+    lastOutboundDate: "2025-10-05",
   },
   {
     customerName: "嘉義 朴子行",
@@ -295,7 +295,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 420,
     pricePerUnit: 580,
-    lastInboundDate: "2025-10-03",
+    lastOutboundDate: "2025-10-03",
   },
   {
     customerName: "基隆 中山百貨",
@@ -303,7 +303,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 320,
     pricePerUnit: 450,
-    lastInboundDate: "2025-10-09",
+    lastOutboundDate: "2025-10-09",
   },
   {
     customerName: "屏東 東港行",
@@ -311,7 +311,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 560,
     pricePerUnit: 750,
-    lastInboundDate: "2025-10-01",
+    lastOutboundDate: "2025-10-01",
   },
   {
     customerName: "台中 沙鹿商行",
@@ -319,7 +319,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 380,
     pricePerUnit: 520,
-    lastInboundDate: "2025-10-07",
+    lastOutboundDate: "2025-10-07",
   },
   {
     customerName: "桃園 八德行",
@@ -327,7 +327,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 280,
     pricePerUnit: 380,
-    lastInboundDate: "2025-10-04",
+    lastOutboundDate: "2025-10-04",
   },
   {
     customerName: "台北 中山百貨",
@@ -335,7 +335,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 240,
     pricePerUnit: 330,
-    lastInboundDate: "2025-10-06",
+    lastOutboundDate: "2025-10-06",
   },
   {
     customerName: "新北 新莊行",
@@ -343,7 +343,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 320,
     pricePerUnit: 440,
-    lastInboundDate: "2025-10-02",
+    lastOutboundDate: "2025-10-02",
   },
   {
     customerName: "台南 仁德商行",
@@ -351,7 +351,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "袋",
     costPerUnit: 180,
     pricePerUnit: 250,
-    lastInboundDate: "2025-10-08",
+    lastOutboundDate: "2025-10-08",
   },
   {
     customerName: "高雄 楠梓行",
@@ -359,7 +359,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "包",
     costPerUnit: 220,
     pricePerUnit: 300,
-    lastInboundDate: "2025-10-05",
+    lastOutboundDate: "2025-10-05",
   },
   {
     customerName: "彰化 鹿港百貨",
@@ -367,7 +367,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 280,
     pricePerUnit: 390,
-    lastInboundDate: "2025-10-03",
+    lastOutboundDate: "2025-10-03",
   },
   {
     customerName: "宜蘭 礁溪行",
@@ -375,7 +375,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "盒",
     costPerUnit: 420,
     pricePerUnit: 580,
-    lastInboundDate: "2025-10-09",
+    lastOutboundDate: "2025-10-09",
   },
   {
     customerName: "苗栗 頭份商行",
@@ -383,7 +383,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 360,
     pricePerUnit: 490,
-    lastInboundDate: "2025-10-01",
+    lastOutboundDate: "2025-10-01",
   },
   {
     customerName: "台中 大里行",
@@ -391,7 +391,7 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "組",
     costPerUnit: 280,
     pricePerUnit: 380,
-    lastInboundDate: "2025-10-07",
+    lastOutboundDate: "2025-10-07",
   },
   {
     customerName: "新竹 湖口百貨",
@@ -399,6 +399,6 @@ export const FAKE_PRICE_DATA: PriceData[] = [
     unit: "箱",
     costPerUnit: 520,
     pricePerUnit: 700,
-    lastInboundDate: "2025-10-04",
+    lastOutboundDate: "2025-10-04",
   },
 ];

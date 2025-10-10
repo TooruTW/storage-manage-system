@@ -4,5 +4,5 @@ export type PriceData = {
     unit: string;
     costPerUnit: number;
     pricePerUnit: number;
-    lastInboundDate: string;
+    lastOutboundDate: string;
   };

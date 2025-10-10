@@ -24,7 +24,7 @@ const ResultArea = ({ object, product }: ResultAreaProps) => {
   return (
     <div className="w-full h-full overflow-y-auto flex flex-col gap-2 items-center justify-center">
       {tab === "price" && <Price object={object} product={product} />}
-      {tab === "cost" && <Cost />}
+      {tab === "cost" && <Cost object={object} product={product} />}
       {tab === "customer" && <Customer />}
       {tab === "supplier" && <Supplier />}
     </div>
