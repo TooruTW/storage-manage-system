@@ -29,8 +29,8 @@ const Cost = ({ object }: CostProps) => {
                 ))}
               </div>
               <div className="w-4/5">
-                <p className="flex justify-between">
-                  <span>{item.contactPerson}</span>
+                <p className="flex justify-between gap-4 items-center">
+                  <span className="text-nowrap">{item.contactPerson}</span>
                  <span className="text-paragraph-small text-primary/50">{item.address}</span>
                 </p>
                 <div className="grid grid-cols-2">

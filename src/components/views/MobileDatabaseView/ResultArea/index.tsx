@@ -26,7 +26,7 @@ const ResultArea = ({ object, product }: ResultAreaProps) => {
       {tab === "price" && <Price object={object} product={product} />}
       {tab === "cost" && <Cost object={object} product={product} />}
       {tab === "customer" && <Customer object={object} />}
-      {tab === "supplier" && <Supplier />}
+      {tab === "supplier" && <Supplier object={object} />}
     </div>
   );
 };
