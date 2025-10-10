@@ -21,7 +21,7 @@ const loginButtonList = [
   },
   {
     label: "登出",
-    path: "/home",
+    path: "/logout",
   },
 ];
 
