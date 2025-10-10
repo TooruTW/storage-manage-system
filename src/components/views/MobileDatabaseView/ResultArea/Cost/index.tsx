@@ -7,7 +7,7 @@ type CostProps = {
 };
 
 const Cost = ({ object, product }: CostProps) => {
-    const [data, setData] = useState<CostData[]>([]);
+  const [data, setData] = useState<CostData[]>([]);
   useEffect(() => {
     setData(FAKE_COST_DATA);
   }, []);
@@ -23,26 +23,24 @@ const Cost = ({ object, product }: CostProps) => {
       {data.map(
         (item) => {
           return (
-            <li key={item.productName} className="w-full flex gap-2 items-center  rounded-md border-1 border-primary/10 p-2">
-              <div className="w-1/5 text-balance">
-                {item.supplierName.split(" ").map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
+            <li key={item.productName} className="w-full flex flex-col">
+              <div className="w-fit text-balance rounded-t-md bg-primary text-primary-foreground px-2">
+                <p>{item.supplierName}</p>
               </div>
-              <div className="w-4/5">
-                <p className="flex justify-between">
-                  <span>{item.productName}</span>
-                  <span className="text-paragraph-small">
+              <div className="w-full flex gap-4 rounded-b-md rounded-tr-md bg-primary/10 p-2">
+                <div className="flex flex-col w-1/3">
+                  <div>{item.productName}</div>
+                  <div className="text-label text-primary/50">
                     單位：<span>{item.unit}</span>
-                  </span>
-                </p>
-                <div className="grid grid-cols-3">
+                  </div>
+                </div>
+                <div className="flex justify-between flex-1">
                   <div className="flex flex-col">
                     <span className="text-label text-primary/50">數量:</span>
                     <span className="self-end">{item.quantity}</span>
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-label text-primary/50">單位成本:</span>
+                    <span className="text-label text-primary/50">成本:</span>
                     <span className="self-end">$ {item.costPerUnit}</span>
                   </div>
                   <div className="flex justify-end items-center">
