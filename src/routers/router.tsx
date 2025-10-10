@@ -21,6 +21,7 @@ export const routers = [
     path: "/",
     element: <Layout />,
     children: [
+      { index: true, element: <Navigate to="/home" replace /> },
       {
         path: "/home",
         element: <Home />,
@@ -87,8 +88,7 @@ export const routers = [
             path: "inbound",
             element: <CreateInbound />,
           },
-         
-        ]
+        ],
       },
     ],
   },

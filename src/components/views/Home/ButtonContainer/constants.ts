@@ -1,3 +1,4 @@
+
 const unLoginButtonList = [
   {
     label: "登入",
@@ -24,4 +25,11 @@ const loginButtonList = [
   },
 ];
 
-export { unLoginButtonList, loginButtonList };
+const mobileLoginButtonList = [
+  {label: "查價錢", path: "/mobile-database/price"},
+  {label: "查成本", path: "/mobile-database/cost"},
+  {label: "查客戶", path: "/mobile-database/customer"},
+  {label: "查廠商", path: "/mobile-database/supplier"},
+];
+
+export { unLoginButtonList, loginButtonList, mobileLoginButtonList };
