@@ -15,34 +15,35 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
   // 計算總價：數量 × 單價
   function calculateTotal(
     quantity: number,
-    pricePerUnit: number,
-    totalPrice: number
+    costPerUnit: number,
+    pricePerUnit: number
   ): number {
-    return totalPrice - quantity * pricePerUnit;
+    console.log(quantity, costPerUnit, pricePerUnit);
+    return (pricePerUnit- costPerUnit) * quantity;
   }
 
   // 從原始數據獲取數量和單價
   const rowData = original as unknown as CreateOutbound;
   const quantity = rowData?.quantity || 0;
   const costPerUnit = rowData?.costPerUnit || 0;
-  const totalPrice = rowData?.totalPrice || 0;
+  const pricePerUnit = rowData?.pricePerUnit || 0;
 
   // 計算總價
-  const calculatedTotalCost = calculateTotal(quantity, costPerUnit, totalPrice);
+  const calculatedTotalCost = calculateTotal(quantity, costPerUnit, pricePerUnit);
 
   // We need to keep and update the state of the cell normally
   const [value, setValue] = useState<string>(formatValue(calculatedTotalCost));
 
   // 當數量或單價改變時，重新計算總價
   useEffect(() => {
-    const newTotal = calculateTotal(quantity, costPerUnit, totalPrice);
+    const newTotal = calculateTotal(quantity, costPerUnit, pricePerUnit);
     setValue(formatValue(newTotal));
 
     // 更新表格數據中的 totalPrice
     if (table.options.meta?.updateData) {
       table.options.meta.updateData(index, id, newTotal);
     }
-  }, [quantity, costPerUnit, totalPrice, index, id, table]);
+  }, [quantity, costPerUnit, pricePerUnit, index, id, table]);
 
   return (
     <div
