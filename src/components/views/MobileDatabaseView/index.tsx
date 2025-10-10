@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 
 const MobileDatabaseView = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [object, setObject] = useState<string>("");
+  const [product, setProduct] = useState<string>("");
   const { tab } = useParams();
   useEffect(()=>{
     setIsOpen(false);
@@ -24,7 +26,7 @@ const MobileDatabaseView = () => {
       <div className="w-full h-fit relative z-10">
         <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
-      <SearchArea />
+      <SearchArea object={object} setObject={setObject} product={product} setProduct={setProduct} />
       <ResultArea />
       <ArrowLeft className="size-10 absolute left-0 bottom-4 rounded-full bg-primary/10 p-2 shadow-md" />
     </div>
