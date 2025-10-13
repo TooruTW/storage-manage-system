@@ -2,16 +2,11 @@ import "dayjs/locale/zh-tw";
 import MainImage from "./MainImage";
 import { Outlet, useLocation } from "react-router-dom";
 import TimeComponent from "./TimeComponent";
-import { useEffect } from "react";
-import { connecTest } from "@/api/supabase/connectTest";
 
 const Home = () => {
   const location = useLocation();
   const isLoggingIn = location.pathname === "/home/login";
 
-  useEffect(() => {
-    connecTest();
-  }, []);
 
   return (
     <div

@@ -2,12 +2,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { EyeClosed } from "lucide-react";
 import { Eye } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextContent from "./TextContent";
 import { useAccountStore } from "@/stores/useAccountState";
-import dayjs from "dayjs";
 import { usePostLoginApi } from "@/api/supabase/authApi/usePostLoginApi";
+import { useCheckStateApi } from "@/api/supabase/authApi/useCheckStateApi";
 
 type Inputs = {
   account: string;
@@ -23,6 +23,13 @@ const LoginForm = () => {
   } = useForm<Inputs>();
   const navigate = useNavigate();
   const { mutate: postLoginApi } = usePostLoginApi();
+  const {data: checkState} = useCheckStateApi();
+
+  useEffect(()=>{
+    if(checkState){
+      navigate("/home");
+    }
+  },[checkState,navigate])
 
   const handleLogin = async (data: Inputs) => {
     postLoginApi(
@@ -36,9 +43,7 @@ const LoginForm = () => {
 
           useAccountStore.getState().setIsLogin(true);
           useAccountStore.getState().setUser(data.account);
-          useAccountStore
-            .getState()
-            .setLastLogin(dayjs().format("YYYY-MM-DD HH:mm:ss"));
+
           navigate("/home");
         },
         onError: () => {

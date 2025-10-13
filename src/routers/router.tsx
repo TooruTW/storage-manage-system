@@ -16,7 +16,7 @@ import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
 import CreateInbound from "@/components/views/CreateView/CreateInbound";
 import MobileDatabaseView from "@/components/views/MobileDatabaseView";
 import Logout from "@/components/views/Logout";
-  
+
 export const routers = [
   {
     path: "/",
