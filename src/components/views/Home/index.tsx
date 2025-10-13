@@ -2,12 +2,24 @@ import "dayjs/locale/zh-tw";
 import MainImage from "./MainImage";
 import { Outlet, useLocation } from "react-router-dom";
 import TimeComponent from "./TimeComponent";
+import { useEffect } from "react";
+import { connecTest, getDataTest } from "@/api/supabase/connectTest";
 
 const Home = () => {
   const location = useLocation();
   const isLoggingIn = location.pathname === "/home/login";
+
+  useEffect(() => {
+    connecTest();
+    getDataTest();
+  }, []);
+
   return (
-    <div className={`w-full h-screen flex flex-col items-center justify-center py-4 ${!isLoggingIn ? "gap-7" : "gap-1"}`}>
+    <div
+      className={`w-full h-screen flex flex-col items-center justify-center py-4 ${
+        !isLoggingIn ? "gap-7" : "gap-1"
+      }`}
+    >
       <h1 className="text-h1 font-bold">進出貨管理系統</h1>
       <MainImage />
       <TimeComponent />
