@@ -3,7 +3,7 @@ import MainImage from "./MainImage";
 import { Outlet, useLocation } from "react-router-dom";
 import TimeComponent from "./TimeComponent";
 import { useEffect } from "react";
-import { connecTest, getDataTest } from "@/api/supabase/connectTest";
+import { connecTest } from "@/api/supabase/connectTest";
 
 const Home = () => {
   const location = useLocation();
@@ -11,7 +11,6 @@ const Home = () => {
 
   useEffect(() => {
     connecTest();
-    getDataTest();
   }, []);
 
   return (
