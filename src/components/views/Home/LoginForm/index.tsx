@@ -2,11 +2,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { EyeClosed } from "lucide-react";
 import { Eye } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import TextContent from "./TextContent";
 import { useAccountStore } from "@/stores/useAccountState";
-import dayjs from "dayjs";
+import { usePostLoginApi } from "@/api/supabase/authApi/usePostLoginApi";
+import { useCheckStateApi } from "@/api/supabase/authApi/useCheckStateApi";
 
 type Inputs = {
   account: string;
@@ -17,22 +18,47 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Inputs>();
   const navigate = useNavigate();
+  const { mutate: postLoginApi } = usePostLoginApi();
+  const {data: checkState} = useCheckStateApi();
 
-  const handleLogin = (data: Inputs) => {
-    // 與後端確認後登入驗證，驗證成功後登入
-    useAccountStore.getState().setIsLogin(true);
-    useAccountStore.getState().setUser(data.account);
-    useAccountStore.getState().setLastLogin(dayjs().format("YYYY-MM-DD HH:mm:ss"));
+  useEffect(()=>{
+    if(checkState){
+      navigate("/home");
+    }
+  },[checkState,navigate])
+
+  const handleLogin = async (data: Inputs) => {
+    postLoginApi(
+      {
+        email: data.account,
+        password: data.password,
+      },
+      {
+        onSuccess: () => {
+          console.log("登入成功");
+
+          useAccountStore.getState().setIsLogin(true);
+          useAccountStore.getState().setUser(data.account);
+
+          navigate("/home");
+        },
+        onError: () => {
+          reset(); // 清空表單
+          alert("登入失敗，請檢查帳號密碼");
+        },
+      }
+    );
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     console.log(data);
     handleLogin(data);
-    navigate("/home");
   };
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (
@@ -83,10 +109,17 @@ const LoginForm = () => {
       </label>
 
       <div className="flex justify-between">
-        <Button variant="cancel" className="max-lg:w-1/2" type="button" onClick={() => navigate("/home")}>
+        <Button
+          variant="cancel"
+          className="max-lg:w-1/2"
+          type="button"
+          onClick={() => navigate("/home")}
+        >
           取消
         </Button>
-        <Button className="max-lg:w-1/2" type="submit">登入</Button>
+        <Button className="max-lg:w-1/2" type="submit">
+          登入
+        </Button>
       </div>
     </form>
   );
