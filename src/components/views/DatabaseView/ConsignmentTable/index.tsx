@@ -1,9 +1,14 @@
-import { FAKE_DATA } from "./constants/data";
 import { columns } from "./Columns";
-import { BaseTable } from "../shared";
+import { BaseTable, TableStateView } from "../shared";
+import { useGetConsignmentApi } from "@/api/supabase/consignmentApi/useGetConsignmentApi";
 
 const ConsignmentTable = () => {
-  return <BaseTable data={FAKE_DATA} columns={columns} />;
+  const { data, isLoading } = useGetConsignmentApi();
+
+  if (isLoading) return <TableStateView type="loading" />;
+
+  if (!data) return <TableStateView type="empty" />;
+  return <BaseTable data={data} columns={columns} />;
 };
 
 export default ConsignmentTable;
