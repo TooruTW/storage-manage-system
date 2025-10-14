@@ -2,3 +2,4 @@
 export { default as EditableCell } from "./EditableCell";
 export { Filter } from "./Filter";
 export { default as BaseTable } from "./BaseTable";
+export { default as TableStateView } from "./TableStateView";
