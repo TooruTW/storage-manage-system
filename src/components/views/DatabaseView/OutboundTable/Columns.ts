@@ -5,22 +5,23 @@ import EditableCell from "../shared/EditableCell";
 const columnHelper = createColumnHelper<Outbound>();
 
 const columns = [
-  columnHelper.accessor("productName", {
-    cell: EditableCell,
-    header: "商品名",
-    enableColumnFilter: true, // 允許過濾
-  }),
-  columnHelper.accessor("customerName", {
+  columnHelper.accessor("name", {
     cell: EditableCell,
     header: "客戶名",
     enableColumnFilter: true, // 允許過濾
   }),
+  columnHelper.accessor("product_name", {
+    cell: EditableCell,
+    header: "商品名",
+    enableColumnFilter: true, // 允許過濾
+  }),
+
   columnHelper.accessor("unit", {
     cell: EditableCell,
     header: "單位",
     enableColumnFilter: false, // 不允許過濾
   }),
-  columnHelper.accessor("costPerUnit", {
+  columnHelper.accessor("cost_per_unit", {
     cell: EditableCell,
     header: "單成本",
     enableColumnFilter: false, // 不允許過濾
@@ -30,22 +31,22 @@ const columns = [
     header: "數量",
     enableColumnFilter: false, // 允許過濾
   }),
-  columnHelper.accessor("pricePerUnit", {
+  columnHelper.accessor("price_per_unit", {
     cell: EditableCell,
     header: "單價",
     enableColumnFilter: false, // 允許過濾
   }),
-  columnHelper.accessor("shipmentDate", {
+  columnHelper.accessor("shipment_date", {
     cell: EditableCell,
     header: "出貨日",
     enableColumnFilter: true, // 不允許過濾
   }),
-  columnHelper.accessor("totalPrice", {
+  columnHelper.accessor("total_price", {
     cell: EditableCell,
     header: "總價",
     enableColumnFilter: false, // 不允許過濾
   }),
-  columnHelper.accessor("netProfit", {
+  columnHelper.accessor("net_profit", {
     cell: EditableCell,
     header: "損益",
     enableColumnFilter: false, // 允許過濾

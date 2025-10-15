@@ -1,9 +1,15 @@
-import { FAKE_DATA } from "./constants/data";
 import { columns } from "./Columns";
-import { BaseTable } from "../shared";
+import { BaseTable, TableStateView } from "../shared";
+import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
 
 const SupplierTable = () => {
-  return <BaseTable data={FAKE_DATA} columns={columns} />;
+  const { data, isLoading } = useGetSupplierApi();
+
+  if (isLoading) return <TableStateView type="loading" />;
+
+  if (!data) return <TableStateView type="empty" />;
+
+  return <BaseTable data={data} columns={columns} />;
 };
 
 export default SupplierTable;

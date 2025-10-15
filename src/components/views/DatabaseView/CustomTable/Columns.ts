@@ -5,22 +5,22 @@ import EditableCell from "../shared/EditableCell";
 const columnHelper = createColumnHelper<Custom>();
 
 const columns = [
-  columnHelper.accessor("storeName", {
+  columnHelper.accessor("name", {
     cell: EditableCell,
     header: "店名",
     enableColumnFilter: true,
   }),
-  columnHelper.accessor("contactPerson", {
+  columnHelper.accessor("contact_person", {
     cell: EditableCell,
     header: "聯絡人",
     enableColumnFilter: true,
   }),
-  columnHelper.accessor("landlinePhone", {
+  columnHelper.accessor("landline_phone", {
     cell: EditableCell,
     header: "市話",
     enableColumnFilter: false,
   }),
-  columnHelper.accessor("mobilePhone", {
+  columnHelper.accessor("mobile_phone", {
     cell: EditableCell,
     header: "手機",
     enableColumnFilter: false,
