@@ -1,9 +1,16 @@
-import { FAKE_DATA } from "./constants/data";
+
 import { columns } from "./Columns";
-import { BaseTable } from "../shared";
+import { BaseTable, TableStateView } from "../shared";
+import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
 
 const OutboundTable = () => {
-  return <BaseTable data={FAKE_DATA} columns={columns} />;
+  const { data: outboundData, isLoading } = useGetOutboundApi();
+
+  if (isLoading) return <TableStateView type="loading" />;
+
+  if (!outboundData) return <TableStateView type="empty" />;
+
+  return <BaseTable data={outboundData} columns={columns} />;
 };
 
 export default OutboundTable;
