@@ -1,7 +1,7 @@
 
 import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
-import { useGetInventoryApi } from "@/api/supabase/inventoryApi/getInventoryApi";
+import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
 
 const InventoryTable = () => {
   const { data: inventoryData, isLoading } = useGetInventoryApi();
