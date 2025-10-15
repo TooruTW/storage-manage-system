@@ -1,9 +1,16 @@
-import { FAKE_DATA } from "./constants/data";
+
 import { columns } from "./Columns";
-import { BaseTable } from "../shared";
+import { BaseTable, TableStateView } from "../shared";
+import { useGetInventoryApi } from "@/api/supabase/inventoryApi/getInventoryApi";
 
 const InventoryTable = () => {
-  return <BaseTable data={FAKE_DATA} columns={columns} />;
+  const { data: inventoryData, isLoading } = useGetInventoryApi();
+
+  if (isLoading) return <TableStateView type="loading" />;
+
+  if (!inventoryData) return <TableStateView type="empty" />;
+
+  return <BaseTable data={inventoryData} columns={columns} />;
 };
 
 export default InventoryTable;

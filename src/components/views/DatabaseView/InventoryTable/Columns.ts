@@ -5,7 +5,7 @@ import { EditableCell } from "../shared";
 const columnHelper = createColumnHelper<Inventory>();
 
 const columns = [
-  columnHelper.accessor("productName", {
+  columnHelper.accessor("product_name", {
     cell: EditableCell,
     header: "商品名",
     enableColumnFilter: true, // 允許過濾
@@ -20,7 +20,7 @@ const columns = [
     header: "數量",
     enableColumnFilter: false, // 允許過濾
   }),
-  columnHelper.accessor("lastInboundDate", {
+  columnHelper.accessor("last_inbound_date", {
     cell: EditableCell,
     header: "最後進貨日",
     enableColumnFilter: true, // 不允許過濾
