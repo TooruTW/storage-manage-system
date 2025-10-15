@@ -7,7 +7,7 @@ type Outbound = {
     id: string;
     name: string;
   };
-  inbound: {
+  product: {
     product_name: string;
     unit: string;
   };
@@ -24,7 +24,7 @@ const getOutboundApi = async () => {
   const { data: outbound, error } = await supabase
     .from("outbound")
     .select(
-      "id, customer:customer_id(id, name), inbound:product_id(product_name,unit), cost_per_unit, quantity, price_per_unit, shipment_date, total_price, net_profit, remark"
+      "id, customer:customer_id(id, name), product:product_id(product_name,unit), cost_per_unit, quantity, price_per_unit, shipment_date, total_price, net_profit, remark"
     )
   if (error) {
     console.error("Get outbound error", error);
@@ -39,8 +39,8 @@ const getOutboundApi = async () => {
     return {
       id: item.id,
       name: item.customer.name,
-      product_name: item.inbound.product_name,
-      unit: item.inbound.unit,
+      product_name: item.product.product_name,
+      unit: item.product.unit,
       cost_per_unit: item.cost_per_unit,
       quantity: item.quantity,
       price_per_unit: item.price_per_unit,

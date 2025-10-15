@@ -3,8 +3,10 @@ import supabase from "..";
 
 type Consignment = {
   id: string;
-  product_name: string;
-  unit: string;
+  product: {
+    product_name: string;
+    unit: string;
+  };
   current_stock: number;
   last_update_date: string;
   customer: {
@@ -16,7 +18,7 @@ const getConsignmentApi = async () => {
   const { data: consignment, error } = await supabase
     .from("consignment")
     .select(
-      "id, product_name, unit, current_stock, last_update_date, customer:customer_id(name)"
+      "id, product:product_id(product_name, unit), current_stock, last_update_date, customer:customer_id(name)"
     );
 
   if (error || !consignment) {
@@ -31,8 +33,8 @@ const getConsignmentApi = async () => {
   const joinedData = result.map((item) => {
     return {
       id: item.id,
-      product_name: item.product_name,
-      unit: item.unit,
+      product_name: item.product.product_name,
+      unit: item.product.unit,
       current_stock: item.current_stock,
       last_update_date: item.last_update_date,
       name: item.customer.name,
