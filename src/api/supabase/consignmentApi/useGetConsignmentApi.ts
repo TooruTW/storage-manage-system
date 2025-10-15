@@ -1,6 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
 
+type Consignment = {
+  id: string;
+  product_name: string;
+  unit: string;
+  current_stock: number;
+  last_update_date: string;
+  customer: {
+    name: string;
+  };
+};
+
 const getConsignmentApi = async () => {
   const { data: consignment, error } = await supabase
     .from("consignment")
@@ -13,9 +24,11 @@ const getConsignmentApi = async () => {
     throw error;
   }
 
-  console.log("data", consignment);
+  console.log("consignment", consignment);
 
-  const joinedData = consignment.map((item: any) => {
+  const result = consignment as unknown as Consignment[];
+
+  const joinedData = result.map((item) => {
     return {
       id: item.id,
       product_name: item.product_name,
