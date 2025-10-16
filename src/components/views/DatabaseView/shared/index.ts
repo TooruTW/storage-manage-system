@@ -3,3 +3,6 @@ export { default as EditableCell } from "./EditableCell";
 export { Filter } from "./Filter";
 export { default as BaseTable } from "./BaseTable";
 export { default as TableStateView } from "./TableStateView";
+
+// 引入 React Table 的型別擴充
+import "./types/moduleType";
