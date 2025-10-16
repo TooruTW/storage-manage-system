@@ -10,7 +10,6 @@ const getSupplierApi = async () => {
     throw error;
   }
 
-  console.log("data", supplier);
 
   return supplier;
 };
