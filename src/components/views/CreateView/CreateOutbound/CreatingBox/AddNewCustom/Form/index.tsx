@@ -4,7 +4,7 @@ import { FormDataType } from "./type";
 import Address from "./Address";
 import PhoneNumber from "./PhoneNumber";
 
-export default function App() {
+export default function Form() {
   const {
     register,
     handleSubmit,

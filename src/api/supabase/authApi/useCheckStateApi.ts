@@ -9,7 +9,7 @@ const checkStateApi = async () => {
   
 
   // 等待 5 秒
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+  // await new Promise((resolve) => setTimeout(resolve, 5000));
 
   if (error) {
     console.error("Check state error", error);
