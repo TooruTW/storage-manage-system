@@ -4,7 +4,7 @@ import { CellContext } from "@tanstack/react-table";
 // 通用的可編輯單元格組件
 const EditableCell = <TData extends Record<string, unknown>>({
   getValue,
-  row: { index },
+  row: { index, original },
   column: { id },
   table,
 }: CellContext<TData, unknown>) => {
@@ -16,6 +16,7 @@ const EditableCell = <TData extends Record<string, unknown>>({
 
   // When the input is blurred, we'll call our table meta's updateData function
   const onBlur = () => {
+    table.options.meta?.collectData(original.id as string, id as string, value);
     table.options.meta?.updateData(index, id, value);
   };
 

@@ -22,6 +22,21 @@ const BaseTable = <TData extends Record<string, any>>({
 }: BaseTableProps<TData>) => {
   const [data, setData] = useState(() => initialData);
   const [isEditing, setIsEditing] = useState(false);
+  const [newData, setNewData] = useState<Map<string, Map<string, unknown>>>(
+    new Map()
+  );
+
+
+  // const collectData = (id: string, columnId: string, value: unknown) => {
+  //   if (newData.has(id)) {
+  //     newData.get(id)?.set(columnId, value);
+  //   } else {
+  //     newData.set(id, new Map([[columnId, value]]));
+  //   }
+  //   console.log("newData", newData);
+
+  //   setNewData(new Map(newData));
+  // };
 
   // 表格設定及其額外功能
   const table = useReactTable({
@@ -31,7 +46,18 @@ const BaseTable = <TData extends Record<string, any>>({
     getFilteredRowModel: getFilteredRowModel(),
     // Provide our updateData function to our table meta
     meta: {
+      collectData : (id: string, columnId: string, value: unknown) => {
+        if (newData.has(id)) {
+          newData.get(id)?.set(columnId, value);
+        } else {
+          newData.set(id, new Map([[columnId, value]]));
+        }
+        console.log("newData", newData);
+    
+        setNewData(new Map(newData));
+      },
       updateData: (rowIndex, columnId, value) => {
+        console.log("updateData", rowIndex, columnId, value);
         // Skip page index reset until after next rerender
         setData((old) =>
           old.map((row, index) => {
@@ -48,7 +74,6 @@ const BaseTable = <TData extends Record<string, any>>({
       isEditing,
     },
   });
-
 
   return (
     <div
