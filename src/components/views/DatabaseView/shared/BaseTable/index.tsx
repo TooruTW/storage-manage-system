@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Filter } from "../Filter";
-import { EditDataMap } from "../types/editDataMap";
+import { EditDataMap } from "../types/EditDataMap";
 
 interface BaseTableProps<TData> {
   data: TData[];
