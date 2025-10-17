@@ -1,7 +1,7 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { Consignment } from "./type/dataType";
-import EditableCell from "../shared/EditableCell";
 import ReadOnlyCell from "../shared/ReadOnlyCell";
+import EditableNumberCell from "../shared/EditableNumberCell";
 const columnHelper = createColumnHelper<Consignment>();
 
 const columns = [
@@ -21,12 +21,12 @@ const columns = [
     enableColumnFilter: false, 
   }),
   columnHelper.accessor("current_stock", {
-    cell: EditableCell,
+    cell: EditableNumberCell,
     header: "當前庫存量",
     enableColumnFilter: false, 
   }),
   columnHelper.accessor("last_update_date", {
-    cell: EditableCell,
+    cell: ReadOnlyCell,
     header: "日期",
     enableColumnFilter: true, 
   }),

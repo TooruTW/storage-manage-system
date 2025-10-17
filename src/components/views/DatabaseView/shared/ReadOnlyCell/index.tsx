@@ -9,7 +9,11 @@ const ReadOnlyCell = <TData extends Record<string, unknown>>({
   const isEditing = table.options.meta?.isEditing || false;
 
   return (
-    <p className={`w-full text-center h-full py-4 ${isEditing ? "cursor-not-allowed" : "cursor-text"}`}>
+    <p
+      className={`w-full text-center h-full py-4 ${
+        isEditing ? "cursor-not-allowed" : "cursor-text"
+      }`}
+    >
       {initialValue as string}
     </p>
   );
