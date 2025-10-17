@@ -1,0 +1,1 @@
+export type EditDataMap = Map<string, Map<string, unknown>>

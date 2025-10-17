@@ -27,9 +27,10 @@ const EditableCell = <TData extends Record<string, unknown>>({
 
   return (
     <input
-      value={value as string}
+      value={value as number}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
+      type="number"
       className={`w-full text-center h-full py-4 ${
         !isEditing ? "cursor-text" : "italic"
       }`}

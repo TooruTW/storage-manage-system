@@ -8,20 +8,29 @@ import {
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Filter } from "../Filter";
+import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
 
 interface BaseTableProps<TData> {
   data: TData[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
+  updateData?: (data: EditDataMap) => void;
+  deleteData?: (id: string) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const BaseTable = <TData extends Record<string, any>>({
   data: initialData,
   columns,
+  updateData,
 }: BaseTableProps<TData>) => {
   const [data, setData] = useState(() => initialData);
   const [isEditing, setIsEditing] = useState(false);
+  const [newData, setNewData] = useState<EditDataMap>(
+    new Map()
+  );
+
+
 
   // 表格設定及其額外功能
   const table = useReactTable({
@@ -31,7 +40,16 @@ const BaseTable = <TData extends Record<string, any>>({
     getFilteredRowModel: getFilteredRowModel(),
     // Provide our updateData function to our table meta
     meta: {
+      collectData : (id: string, columnId: string, value: unknown) => {
+        if (newData.has(id)) {
+          newData.get(id)?.set(columnId, value);
+        } else {
+          newData.set(id, new Map([[columnId, value]]));
+        }    
+        setNewData(new Map(newData));
+      },
       updateData: (rowIndex, columnId, value) => {
+        console.log("updateData", rowIndex, columnId, value);
         // Skip page index reset until after next rerender
         setData((old) =>
           old.map((row, index) => {
@@ -49,7 +67,6 @@ const BaseTable = <TData extends Record<string, any>>({
     },
   });
 
-
   return (
     <div
       className={`w-full flex flex-col gap-4 ${isEditing && "bg-primary/10"}`}
@@ -58,7 +75,12 @@ const BaseTable = <TData extends Record<string, any>>({
         <div>共 {table.getRowModel().rows.length} 筆資料</div>
         <Button
           className="active:scale-95 transition-all"
-          onClick={() => setIsEditing(!isEditing)}
+          onClick={() => {
+            setIsEditing(!isEditing);
+            if (isEditing) {
+              updateData?.(newData);
+            }
+          }}
         >
           {isEditing ? "完成" : "編輯"}
         </Button>

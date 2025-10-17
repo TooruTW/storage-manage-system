@@ -1,29 +1,29 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { Inventory } from "./type/dataType";
-import { EditableCell } from "../shared";
+import { EditableNumberCell, ReadOnlyCell } from "../shared";
 
 const columnHelper = createColumnHelper<Inventory>();
 
 const columns = [
   columnHelper.accessor("product_name", {
-    cell: EditableCell,
+    cell: ReadOnlyCell,
     header: "商品名",
-    enableColumnFilter: true, // 允許過濾
+    enableColumnFilter: true,
   }),
   columnHelper.accessor("unit", {
-    cell: EditableCell,
+    cell: ReadOnlyCell,
     header: "單位",
-    enableColumnFilter: false, // 不允許過濾
+    enableColumnFilter: false, 
   }),
   columnHelper.accessor("quantity", {
-    cell: EditableCell,
+    cell: EditableNumberCell,
     header: "數量",
-    enableColumnFilter: false, // 允許過濾
+    enableColumnFilter: false,
   }),
   columnHelper.accessor("last_inbound_date", {
-    cell: EditableCell,
+    cell: ReadOnlyCell,
     header: "最後進貨日",
-    enableColumnFilter: true, // 不允許過濾
+    enableColumnFilter: true, 
   }),
 ];
 

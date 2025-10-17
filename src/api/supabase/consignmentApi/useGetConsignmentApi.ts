@@ -19,17 +19,14 @@ const getConsignmentApi = async () => {
     .from("consignment")
     .select(
       "id, product:product_id(product_name, unit), current_stock, last_update_date, customer:customer_id(name)"
-    );
-
+    )
   if (error || !consignment) {
     console.error("Get consignment error", error);
     throw error;
   }
 
-  console.log("consignment", consignment);
 
   const result = consignment as unknown as Consignment[];
-
   const joinedData = result.map((item) => {
     return {
       id: item.id,
@@ -39,7 +36,7 @@ const getConsignmentApi = async () => {
       last_update_date: item.last_update_date,
       name: item.customer.name,
     };
-  });
+  }).sort((a, b) => a.name.localeCompare(b.name));
 
   return joinedData;
 };
