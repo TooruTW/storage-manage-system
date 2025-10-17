@@ -1,6 +1,6 @@
-import { EditDataMap } from "@/components/views/DatabaseView/shared/types/editDataMap";
 import { useMutation } from "@tanstack/react-query";
 import supabase from "..";
+import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
 
 type UpdateData = {
   id: string;

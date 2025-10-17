@@ -8,13 +8,13 @@ import {
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Filter } from "../Filter";
-import { EditDataMap } from "../types/EditDataMap";
+import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
 
 interface BaseTableProps<TData> {
   data: TData[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
-  updateData: (data: EditDataMap) => void;
+  updateData?: (data: EditDataMap) => void;
   deleteData?: (id: string) => void;
 }
 
@@ -78,7 +78,7 @@ const BaseTable = <TData extends Record<string, any>>({
           onClick={() => {
             setIsEditing(!isEditing);
             if (isEditing) {
-              updateData(newData);
+              updateData?.(newData);
             }
           }}
         >
