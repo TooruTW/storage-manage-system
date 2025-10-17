@@ -1,14 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import supabase from "..";
 import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
+
 type UpdateData = {
   id: string;
   data: {
-    name?: string;
-    contact_person?: string;
-    landline_phone?: string;
-    mobile_phone?: string;
-    address?: string;
+    current_stock?: number;
   };
 };
 
@@ -22,13 +19,13 @@ type BatchUpdateResponse = {
   }>;
 };
 
-const patchCustomerApi = async (data: EditDataMap) => {
+const patchConsignmentApi = async (data: EditDataMap) => {
   const updateDataList: UpdateData[] = [];
   data.forEach((val, key) => {
     const data: UpdateData["data"] = {};
 
     val.forEach((val, key) => {
-      data[key as keyof UpdateData["data"]] = val as unknown as string;
+      data[key as keyof UpdateData["data"]] = Number(val);
     });
     updateDataList.push({
       id: key,
@@ -39,7 +36,7 @@ const patchCustomerApi = async (data: EditDataMap) => {
   console.log("準備發送的資料 :", updateDataList);
 
   // 調用 Supabase RPC function
-  const { data: result, error } = await supabase.rpc("update_customer_batch", {
+  const { data: result, error } = await supabase.rpc("update_consignment_batch", {
     update_data: updateDataList,
   });
 
@@ -53,10 +50,10 @@ const patchCustomerApi = async (data: EditDataMap) => {
   return result as BatchUpdateResponse;
 };
 
-const usePatchCustomerApi = () => {
+const usePatchConsignmentApi = () => {
   return useMutation({
-    mutationFn: (data: EditDataMap) => patchCustomerApi(data),
+    mutationFn: (data: EditDataMap) => patchConsignmentApi(data),
   });
 };
 
-export { usePatchCustomerApi };
+export { usePatchConsignmentApi };
