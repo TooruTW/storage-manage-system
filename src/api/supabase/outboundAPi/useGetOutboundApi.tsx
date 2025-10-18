@@ -33,7 +33,6 @@ const getOutboundApi = async () => {
 
   const result = outbound as unknown as Outbound[];
 
-  console.log("outbound", outbound);
 
   const joinedData = result.map((item) => {
     return {
