@@ -1,7 +1,7 @@
-import { usePopoutStore } from "@/stores/usePopoutStore";
+import { usePopupStore } from "@/stores/usePopupStore";
 
-const PopoutContainer = () => {
-  const { isOpen, content } = usePopoutStore();
+const PopupContainer = () => {
+  const { isOpen, content } = usePopupStore();
 
   return (
     isOpen && (
@@ -12,4 +12,4 @@ const PopoutContainer = () => {
   );
 };
 
-export default PopoutContainer;
+export default PopupContainer;
