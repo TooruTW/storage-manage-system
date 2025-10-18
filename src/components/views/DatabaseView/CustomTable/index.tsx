@@ -20,7 +20,7 @@ const CustomTable = () => {
 
   if (!data) return <TableStateView type="empty" />;
 
-  return <BaseTable data={data} columns={columns} updateData={patchCustomer} />;
+  return <BaseTable data={data} columns={columns} updateDataToServer={patchCustomer} />;
 };
 
 export default CustomTable;
