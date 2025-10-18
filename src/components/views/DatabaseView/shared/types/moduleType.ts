@@ -5,5 +5,6 @@ declare module "@tanstack/react-table" {
     updateData: (rowIndex: number, columnId: string, value: unknown) => void;
     isEditing?: boolean;
     collectData?: (id: string, columnId: string, value: unknown) => void;
+    originalData?: TData[];
   }
 }
