@@ -1,7 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { Consignment } from "./type/dataType";
-import ReadOnlyCell from "../shared/ReadOnlyCell";
-import EditableNumberCell from "../shared/EditableNumberCell";
+import { EditableNumberCell , ReadOnlyCell } from "../shared";
 const columnHelper = createColumnHelper<Consignment>();
 
 const columns = [

@@ -11,7 +11,7 @@ const InventoryTable = () => {
 
   if (!inventoryData) return <TableStateView type="empty" />;
 
-  return <BaseTable data={inventoryData} columns={columns} updateData={patchInventory} />;
+  return <BaseTable data={inventoryData} columns={columns} updateDataToServer={patchInventory} />;
 };
 
 export default InventoryTable;

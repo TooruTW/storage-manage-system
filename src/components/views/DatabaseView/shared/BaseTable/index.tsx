@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useReactTable,
   getCoreRowModel,
   getFilteredRowModel,
   flexRender,
   ColumnDef,
+  VisibilityState,
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Filter } from "../Filter";
@@ -16,26 +17,41 @@ interface BaseTableProps<TData> {
   data: TData[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
-  updateData?: (data: EditDataMap) => void;
-  deleteData?: (id: string) => void;
+  updateDataToServer?: (data: EditDataMap) => void;
+  deleteDataToServer?: (ids: string[]) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const BaseTable = <TData extends Record<string, any>>({
+const BaseTable = <TData extends Record<string, unknown>>({
   data: initialData,
   columns,
-  updateData,
+  updateDataToServer,
+  deleteDataToServer,
 }: BaseTableProps<TData>) => {
   const [data, setData] = useState(() => initialData);
   const [isEditing, setIsEditing] = useState(false);
   const [newData, setNewData] = useState<EditDataMap>(new Map());
+  const [deletedData, setDeletedData] = useState<string[]>([]);
   const [originalData] = useState<TData[]>(initialData); // 保存原始資料
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
+    actions: false, // 預設隱藏刪除欄位
+  });
   const { setContent } = usePopupStore();
+
+  // 根據 isEditing 狀態控制刪除欄位的顯示/隱藏
+  useEffect(() => {
+    setColumnVisibility({
+      actions: isEditing, // 只在編輯模式下顯示刪除欄位
+    });
+  }, [isEditing]);
 
   // 表格設定及其額外功能
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnVisibility, // 加入欄位可見性狀態
+    },
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     // Provide our updateData function to our table meta
@@ -63,6 +79,10 @@ const BaseTable = <TData extends Record<string, any>>({
           })
         );
       },
+      deleteData: (id: string) => {
+        setDeletedData((old) => [...old, id]);
+        setData((old) => old.filter((row) => row.id !== id));
+      },
       isEditing,
       originalData, // 將原始資料放入 meta，供各個 cell 訪問
     },
@@ -73,7 +93,8 @@ const BaseTable = <TData extends Record<string, any>>({
       <UpdateConfirm
         warningContent="確定要將資料修改為以下內容嗎？"
         onConfirm={() => {
-          updateData?.(newData); // 更新資料
+          updateDataToServer?.(newData); // 更新資料
+          deleteDataToServer?.(deletedData); // 刪除資料
           setNewData(new Map()); // 清空新資料
           setIsEditing(false); // 退出編輯模式
         }}

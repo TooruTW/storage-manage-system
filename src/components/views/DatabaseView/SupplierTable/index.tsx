@@ -18,7 +18,7 @@ const SupplierTable = () => {
   if (isLoading) return <TableStateView type="loading" />;
   if (!data) return <TableStateView type="empty" />;
 
-  return <BaseTable data={data} columns={columns} updateData={patchSupplier} />;
+  return <BaseTable data={data} columns={columns} updateDataToServer={patchSupplier} />;
 };
 
 export default SupplierTable;

@@ -10,7 +10,7 @@ const ConsignmentTable = () => {
   if (isLoading) return <TableStateView type="loading" />;
 
   if (!data) return <TableStateView type="empty" />;
-  return <BaseTable data={data} columns={columns} updateData={patchConsignment} />;
+  return <BaseTable data={data} columns={columns} updateDataToServer={patchConsignment} />;
 };
 
 export default ConsignmentTable;
