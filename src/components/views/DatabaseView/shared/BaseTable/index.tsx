@@ -9,6 +9,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Filter } from "../Filter";
 import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
+import { usePopupStore } from "@/stores/usePopupStore";
+import UpdateConfirm from "../UpdateConfirm";
 
 interface BaseTableProps<TData> {
   data: TData[];
@@ -26,11 +28,9 @@ const BaseTable = <TData extends Record<string, any>>({
 }: BaseTableProps<TData>) => {
   const [data, setData] = useState(() => initialData);
   const [isEditing, setIsEditing] = useState(false);
-  const [newData, setNewData] = useState<EditDataMap>(
-    new Map()
-  );
-
-
+  const [newData, setNewData] = useState<EditDataMap>(new Map());
+  const [originalData] = useState<TData[]>(initialData); // 保存原始資料
+  const { setContent } = usePopupStore();
 
   // 表格設定及其額外功能
   const table = useReactTable({
@@ -40,12 +40,12 @@ const BaseTable = <TData extends Record<string, any>>({
     getFilteredRowModel: getFilteredRowModel(),
     // Provide our updateData function to our table meta
     meta: {
-      collectData : (id: string, columnId: string, value: unknown) => {
+      collectData: (id: string, columnId: string, value: unknown) => {
         if (newData.has(id)) {
           newData.get(id)?.set(columnId, value);
         } else {
           newData.set(id, new Map([[columnId, value]]));
-        }    
+        }
         setNewData(new Map(newData));
       },
       updateData: (rowIndex, columnId, value) => {
@@ -64,8 +64,35 @@ const BaseTable = <TData extends Record<string, any>>({
         );
       },
       isEditing,
+      originalData, // 將原始資料放入 meta，供各個 cell 訪問
     },
   });
+
+  const showConfirmUpdate = () => {
+    setContent(
+      <UpdateConfirm
+        warningContent="確定要將資料修改為以下內容嗎？"
+        onConfirm={() => {
+          updateData?.(newData); // 更新資料
+          setNewData(new Map()); // 清空新資料
+          setIsEditing(false); // 退出編輯模式
+        }}
+      />
+    );
+  };
+
+  const showConfirmReset = () => {
+    setContent(
+      <UpdateConfirm
+        warningContent="確定要重置資料嗎？"
+        onConfirm={() => {
+          setData(originalData); // 重置資料
+          setNewData(new Map()); // 清空新資料
+          setIsEditing(false); // 退出編輯模式
+        }}
+      />
+    );
+  };
 
   return (
     <div
@@ -73,17 +100,32 @@ const BaseTable = <TData extends Record<string, any>>({
     >
       <div className="flex justify-between items-center mt-4">
         <div>共 {table.getRowModel().rows.length} 筆資料</div>
-        <Button
-          className="active:scale-95 transition-all"
-          onClick={() => {
-            setIsEditing(!isEditing);
-            if (isEditing) {
-              updateData?.(newData);
-            }
-          }}
-        >
-          {isEditing ? "完成" : "編輯"}
-        </Button>
+        <div className="flex gap-2">
+          {!isEditing && (
+            <Button
+              className="active:scale-95 transition-all"
+              onClick={() => setIsEditing(true)}
+            >
+              編輯
+            </Button>
+          )}
+          {isEditing && (
+            <Button
+              className="active:scale-95 transition-all"
+              onClick={showConfirmReset}
+            >
+              重置資料
+            </Button>
+          )}
+          {isEditing && (
+            <Button
+              className="active:scale-95 transition-all"
+              onClick={showConfirmUpdate}
+            >
+              確認修改
+            </Button>
+          )}
+        </div>
       </div>
       {/* 表格 */}
       <div className="overflow-x-auto">

@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Header } from "./Header";
 import LoadingView from "./LoadingView";
 import useLoading from "@/stores/useLoading";
+import PopupContainer from "./PopupContainer";
 
 const Layout = () => {
   const location = useLocation();
@@ -11,14 +12,13 @@ const Layout = () => {
 
   return (
     <div className="h-screen flex flex-col w-full px-12 max-md:px-4">
+      <PopupContainer />
       {isOpen && (
         <div className="w-full py-4 h-fit">
           <Header />
         </div>
       )}
-      {loading && (
-        <LoadingView />
-      )}
+      {loading && <LoadingView />}
       <main className="w-full h-full flex justify-center">
         <Outlet />
       </main>
