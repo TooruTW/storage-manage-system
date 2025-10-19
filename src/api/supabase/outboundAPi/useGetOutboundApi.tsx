@@ -8,6 +8,7 @@ type Outbound = {
     name: string;
   };
   product: {
+    id: string;
     product_name: string;
     unit: string;
   };
@@ -24,8 +25,8 @@ const getOutboundApi = async () => {
   const { data: outbound, error } = await supabase
     .from("outbound")
     .select(
-      "id, customer:customer_id(id, name), product:product_id(product_name,unit), cost_per_unit, quantity, price_per_unit, shipment_date, total_price, net_profit, remark"
-    )
+      "id, customer:customer_id(id, name), product:product_id(id, product_name,unit), cost_per_unit, quantity, price_per_unit, shipment_date, total_price, net_profit, remark"
+    );
   if (error) {
     console.error("Get outbound error", error);
     throw error;
@@ -33,11 +34,12 @@ const getOutboundApi = async () => {
 
   const result = outbound as unknown as Outbound[];
 
-
   const joinedData = result.map((item) => {
     return {
       id: item.id,
-      name: item.customer.name,
+      customer_id: item.customer.id,
+      customer_name: item.customer.name,
+      product_id: item.product.id,
       product_name: item.product.product_name,
       unit: item.product.unit,
       cost_per_unit: item.cost_per_unit,

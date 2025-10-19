@@ -1,6 +1,7 @@
 export type Outbound = {
   id: string; // 出貨單號
-  name: string; // 客戶名
+  customer_name: string; // 客戶名
+  product_id: string; // 商品ID
   product_name: string; // 商品名
   unit: string; // 單位
   cost_per_unit: number; // 單成本

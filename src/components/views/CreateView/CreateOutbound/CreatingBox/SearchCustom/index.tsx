@@ -1,13 +1,18 @@
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, UseFormSetValue } from "react-hook-form";
 import { CreateOutbound } from "../../type";
 import SearchInput from "./SearchInput";
 
 type SearchCustomProps = {
   setIsAddNewCustom: (isAddNewCustom: boolean) => void;
   control: Control<CreateOutbound>;
+  setValue: UseFormSetValue<CreateOutbound>;
 };
 
-const SearchCustom = ({ setIsAddNewCustom, control }: SearchCustomProps) => {
+const SearchCustom = ({
+  setIsAddNewCustom,
+  control,
+  setValue,
+}: SearchCustomProps) => {
   return (
     <div className="">
       <p
@@ -19,13 +24,17 @@ const SearchCustom = ({ setIsAddNewCustom, control }: SearchCustomProps) => {
       <div className="flex gap-2 w-full relative">
         <h2 className="text-h2">客戶：</h2>
         <Controller
-          name="customerName"
+          name="customer_name"
           control={control}
           rules={{
             required: "請選擇客戶",
           }}
           render={({ field }) => (
-            <SearchInput value={field.value || ""} onChange={field.onChange} />
+            <SearchInput
+              value={field.value || ""}
+              onChange={field.onChange}
+              setValue={setValue}
+            />
           )}
         />
       </div>
