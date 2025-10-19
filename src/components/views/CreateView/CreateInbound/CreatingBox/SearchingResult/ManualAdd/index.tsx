@@ -16,6 +16,8 @@ const ManualAdd = ({ setValue, onSubmit }: ManualAddProps) => {
     if (!productName.trim() || !unit.trim()) {
       return;
     }
+    // 手動新增的商品，設定 product_id 為空字串（表示為新商品，尚未存在於資料庫）
+    setValue("product_id", "");
     setValue("product_name", productName);
     setValue("unit", unit);
     setValue("price_per_unit", 0);

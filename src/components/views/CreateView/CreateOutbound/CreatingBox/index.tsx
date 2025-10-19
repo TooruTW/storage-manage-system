@@ -73,6 +73,7 @@ const CreatingBox = () => {
           <SearchCustom
             setIsAddNewCustom={setIsAddNewCustom}
             control={control}
+            setValue={setValue}
           />
           <SearchingResult
             setValue={setValue}

@@ -1,13 +1,19 @@
-import { Control, Controller, FieldError } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldError,
+  UseFormSetValue,
+} from "react-hook-form";
 import { CreateInbound } from "../../type";
 import SearchInput from "./SearchInput";
 
 type SearchSupplierProps = {
   control: Control<CreateInbound>;
+  setValue: UseFormSetValue<CreateInbound>;
   error?: FieldError;
 };
 
-const SearchSupplier = ({ control, error }: SearchSupplierProps) => {
+const SearchSupplier = ({ control, setValue, error }: SearchSupplierProps) => {
   return (
     <div>
       <div className="flex gap-2 w-full relative">
@@ -23,6 +29,7 @@ const SearchSupplier = ({ control, error }: SearchSupplierProps) => {
               <SearchInput
                 value={field.value || ""}
                 onChange={field.onChange}
+                setValue={setValue}
               />
             )}
           />

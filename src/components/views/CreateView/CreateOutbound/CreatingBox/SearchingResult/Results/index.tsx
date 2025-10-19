@@ -34,7 +34,7 @@ const Results = ({
     // filter by tab
     if (currentTab !== "all") {
       const purchaseHistory = outboundData?.filter(
-        (outbound) => outbound.name === customerName
+        (outbound) => outbound.customer_name === customerName
       );
       const purchaseHistoryProducts = inventoryData.filter((inventory) =>
         purchaseHistory?.some(
@@ -52,7 +52,8 @@ const Results = ({
   }, [keyword, currentTab, inventoryData, outboundData, customerName]);
 
   const handleClickItem = (item: Inventory) => {
-    // 填入商品名稱、單位和成本單價
+    // 填入商品 ID、名稱、單位和成本單價
+    setValue("product_id", item.id);
     setValue("product_name", item.product_name);
     setValue("unit", item.unit);
     setValue("cost_per_unit", item.last_cost_per_unit);

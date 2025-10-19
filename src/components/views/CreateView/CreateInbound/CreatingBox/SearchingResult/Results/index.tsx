@@ -27,15 +27,14 @@ const Results = ({ keyword, setValue, onSubmit }: ResultsProps) => {
       setResults(inventoryData);
     } else {
       setResults(
-        inventoryData.filter((result) =>
-          result.product_name.includes(keyword)
-        )
+        inventoryData.filter((result) => result.product_name.includes(keyword))
       );
     }
   }, [keyword, inventoryData]);
 
   const handleClickItem = (item: Inventory) => {
-    // 填入商品名稱、單位和成本單價
+    // 填入商品 ID、名稱、單位和成本單價
+    setValue("product_id", item.id);
     setValue("product_name", item.product_name);
     setValue("unit", item.unit);
     setValue("price_per_unit", item.last_cost_per_unit);

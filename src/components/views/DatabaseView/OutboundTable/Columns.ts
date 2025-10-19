@@ -5,7 +5,7 @@ import { ReadOnlyCell, DeleteCell } from "../shared";
 const columnHelper = createColumnHelper<Outbound>();
 
 const columns = [
-  columnHelper.accessor("name", {
+  columnHelper.accessor("customer_name", {
     cell: ReadOnlyCell,
     header: "客戶名",
     enableColumnFilter: true, // 允許過濾

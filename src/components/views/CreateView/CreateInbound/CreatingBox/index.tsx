@@ -25,6 +25,8 @@ const CreatingBox = () => {
     }
 
     const newData: CreateInbound = {
+      supplier_id: data.supplier_id,
+      product_id: data.product_id,
       supplier_name: data.supplier_name,
       product_name: data.product_name,
       unit: data.unit,
@@ -76,6 +78,7 @@ const CreatingBox = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <SearchSupplier
             control={control}
+            setValue={setValue}
             error={formState.errors.supplier_name}
           />
           <SearchingResult

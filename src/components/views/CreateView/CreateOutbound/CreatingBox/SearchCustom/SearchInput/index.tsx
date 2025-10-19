@@ -4,13 +4,16 @@ import {
   useGetCustomerApi,
 } from "@/api/supabase/customerApi/useGetCustomerApi";
 import useClickOutSide from "@/components/hook/useClickOutSide";
+import { UseFormSetValue } from "react-hook-form";
+import { CreateOutbound } from "../../../type";
 
 type SearchInputProps = {
   value: string;
   onChange: (value: string) => void;
+  setValue: UseFormSetValue<CreateOutbound>;
 };
 
-const SearchInput = ({ value, onChange }: SearchInputProps) => {
+const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
   const { data: customerData } = useGetCustomerApi();
   const [customList, setCustomList] = useState<Customer[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -33,6 +36,12 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
     );
   }, [value, customerData]);
 
+  const handleSelectCustomer = (customer: Customer) => {
+    onChange(customer.name);
+    setValue("customer_id", customer.id);
+    setIsOpen(false);
+  };
+
   return (
     <div ref={ref} className="relative w-full">
       <input
@@ -50,10 +59,7 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
           {customList.map((custom) => (
             <p
               key={custom.id}
-              onClick={() => {
-                onChange(custom.name);
-                setIsOpen(false);
-              }}
+              onClick={() => handleSelectCustomer(custom)}
               className="text-paragraph py-2 hover:bg-primary/10 cursor-pointer"
             >
               {custom.name}

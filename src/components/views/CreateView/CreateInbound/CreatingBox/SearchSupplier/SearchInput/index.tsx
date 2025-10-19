@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
 import { Supplier } from "@/api/supabase/supplierApi/useGetSupplierApi";
 import useClickOutSide from "@/components/hook/useClickOutSide";
+import { UseFormSetValue } from "react-hook-form";
+import { CreateInbound } from "../../../type";
 
 type SearchInputProps = {
   value: string;
   onChange: (value: string) => void;
+  setValue: UseFormSetValue<CreateInbound>;
 };
 
-const SearchInput = ({ value, onChange }: SearchInputProps) => {
+const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
   const ref = useClickOutSide({ action: () => setIsOpen(false) });
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { data: supplierData } = useGetSupplierApi();
@@ -32,6 +35,12 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
     );
   }, [value, supplierData]);
 
+  const handleSelectSupplier = (supplier: Supplier) => {
+    onChange(supplier.name);
+    setValue("supplier_id", supplier.id);
+    setIsOpen(false);
+  };
+
   return (
     <div ref={ref} className="relative w-full">
       <input
@@ -49,10 +58,7 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
           {supplierList.map((supplier) => (
             <p
               key={supplier.id}
-              onClick={() => {
-                onChange(supplier.name);
-                setIsOpen(false);
-              }}
+              onClick={() => handleSelectSupplier(supplier)}
               className="text-paragraph py-2 hover:bg-primary/10 cursor-pointer"
             >
               {supplier.name}
