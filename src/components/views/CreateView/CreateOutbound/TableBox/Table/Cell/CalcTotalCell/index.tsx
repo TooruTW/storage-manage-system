@@ -20,7 +20,7 @@ const CalcTotalCell = <TData extends Record<string, unknown>>({
   // 從原始數據獲取數量和單價
   const rowData = original as unknown as CreateOutbound;
   const quantity = rowData?.quantity || 0;
-  const pricePerUnit = rowData?.pricePerUnit || 0;
+  const pricePerUnit = rowData?.price_per_unit || 0;
 
   // 計算總價
   const calculatedTotal = calculateTotal(quantity, pricePerUnit);

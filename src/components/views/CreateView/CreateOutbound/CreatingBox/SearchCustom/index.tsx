@@ -19,7 +19,7 @@ const SearchCustom = ({ setIsAddNewCustom, control }: SearchCustomProps) => {
       <div className="flex gap-2 w-full relative">
         <h2 className="text-h2">客戶：</h2>
         <Controller
-          name="customerName"
+          name="customer_name"
           control={control}
           rules={{
             required: "請選擇客戶",

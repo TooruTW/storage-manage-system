@@ -12,26 +12,28 @@ import useLoading from "@/stores/useLoading";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
-  const { handleSubmit, control, setValue } = useForm<CreateOutbound>();
+  const { handleSubmit, control, setValue, watch } = useForm<CreateOutbound>();
 
   const addDataToLocalStorage = (data: CreateOutbound) => {
     let newDataDate = dayjs().format("YYYY-MM-DD");
     const prevData = useCreateOutbound.getState().createOutbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].shipmentDate;
+      newDataDate = prevData[prevData.length - 1].shipment_date;
     }
 
     const newData: CreateOutbound = {
-      customerName: data.customerName,
-      productName: data.productName,
+      customer_id: data.customer_id,
+      product_id: data.product_id,
+      customer_name: data.customer_name,
+      product_name: data.product_name,
       unit: data.unit,
-      costPerUnit: data.costPerUnit,
+      cost_per_unit: data.cost_per_unit,
       quantity: 0,
-      pricePerUnit: 0,
-      shipmentDate: newDataDate,
-      totalPrice: 0,
-      netProfit: 0,
+      price_per_unit: 0,
+      shipment_date: newDataDate,
+      total_price: 0,
+      net_profit: 0,
       remark: "",
     };
 
@@ -74,6 +76,7 @@ const CreatingBox = () => {
           />
           <SearchingResult
             setValue={setValue}
+            watch={watch}
             onSubmit={handleSubmit(onSubmit)}
           />
         </form>

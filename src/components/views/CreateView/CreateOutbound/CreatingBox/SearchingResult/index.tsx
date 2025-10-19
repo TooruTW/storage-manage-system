@@ -2,15 +2,20 @@ import { useState } from "react";
 import Tab from "./Tab";
 import Results from "./Results";
 import { Search } from "lucide-react";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { CreateOutbound } from "../../type";
 
 type SearchingResultProps = {
   setValue: UseFormSetValue<CreateOutbound>;
+  watch: UseFormWatch<CreateOutbound>;
   onSubmit: () => void;
 };
 
-const SearchingResult = ({ setValue, onSubmit }: SearchingResultProps) => {
+const SearchingResult = ({
+  setValue,
+  watch,
+  onSubmit,
+}: SearchingResultProps) => {
   const [currentTab, setCurrentTab] = useState<"all" | "purchaseHistory">(
     "purchaseHistory"
   );
@@ -33,6 +38,7 @@ const SearchingResult = ({ setValue, onSubmit }: SearchingResultProps) => {
         currentTab={currentTab}
         keyword={keyword}
         setValue={setValue}
+        watch={watch}
         onSubmit={onSubmit}
       />
     </div>
