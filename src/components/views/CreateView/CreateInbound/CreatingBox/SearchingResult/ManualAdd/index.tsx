@@ -16,8 +16,9 @@ const ManualAdd = ({ setValue, onSubmit }: ManualAddProps) => {
     if (!productName.trim() || !unit.trim()) {
       return;
     }
-    setValue("productName", productName);
+    setValue("product_name", productName);
     setValue("unit", unit);
+    setValue("price_per_unit", 0);
     onSubmit();
     // 清空輸入框
     setProductName("");

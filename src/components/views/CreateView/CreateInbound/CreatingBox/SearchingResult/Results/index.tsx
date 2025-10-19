@@ -36,8 +36,9 @@ const Results = ({ keyword, setValue, onSubmit }: ResultsProps) => {
 
   const handleClickItem = (item: Inventory) => {
     // 填入商品名稱、單位和成本單價
-    setValue("productName", item.product_name);
+    setValue("product_name", item.product_name);
     setValue("unit", item.unit);
+    setValue("price_per_unit", item.last_cost_per_unit);
     // 自動提交表單
     onSubmit();
   };

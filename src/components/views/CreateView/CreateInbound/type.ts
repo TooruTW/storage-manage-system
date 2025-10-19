@@ -1,10 +1,10 @@
 export type CreateInbound = {
-    supplierName: string;
-    productName: string;
+    supplier_name: string;
+    product_name: string;
     unit: string;
     quantity: number;
-    pricePerUnit: number;
-    totalPrice: number;
+    price_per_unit: number;
+    total_price: number;
     remark: "";
-    lastInboundDate: string;
+    last_inbound_date: string;
 }

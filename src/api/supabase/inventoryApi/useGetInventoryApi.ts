@@ -7,6 +7,7 @@ export type Inventory = {
   unit: string;
   quantity: number;
   last_inbound_date: string;
+  last_cost_per_unit: number;
 }
 
 const getInventoryApi = async () => {
@@ -19,6 +20,8 @@ const getInventoryApi = async () => {
         console.error("Get inventory error", error);
         throw error;
     }
+
+    console.log(inventory);
 
     return inventory as unknown as Inventory[] || [];
 };

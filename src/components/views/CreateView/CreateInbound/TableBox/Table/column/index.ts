@@ -11,13 +11,13 @@ import StringCell from "../Cell/StringCell";
 const columnHelper = createColumnHelper<CreateInbound>();
 
 const columns = [
-  columnHelper.accessor("supplierName", {
+  columnHelper.accessor("supplier_name", {
     cell: ReadOnlyCell,
     header: "進貨商",
     enableColumnFilter: true,
     size: 120,
   }),
-  columnHelper.accessor("productName", {
+  columnHelper.accessor("product_name", {
     cell: ReadOnlyCell,
     header: "商品名",
     enableColumnFilter: true,
@@ -35,13 +35,13 @@ const columns = [
     enableColumnFilter: false,
     size: 50,
   }),
-  columnHelper.accessor("pricePerUnit", {
+  columnHelper.accessor("price_per_unit", {
     cell: MoneyCell,
     header: "單價 $",
     enableColumnFilter: false,
     size: 100,
   }),
-  columnHelper.accessor("totalPrice", {
+  columnHelper.accessor("total_price", {
     cell: CalcTotalCell,
     header: "小計 $",
     enableColumnFilter: false,
@@ -53,9 +53,9 @@ const columns = [
     enableColumnFilter: true,
     size: 100,
   }),
-  columnHelper.accessor("lastInboundDate", {
+  columnHelper.accessor("last_inbound_date", {
     cell: DateCell,
-    header: "最後進貨日",
+    header: "進貨日",
     enableColumnFilter: true,
     size: 100,
   }),

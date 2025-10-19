@@ -14,7 +14,7 @@ const SearchSupplier = ({ control, error }: SearchSupplierProps) => {
         <h2 className="text-h2">進貨商：</h2>
         <div className="flex flex-col gap-1 flex-1">
           <Controller
-            name="supplierName"
+            name="supplier_name"
             control={control}
             rules={{
               required: "請選擇進貨商",

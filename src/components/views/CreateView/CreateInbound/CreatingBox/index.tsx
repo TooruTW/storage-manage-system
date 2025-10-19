@@ -21,18 +21,18 @@ const CreatingBox = () => {
     const prevData = useCreateInbound.getState().createInbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].lastInboundDate;
+      newDataDate = prevData[prevData.length - 1].last_inbound_date;
     }
 
     const newData: CreateInbound = {
-      supplierName: data.supplierName,
-      productName: data.productName,
+      supplier_name: data.supplier_name,
+      product_name: data.product_name,
       unit: data.unit,
       quantity: 0,
-      pricePerUnit: 0,
-      totalPrice: 0,
+      price_per_unit: data.price_per_unit,
+      total_price: 0,
       remark: "",
-      lastInboundDate: newDataDate,
+      last_inbound_date: newDataDate,
     };
 
     useCreateInbound.getState().addCreateInbound(newData);
@@ -76,7 +76,7 @@ const CreatingBox = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <SearchSupplier
             control={control}
-            error={formState.errors.supplierName}
+            error={formState.errors.supplier_name}
           />
           <SearchingResult
             setValue={setValue}
