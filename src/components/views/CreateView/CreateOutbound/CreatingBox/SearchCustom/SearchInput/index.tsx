@@ -21,6 +21,19 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
     }
   }, [customerData]);
 
+
+  useEffect(() => {
+    if (!customerData) return;
+    if (value === "") {
+      setCustomList(customerData);
+      return;
+    }
+    setCustomList(
+      customerData.filter((customer) => customer.name.includes(value))
+    );
+  }, [value, customerData]);
+
+
   return (
     <div className="relative w-full">
       <input

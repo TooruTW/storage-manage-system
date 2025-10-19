@@ -14,10 +14,21 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
 
   // init supplier list
   useEffect(() => {
-    if(supplierData) {
+    if (supplierData) {
       setSupplierList(supplierData);
     }
-    }, [supplierData]);
+  }, [supplierData]);
+
+  useEffect(() => {
+    if (!supplierData) return;
+    if (value === "") {
+      setSupplierList(supplierData);
+      return;
+    }
+    setSupplierList(
+      supplierData.filter((supplier) => supplier.name.includes(value))
+    );
+  }, [value, supplierData]);
 
   return (
     <div className="relative w-full">
