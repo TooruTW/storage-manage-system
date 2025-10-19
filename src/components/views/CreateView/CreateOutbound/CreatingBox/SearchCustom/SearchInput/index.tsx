@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { FAKE_CUSTOM_LIST } from "../constants/FAKE_CUSTOM_LIST";
+import {
+  Customer,
+  useGetCustomerApi,
+} from "@/api/supabase/customerApi/useGetCustomerApi";
 
 type SearchInputProps = {
   value: string;
@@ -7,12 +10,16 @@ type SearchInputProps = {
 };
 
 const SearchInput = ({ value, onChange }: SearchInputProps) => {
-  const [customList, setCustomList] = useState<string[]>([]);
+  const { data: customerData } = useGetCustomerApi();
+  const [customList, setCustomList] = useState<Customer[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  // init customer list
   useEffect(() => {
-    setCustomList(FAKE_CUSTOM_LIST.filter((custom) => custom.includes(value)));
-  }, [value]);
+    if (customerData) {
+      setCustomList(customerData);
+    }
+  }, [customerData]);
 
   return (
     <div className="relative w-full">
@@ -30,14 +37,14 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
         <div className="w-full h-fit max-h-200 overflow-y-auto absolute left-0 top-full translate-y-2 divide-y-1 divide-primary/10 border-1 border-primary rounded-md bg-white z-10 text-center">
           {customList.map((custom) => (
             <p
-              key={custom}
+              key={custom.id}
               onClick={() => {
-                onChange(custom);
+                onChange(custom.name);
                 setIsOpen(false);
               }}
               className="text-paragraph py-2 hover:bg-primary/10 cursor-pointer"
             >
-              {custom}
+              {custom.name}
             </p>
           ))}
         </div>
