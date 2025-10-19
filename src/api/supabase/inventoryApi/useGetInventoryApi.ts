@@ -1,7 +1,7 @@
 import supabase from "..";
 import { useQuery } from "@tanstack/react-query";
 
-type Inventory = {
+export type Inventory = {
   id: string;
   product_name: string;
   unit: string;
