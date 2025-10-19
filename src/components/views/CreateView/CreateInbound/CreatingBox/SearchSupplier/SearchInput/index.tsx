@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { FAKE_SUPPLIER_LIST } from "../constants/FAKE_Supplier_LIST";
+import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
+import { Supplier } from "@/api/supabase/supplierApi/useGetSupplierApi";
 
 type SearchInputProps = {
   value: string;
@@ -7,12 +8,16 @@ type SearchInputProps = {
 };
 
 const SearchInput = ({ value, onChange }: SearchInputProps) => {
-  const [supplierList, setSupplierList] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { data: supplierData } = useGetSupplierApi();
+  const [supplierList, setSupplierList] = useState<Supplier[]>([]);
 
+  // init supplier list
   useEffect(() => {
-    setSupplierList(FAKE_SUPPLIER_LIST.filter((supplier) => supplier.includes(value)));
-    }, [value]);
+    if(supplierData) {
+      setSupplierList(supplierData);
+    }
+    }, [supplierData]);
 
   return (
     <div className="relative w-full">
@@ -30,14 +35,14 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
         <div className="w-full h-fit max-h-200 overflow-y-auto absolute left-0 top-full translate-y-2 divide-y-1 divide-primary/10 border-1 border-primary rounded-md bg-white z-10 text-center">
           {supplierList.map((supplier) => (
             <p
-              key={supplier}
+              key={supplier.id}
               onClick={() => {
-                onChange(supplier);
+                onChange(supplier.name);
                 setIsOpen(false);
               }}
               className="text-paragraph py-2 hover:bg-primary/10 cursor-pointer"
             >
-              {supplier}
+              {supplier.name}
             </p>
           ))}
         </div>
