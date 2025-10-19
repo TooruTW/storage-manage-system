@@ -3,6 +3,7 @@ import {
   Customer,
   useGetCustomerApi,
 } from "@/api/supabase/customerApi/useGetCustomerApi";
+import useClickOutSide from "@/components/hook/useClickOutSide";
 
 type SearchInputProps = {
   value: string;
@@ -13,14 +14,13 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
   const { data: customerData } = useGetCustomerApi();
   const [customList, setCustomList] = useState<Customer[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const ref = useClickOutSide({ action: () => setIsOpen(false) });
   // init customer list
   useEffect(() => {
     if (customerData) {
       setCustomList(customerData);
     }
   }, [customerData]);
-
 
   useEffect(() => {
     if (!customerData) return;
@@ -33,9 +33,8 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
     );
   }, [value, customerData]);
 
-
   return (
-    <div className="relative w-full">
+    <div ref={ref} className="relative w-full">
       <input
         type="text"
         className="border-b-1 border-primary/10 py-1 px-2 shadow-xs w-full"

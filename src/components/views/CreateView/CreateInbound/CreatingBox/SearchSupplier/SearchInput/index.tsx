@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
 import { Supplier } from "@/api/supabase/supplierApi/useGetSupplierApi";
+import useClickOutSide from "@/components/hook/useClickOutSide";
 
 type SearchInputProps = {
   value: string;
@@ -8,6 +9,7 @@ type SearchInputProps = {
 };
 
 const SearchInput = ({ value, onChange }: SearchInputProps) => {
+  const ref = useClickOutSide({ action: () => setIsOpen(false) });
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { data: supplierData } = useGetSupplierApi();
   const [supplierList, setSupplierList] = useState<Supplier[]>([]);
@@ -31,7 +33,7 @@ const SearchInput = ({ value, onChange }: SearchInputProps) => {
   }, [value, supplierData]);
 
   return (
-    <div className="relative w-full">
+    <div ref={ref} className="relative w-full">
       <input
         type="text"
         className="border-b-1 border-primary/10 py-1 px-2 shadow-xs w-full"
