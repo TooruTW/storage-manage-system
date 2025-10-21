@@ -1,8 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+
 import Name from "./Name";
-import { FormDataType } from "./type";
 import Address from "./Address";
 import PhoneNumber from "./PhoneNumber";
+
+import { FormDataType } from "./type";
 
 export default function Form() {
   const {
@@ -11,8 +13,9 @@ export default function Form() {
     control,
     formState: { errors },
   } = useForm<FormDataType>();
-  const onSubmit: SubmitHandler<FormDataType> = (data) => console.log(data);
-
+  const onSubmit: SubmitHandler<FormDataType> = (data) => {
+    console.log(data);
+  };
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */

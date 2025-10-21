@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import dayjs from "dayjs";
+
+import { Button } from "@/components/ui/button";
+
 import SearchingResult from "./SearchingResult";
 import SearchCustom from "./SearchCustom";
 import AddNewCustom from "./AddNewCustom";
-import { useForm } from "react-hook-form";
-import { CreateOutbound } from "../type";
-import { SubmitHandler } from "react-hook-form";
-import dayjs from "dayjs";
+
 import useCreateOutbound from "@/stores/useCreateOutbound";
-import { Button } from "@/components/ui/button";
 import useLoading from "@/stores/useLoading";
+
+import { CreateOutbound } from "../type";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
@@ -48,9 +52,7 @@ const CreatingBox = () => {
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateOutbound.getState().createOutbound;
-    console.log("上傳");
     console.log(data);
-
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     useCreateOutbound.getState().resetCreateOutbound();

@@ -1,8 +1,10 @@
 import { Outlet, useLocation } from "react-router-dom";
+
 import { Header } from "./Header";
 import LoadingView from "./LoadingView";
-import useLoading from "@/stores/useLoading";
 import PopupContainer from "./PopupContainer";
+
+import useLoading from "@/stores/useLoading";
 
 const Layout = () => {
   const location = useLocation();
