@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { CellContext } from "@tanstack/react-table";
 
 // 通用的可編輯單元格組件
@@ -20,26 +20,27 @@ const MoneyCell = <TData extends Record<string, unknown>>({
     return Number(formattedValue.toString().replace(/,/g, ""));
   }
 
-  // We need to keep and update the state of the cell normally
   const [value, setValue] = useState<number | string>(
     formatValue(initialValue as number)
   );
   const [valueType, setValueType] = useState<"number" | "string">("string");
+  const warningStyle = useMemo(()=>{
+    if(Number(value) < 0) return "text-red-500";
+    return "";
+  },[value])
 
-  // When the input is blurred, we'll call our table meta's updateData function
   const onBlur = () => {
     table.options.meta?.updateData(index, id, Number(value));
     setValue(formatValue(Number(value)));
     setValueType("string");
   };
 
-  // If the initialValue is changed external, sync it up with our state
   useEffect(() => {
     setValue(formatValue(initialValue as number));
   }, [initialValue]);
 
   return (
-    <div className={`relative ${Number(value) < 0 && "text-red-500"}`}>
+    <div className={`relative ${warningStyle}`}>
       <input
         type={valueType}
         value={value as number | string}
