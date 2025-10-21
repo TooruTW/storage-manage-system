@@ -1,4 +1,5 @@
 import { Box } from "lucide-react";
+
 import { useAccountStore } from "@/stores/useAccountState";
 
 const MainImage = () => {

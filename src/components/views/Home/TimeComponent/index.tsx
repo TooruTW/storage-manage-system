@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Time } from "@/components/layout/Header/type";
+import { useState, useEffect } from "react";
+
 import dayjs from "dayjs";
 import "dayjs/locale/zh-tw";
-import { useEffect } from "react";
 
+import { Time } from "@/components/layout/Header/type";
 
 const TimeComponent = () => {
   const [time, setTime] = useState<Time>({

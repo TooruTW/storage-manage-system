@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
+
 import { EyeClosed, Eye } from "lucide-react";
 
-import TextContent from "@/components/views/Home/LoginForm/TextContent";
 import { Button } from "@/components/ui/button";
 
+import TextContent from "@/components/views/Home/LoginForm/TextContent";
+
 import { useAccountStore } from "@/stores/useAccountState";
+
 import { usePostLoginApi } from "@/api/supabase/authApi/usePostLoginApi";
 import { useCheckStateApi } from "@/api/supabase/authApi/useCheckStateApi";
 

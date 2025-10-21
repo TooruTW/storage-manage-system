@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useAccountStore } from "@/stores/useAccountState";
+
+import { useCheckStateApi } from "@/api/supabase/authApi/useCheckStateApi";
+
 import {
   unLoginButtonList,
   loginButtonList,
   mobileLoginButtonList,
 } from "./constants";
-import { useNavigate } from "react-router-dom";
 import { ButtonList } from "./type";
-import { useCheckStateApi } from "@/api/supabase/authApi/useCheckStateApi";
-import { useAccountStore } from "@/stores/useAccountState";
 
 const ButtonContainer = () => {
   const isLogin = useAccountStore((state) => state.isLogin);
@@ -54,7 +57,6 @@ const ButtonContainer = () => {
           <span className="bg-primary rounded-full animate-bounce size-1"></span>
           <span className="bg-primary rounded-full animate-bounce size-1"></span>
           <span className="bg-primary rounded-full animate-bounce size-1"></span>
-
         </div>
       )}
 
