@@ -5,8 +5,6 @@ import { useAccountStore } from "@/stores/useAccountState";
 const checkStateApi = async () => {
   const globalState = useAccountStore.getState();
   const { data, error } = await supabase.auth.getSession();
-  console.log("Start checking");
-  
 
   // 等待 5 秒
   // await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -16,13 +14,11 @@ const checkStateApi = async () => {
     throw error;
   }
 
-  if(!data.session) {
+  if (!data.session) {
     globalState.setIsLogin(false);
-    console.log("Checked: not login");
     return null;
-  }else{
+  } else {
     globalState.setIsLogin(true);
-    console.log("Checked: login");
     return data;
   }
 };

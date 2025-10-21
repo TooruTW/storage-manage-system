@@ -1,6 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 import supabase from "..";
+
 import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
+
 type UpdateData = {
   id: string;
   data: {
@@ -36,8 +38,6 @@ const patchCustomerApi = async (data: EditDataMap) => {
     });
   });
 
-  console.log("準備發送的資料 :", updateDataList);
-
   // 調用 Supabase RPC function
   const { data: result, error } = await supabase.rpc("update_customer_batch", {
     update_data: updateDataList,
@@ -47,8 +47,6 @@ const patchCustomerApi = async (data: EditDataMap) => {
     console.error("RPC 調用錯誤:", error);
     throw error;
   }
-
-  console.log("更新結果:", result);
 
   return result as BatchUpdateResponse;
 };

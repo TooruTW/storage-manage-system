@@ -1,5 +1,5 @@
-import supabase from "..";
 import { useMutation } from "@tanstack/react-query";
+import supabase from "..";
 
 const logoutApi = async () => {
   const { error } = await supabase.auth.signOut();
@@ -7,13 +7,13 @@ const logoutApi = async () => {
     console.error("Logout error", error);
     throw error;
   }
-  return ;
+  return;
 };
 
 const usePostLogoutApi = () => {
-    return useMutation({
-        mutationFn: logoutApi,
-    });
-}
+  return useMutation({
+    mutationFn: logoutApi,
+  });
+};
 
 export { usePostLogoutApi };

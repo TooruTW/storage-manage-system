@@ -1,5 +1,5 @@
-import supabase from "..";
 import { useQuery } from "@tanstack/react-query";
+import supabase from "..";
 
 export type Inventory = {
   id: string;
@@ -8,7 +8,7 @@ export type Inventory = {
   quantity: number;
   last_inbound_date: string;
   last_cost_per_unit: number;
-}
+};
 
 const getInventoryApi = async () => {
   const { data: inventory, error } = await supabase
@@ -16,14 +16,12 @@ const getInventoryApi = async () => {
     .select("*")
     .order("last_inbound_date", { ascending: false });
 
-    if (error) {
-        console.error("Get inventory error", error);
-        throw error;
-    }
+  if (error) {
+    console.error("Get inventory error", error);
+    throw error;
+  }
 
-    console.log(inventory);
-
-    return inventory as unknown as Inventory[] || [];
+  return (inventory as unknown as Inventory[]) || [];
 };
 
 const useGetInventoryApi = () => {

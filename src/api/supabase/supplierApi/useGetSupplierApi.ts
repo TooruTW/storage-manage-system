@@ -22,8 +22,6 @@ const getSupplierApi = async () => {
     throw error;
   }
 
-  console.log("supplier", supplier);
-
   return supplier as Supplier[];
 };
 
