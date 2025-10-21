@@ -1,8 +1,9 @@
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
 const TextContent = () => {
-  const [greeting, setGreeting] = useState("");
+  const [greeting, setGreeting] = useState<string>("");
+
   const getGreeting = () => {
     const hour = dayjs().hour();
     if (hour >= 6 && hour < 12) {
@@ -13,9 +14,11 @@ const TextContent = () => {
       setGreeting("晚安");
     }
   };
+
   useEffect(() => {
     getGreeting();
   }, []);
+
   return (
     <div className="flex flex-col gap-3">
       <h2 className="text-h2 font-bold">{greeting}</h2>

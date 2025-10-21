@@ -1,10 +1,11 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { EyeClosed } from "lucide-react";
-import { Eye } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import TextContent from "./TextContent";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { EyeClosed, Eye } from "lucide-react";
+
+import TextContent from "@/components/views/Home/LoginForm/TextContent";
+import { Button } from "@/components/ui/button";
+
 import { useAccountStore } from "@/stores/useAccountState";
 import { usePostLoginApi } from "@/api/supabase/authApi/usePostLoginApi";
 import { useCheckStateApi } from "@/api/supabase/authApi/useCheckStateApi";
@@ -21,15 +22,33 @@ const LoginForm = () => {
     reset,
     formState: { errors },
   } = useForm<Inputs>();
-  const navigate = useNavigate();
-  const { mutate: postLoginApi } = usePostLoginApi();
-  const {data: checkState} = useCheckStateApi();
 
-  useEffect(()=>{
-    if(checkState){
+  const navigate = useNavigate();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const { mutate: postLoginApi } = usePostLoginApi();
+  const { data: checkState } = useCheckStateApi();
+
+  const isPasswordRequired = useMemo(
+    () => errors.password?.type === "required",
+    [errors.password]
+  );
+
+  const isAccountRequired = useMemo(
+    () => errors.account?.type === "required",
+    [errors.account]
+  );
+
+  const inputType = useMemo(
+    () => (isPasswordVisible ? "text" : "password"),
+    [isPasswordVisible]
+  );
+
+  useEffect(() => {
+    if (checkState) {
       navigate("/home");
     }
-  },[checkState,navigate])
+  }, [checkState, navigate]);
 
   const handleLogin = async (data: Inputs) => {
     postLoginApi(
@@ -39,8 +58,6 @@ const LoginForm = () => {
       },
       {
         onSuccess: () => {
-          console.log("登入成功");
-
           useAccountStore.getState().setIsLogin(true);
           useAccountStore.getState().setUser(data.account);
 
@@ -55,11 +72,8 @@ const LoginForm = () => {
   };
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log(data);
     handleLogin(data);
   };
-
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   return (
     <form
@@ -75,7 +89,7 @@ const LoginForm = () => {
           {...register("account", { required: true })}
           placeholder="請輸入帳號"
         />
-        {errors.account?.type === "required" && (
+        {isAccountRequired && (
           <p role="alert" className="text-label text-destructive">
             帳號是必填的
           </p>
@@ -88,7 +102,7 @@ const LoginForm = () => {
         <div className="border-2 rounded-md px-2 py-1 relative focus-within:border-primary/30">
           <input
             className=" focus:outline-none"
-            type={isPasswordVisible ? "text" : "password"}
+            type={inputType}
             {...register("password", { required: true })}
             placeholder="請輸入密碼"
           />
@@ -101,7 +115,7 @@ const LoginForm = () => {
           </div>
         </div>
 
-        {errors.password?.type === "required" && (
+        {isPasswordRequired && (
           <p role="alert" className="text-label text-destructive">
             密碼是必填的
           </p>
