@@ -1,6 +1,8 @@
-import { useNavigate, useParams } from "react-router-dom";
 import { useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 import { ChevronRight } from "lucide-react";
+
 import { MENU_CONSTANTS } from "./constants";
 
 type MenuProps = {
@@ -18,9 +20,9 @@ const Menu = ({ isOpen, setIsOpen }: MenuProps) => {
     "bg-primary/70",
     "bg-primary/60",
   ];
-const openStyle = useMemo(()=>{
-  return isOpen ? "rotate-90" : "rotate-0";
-},[isOpen])
+  const openStyle = useMemo(() => {
+    return isOpen ? "rotate-90" : "rotate-0";
+  }, [isOpen]);
   return (
     <ul className="flex flex-col gap-2">
       <li

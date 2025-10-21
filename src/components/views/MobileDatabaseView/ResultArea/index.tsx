@@ -1,5 +1,7 @@
-import { Box } from "lucide-react";
 import { useParams } from "react-router-dom";
+
+import { Box } from "lucide-react";
+
 import Price from "./Price";
 import Cost from "./Cost";
 import Customer from "./Customer";

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { PriceData } from "./type";
+
 import { FAKE_PRICE_DATA } from "./constants";
+import { PriceData } from "./type";
+
 type PriceProps = {
   object: string;
   product: string;

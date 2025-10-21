@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { RotateCw, X, Search } from "lucide-react";
 
 type SearchAreaProps = {
