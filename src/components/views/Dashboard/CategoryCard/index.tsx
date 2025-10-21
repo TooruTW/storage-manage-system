@@ -1,7 +1,9 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { DollarSign } from "lucide-react";
-import { CategoryProps } from "./type";
 import { useCallback } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+import { DollarSign } from "lucide-react";
+
+import { CategoryProps } from "./type";
 
 const FakeCategoryList: CategoryProps[] = [
   { id: "purchaseAmount", label: "進貨額", value: 100 },

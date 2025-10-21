@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { TIME_RANGE_CONSTANTS } from "./constants";
 
+import { TIME_RANGE_CONSTANTS } from "./constants";
 
 const Tab = () => {
   const { timeRange } = useParams();
@@ -10,7 +10,6 @@ const Tab = () => {
     currentPath[2] = timeRange;
     const newPath = currentPath.join("/");
     navigate(newPath);
-    
   };
   return (
     <div
