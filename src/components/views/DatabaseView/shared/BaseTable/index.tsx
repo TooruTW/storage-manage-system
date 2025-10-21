@@ -7,11 +7,15 @@ import {
   ColumnDef,
   VisibilityState,
 } from "@tanstack/react-table";
+
 import { Button } from "@/components/ui/button";
+
 import { Filter } from "../Filter";
-import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
-import { usePopupStore } from "@/stores/usePopupStore";
 import UpdateConfirm from "../UpdateConfirm";
+
+import { usePopupStore } from "@/stores/usePopupStore";
+
+import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
 
 interface BaseTableProps<TData> {
   data: TData[];
@@ -65,7 +69,6 @@ const BaseTable = <TData extends Record<string, unknown>>({
         setNewData(new Map(newData));
       },
       updateData: (rowIndex, columnId, value) => {
-        console.log("updateData", rowIndex, columnId, value);
         // Skip page index reset until after next rerender
         setData((old) =>
           old.map((row, index) => {

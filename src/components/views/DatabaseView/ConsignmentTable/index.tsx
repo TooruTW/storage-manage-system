@@ -1,5 +1,6 @@
 import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
+
 import { useGetConsignmentApi } from "@/api/supabase/consignmentApi/useGetConsignmentApi";
 import { usePatchConsignmentApi } from "@/api/supabase/consignmentApi/usePatchConsignmentApi";
 
@@ -10,7 +11,13 @@ const ConsignmentTable = () => {
   if (isLoading) return <TableStateView type="loading" />;
 
   if (!data) return <TableStateView type="empty" />;
-  return <BaseTable data={data} columns={columns} updateDataToServer={patchConsignment} />;
+  return (
+    <BaseTable
+      data={data}
+      columns={columns}
+      updateDataToServer={patchConsignment}
+    />
+  );
 };
 
 export default ConsignmentTable;
