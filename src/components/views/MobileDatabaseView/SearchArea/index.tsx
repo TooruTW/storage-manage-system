@@ -1,6 +1,6 @@
-import { RotateCw, X, Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import { RotateCw, X, Search } from "lucide-react";
 
 type SearchAreaProps = {
   object: string;
@@ -9,22 +9,49 @@ type SearchAreaProps = {
   setProduct: (product: string) => void;
 };
 
-const SearchArea = ({ object, setObject, product, setProduct }: SearchAreaProps) => {
+const SearchArea = ({
+  object,
+  setObject,
+  product,
+  setProduct,
+}: SearchAreaProps) => {
   const { tab } = useParams();
-  const [isProduct, setIsProduct] = useState<boolean>(false);
+
+  const isProduct = useMemo(() => tab === "price" || tab === "cost", [tab]);
+  const isFilterActive = useMemo(
+    () => !!(object || product),
+    [object, product]
+  );
+
+  const [inputStyle, setInputStyle] = useState<string>("w-full");
+  const [cleanerStyle, setCleanerStyle] = useState<string>("opacity-0");
 
   useEffect(() => {
-    if (tab === "price" || tab === "cost") setIsProduct(true);
-    else setIsProduct(false);
-  }, [tab]);
+    setInputStyle(isProduct ? "w-1/2" : "w-full");
+  }, [isProduct]);
+
+  useEffect(() => {
+    setCleanerStyle(isFilterActive ? "opacity-100" : "opacity-0");
+  }, [isFilterActive]);
+
+  function handleCleanAllFilters() {
+    setObject("");
+    setProduct("");
+  }
+
+  function handleCleanObject() {
+    setObject("");
+  }
+
+  function handleCleanProduct() {
+    setProduct("");
+  }
 
   return (
     <div className="flex flex-col gap-2">
       <div className=" flex items-center gap-2 w-full">
         <div
-          className={`flex items-center justify-between border-1 rounded-md px-4 py-1 border-primary/10 ${
-            isProduct ? "w-1/2" : "w-full"
-          }`}
+          className={`flex items-center justify-between border-1 rounded-md px-4 py-1 border-primary/10 ${inputStyle}`}
         >
           <input
             type="text"
@@ -57,24 +84,19 @@ const SearchArea = ({ object, setObject, product, setProduct }: SearchAreaProps)
           {object && (
             <div className="flex items-center gap-1 text-label rounded-full px-2 py-1 bg-primary/20 w-fit">
               <p>{object}</p>
-              <X className="size-3" onClick={() => setObject("")} />
+              <X className="size-3" onClick={handleCleanObject} />
             </div>
           )}
           {product && (
             <div className="flex items-center gap-1 text-label rounded-full px-2 py-1 bg-primary/10 w-fit">
               <p>{product}</p>
-              <X className="size-3" onClick={() => setProduct("")} />
+              <X className="size-3" onClick={handleCleanProduct} />
             </div>
           )}
         </div>
         <div
-          className={`flex items-center gap-1 text-label rounded-full px-2 py-1 bg-primary/10 w-fit ${
-            object || product ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => {
-            setObject("");
-            setProduct("");
-          }}
+          className={`flex items-center gap-1 text-label rounded-full px-2 py-1 bg-primary/10 w-fit ${cleanerStyle}`}
+          onClick={handleCleanAllFilters}
         >
           清除條件 <RotateCw className="size-3" />
         </div>
