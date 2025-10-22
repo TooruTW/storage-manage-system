@@ -10,7 +10,7 @@ const Layout = () => {
   const location = useLocation();
   const viewUrl = location.pathname.split("/")[1];
   const isOpen = viewUrl !== "home";
-  const { loading } = useLoading();
+  const { isLoading } = useLoading();
 
   return (
     <div className="h-screen flex flex-col w-full px-12 max-md:px-4">
@@ -20,7 +20,7 @@ const Layout = () => {
           <Header />
         </div>
       )}
-      {loading && <LoadingView />}
+      {isLoading && <LoadingView />}
       <main className="w-full h-full flex justify-center">
         <Outlet />
       </main>
