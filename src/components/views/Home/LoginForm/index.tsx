@@ -61,7 +61,7 @@ const LoginForm = () => {
       },
       {
         onSuccess: () => {
-          useAccountStore.getState().setIsLogin(true);
+          useAccountStore.getState().setLoginState("success");
           useAccountStore.getState().setUser(data.account);
 
           navigate("/home");

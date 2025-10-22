@@ -15,10 +15,10 @@ const checkStateApi = async () => {
   }
 
   if (!data.session) {
-    globalState.setIsLogin(false);
+    globalState.setLoginState("failed");
     return null;
   } else {
-    globalState.setIsLogin(true);
+    globalState.setLoginState("success");
     return data;
   }
 };

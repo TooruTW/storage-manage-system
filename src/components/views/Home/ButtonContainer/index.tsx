@@ -14,7 +14,7 @@ import { ButtonList } from "./type";
 import Loading from "./Loading";
 
 const ButtonContainer = () => {
-  const isLogin = useAccountStore((state) => state.isLogin);
+  const loginState = useAccountStore((state) => state.loginState);
   const navigate = useNavigate();
   const [buttonList, setButtonList] = useState<ButtonList[]>([]);
   const [isMobile, setIsMobile] = useState(false);
@@ -24,8 +24,8 @@ const ButtonContainer = () => {
     return `cascade-btn-${100 - index * 10}`;
   }, []);
   const isChecking = useMemo(() => {
-    return isLogin === "checking";
-  }, [isLogin]);
+    return loginState === "checking";
+  }, [loginState]);
 
   // 判斷是否為行動裝置
   useEffect(() => {
@@ -37,24 +37,24 @@ const ButtonContainer = () => {
   useEffect(() => {
     if (!checkState) return;
     if (!checkState.session) {
-      useAccountStore.getState().setIsLogin(false);
+      useAccountStore.getState().setLoginState("failed");
       return;
     }
-    useAccountStore.getState().setIsLogin(true);
+    useAccountStore.getState().setLoginState("success");
   }, [checkState]);
 
   // 判斷按鈕列表
   useEffect(() => {
-    if (!isLogin) {
+    if (loginState === "failed") {
       setButtonList(unLoginButtonList);
-    } else if (isLogin === true) {
+    } else if (loginState === "success") {
       if (isMobile) {
         setButtonList(mobileLoginButtonList);
       } else {
         setButtonList(loginButtonList);
       }
     }
-  }, [isLogin, isMobile]);
+  }, [loginState, isMobile]);
 
   return (
     <div className="flex w-fit max-lg:w-1/3 max-lg:min-w-75 gap-2 max-lg:flex-col max-lg:gap-7">
