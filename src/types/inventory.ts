@@ -4,4 +4,5 @@ export type Inventory = {
   unit: string; // 單位
   quantity: number; // 當前庫存量
   last_inbound_date: string; // 最後進貨日
+  last_cost_per_unit: number; // 最後進貨單價
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { CreateInbound } from "../../../type";
 import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
-import { Inventory } from "@/api/supabase/inventoryApi/useGetInventoryApi";
+import { Inventory } from "@/types/inventory";
 
 type ResultsProps = {
   keyword: string;
