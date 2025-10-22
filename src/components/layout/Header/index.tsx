@@ -5,17 +5,10 @@ import { Box } from "lucide-react";
 import dayjs from "dayjs";
 import converter from "number-to-chinese-words";
 
-import type { Time } from "./type";
+import { INITIAL_TIME } from "./data";
 
 export const Header = () => {
-  const [time, setTime] = useState<Time>({
-    year: "",
-    month: "",
-    date: "",
-    week: "",
-    hour: 0,
-    minute: 0,
-  });
+  const [time, setTime] = useState(INITIAL_TIME);
   const navigate = useNavigate();
   const updateTime = () => {
     const now = dayjs();
@@ -45,7 +38,7 @@ export const Header = () => {
         strokeWidth={1}
         onClick={() => navigate("/home")}
       />
-      {/* Date and Time */}
+      {/* 日曆和時間 */}
       <div>
         <p className="text-label">
           <span>

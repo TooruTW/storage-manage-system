@@ -7,3 +7,12 @@ export type Time = {
   minute?: number;
   time?: string;
 };
+
+export const INITIAL_TIME: Time = {
+  year: "",
+  month: "",
+  date: "",
+  week: "",
+  hour: 0,
+  minute: 0,
+};
