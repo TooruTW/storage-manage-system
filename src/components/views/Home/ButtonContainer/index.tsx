@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useAccountStore } from "@/stores/useAccountState";
@@ -11,6 +11,7 @@ import {
   mobileLoginButtonList,
 } from "./constants";
 import { ButtonList } from "./type";
+import Loading from "./Loading";
 
 const ButtonContainer = () => {
   const isLogin = useAccountStore((state) => state.isLogin);
@@ -19,6 +20,12 @@ const ButtonContainer = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   const { data: checkState } = useCheckStateApi();
+  const buttonStyle = useCallback((index: number) => {
+    return `cascade-btn-${100 - index * 10}`;
+  }, []);
+  const isChecking = useMemo(() => {
+    return isLogin === "checking";
+  }, [isLogin]);
 
   // 判斷是否為行動裝置
   useEffect(() => {
@@ -51,22 +58,14 @@ const ButtonContainer = () => {
 
   return (
     <div className="flex w-fit max-lg:w-1/3 max-lg:min-w-75 gap-2 max-lg:flex-col max-lg:gap-7">
-      {isLogin === "checking" && (
-        <div className="w-fit h-15 flex items-center gap-2">
-          連線中
-          <span className="bg-primary rounded-full animate-bounce size-1"></span>
-          <span className="bg-primary rounded-full animate-bounce size-1"></span>
-          <span className="bg-primary rounded-full animate-bounce size-1"></span>
-        </div>
-      )}
+      {isChecking && <Loading />}
 
       {buttonList.map((button, index) => (
         <button
           key={button.label}
           onClick={() => navigate(button.path)}
-          className={`w-fit p-4 max-lg:w-full text-primary-foreground rounded-md max-lg:py-4 cascade-btn-${
-            100 - index * 10
-          }`}
+          className={`w-fit p-4 max-lg:w-full text-primary-foreground rounded-md max-lg:py-4 
+          ${buttonStyle(index)}`}
         >
           {button.label}
         </button>
