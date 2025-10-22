@@ -14,26 +14,21 @@ type CreateOutboundStore = {
 
 const useCreateOutbound = create<CreateOutboundStore>((set, get) => ({
   createOutbound: getData(),
-
   setCreateOutbound: (createOutbound) => set({ createOutbound }),
-
   addCreateOutbound: (newOutbound: CreateOutbound) =>
     set((state) => ({
       createOutbound: [newOutbound, ...state.createOutbound],
     })),
-
   removeCreateOutbound: (index: number) =>
     set((state) => ({
       createOutbound: state.createOutbound.filter((_, i) => i !== index),
     })),
-
   updateCreateOutbound: (index: number, updateOutbound: CreateOutbound) =>
     set((state) => ({
       createOutbound: state.createOutbound.map((outbound, i) =>
         i === index ? updateOutbound : outbound
       ),
     })),
-
   resetCreateOutbound: () => set({ createOutbound: [] }),
   saveCreateOutbound: () => {
     localStorage.setItem(

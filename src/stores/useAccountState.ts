@@ -7,7 +7,6 @@ type AccountStore = {
   setIsLogin: (isLogin: boolean) => void;
   setUser: (user: string) => void;
   reset: () => void;
-
 };
 
 export const useAccountStore = create<AccountStore>((set) => ({
@@ -18,4 +17,3 @@ export const useAccountStore = create<AccountStore>((set) => ({
   setUser: (user) => set({ user }),
   reset: () => set({ isLogin: "checking", user: "", lastLogin: "" }),
 }));
-

@@ -50,7 +50,7 @@ const SearchArea = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className=" flex items-center gap-2 w-full">
+      <div className="flex items-center gap-2 w-full">
         <div
           className={`flex items-center justify-between border-1 rounded-md px-4 py-1 border-primary/10 ${inputStyle}`}
         >

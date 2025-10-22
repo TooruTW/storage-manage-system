@@ -16,7 +16,6 @@ const Logout = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["checkState"] });
         useAccountStore.getState().reset();
-
         navigate("/home");
       },
       onError: () => {

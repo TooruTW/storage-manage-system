@@ -123,9 +123,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
   };
 
   return (
-    <div
-      className={`w-full flex flex-col gap-4 ${editingStyle}`}
-    >
+    <div className={`w-full flex flex-col gap-4 ${editingStyle}`}>
       <div className="flex justify-between items-center mt-4">
         <div>共 {table.getRowModel().rows.length} 筆資料</div>
         <div className="flex gap-2">
@@ -204,7 +202,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
                         key={cell.id}
                         className={`${
                           isEditing ? "border-2" : "border-y-2"
-                        }  border-primary/10 `}
+                        } border-primary/10`}
                       >
                         {/* 單元格內容 */}
                         {flexRender(

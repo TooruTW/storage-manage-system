@@ -101,10 +101,9 @@ const LoginForm = () => {
 
       <label htmlFor="password" className="flex flex-col gap-1 ">
         <span className="text-label">密碼</span>
-
         <div className="border-2 rounded-md px-2 py-1 relative focus-within:border-primary/30">
           <input
-            className=" focus:outline-none"
+            className="focus:outline-none"
             type={inputType}
             {...register("password", { required: true })}
             placeholder="請輸入密碼"
