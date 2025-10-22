@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { CellContext } from "@tanstack/react-table";
 
 // 通用的可編輯單元格組件
-const SelecterCell = <TData extends Record<string, unknown>>({
+const SelectorCell = <TData extends Record<string, unknown>>({
   getValue,
   row: { index },
   column: { id },
@@ -36,4 +36,4 @@ const SelecterCell = <TData extends Record<string, unknown>>({
   );
 };
 
-export default SelecterCell;
+export default SelectorCell;
