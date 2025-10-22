@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -40,6 +40,10 @@ const BaseTable = <TData extends Record<string, unknown>>({
     actions: false, // 預設隱藏刪除欄位
   });
   const { setContent } = usePopupStore();
+
+  const editingStyle = useMemo(() => {
+    return isEditing ? "bg-primary/10" : "";
+  }, [isEditing]);
 
   // 根據 isEditing 狀態控制刪除欄位的顯示/隱藏
   useEffect(() => {
@@ -120,7 +124,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
 
   return (
     <div
-      className={`w-full flex flex-col gap-4 ${isEditing && "bg-primary/10"}`}
+      className={`w-full flex flex-col gap-4 ${editingStyle}`}
     >
       <div className="flex justify-between items-center mt-4">
         <div>共 {table.getRowModel().rows.length} 筆資料</div>
