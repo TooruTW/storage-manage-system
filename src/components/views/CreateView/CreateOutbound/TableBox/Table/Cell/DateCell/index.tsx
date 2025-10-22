@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { CellContext } from "@tanstack/react-table";
 import dayjs from "dayjs";
 
-
 // 通用的可編輯單元格組件
 const DateCell = <TData extends Record<string, unknown>>({
   getValue,
@@ -24,7 +23,6 @@ const DateCell = <TData extends Record<string, unknown>>({
   const onBlur = () => {
     const date = dayjs(value as string);
     if (!date.isValid()) {
-      console.log("date is not valid");
       setValue(prevValue);
       return;
     }

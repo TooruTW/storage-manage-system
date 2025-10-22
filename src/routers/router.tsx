@@ -1,6 +1,9 @@
-import ButtonContainer from "@/components/views/Home/ButtonContainer";
+import { Navigate } from "react-router-dom";
+
 import Layout from "@/components/layout";
+
 import Home from "@/components/views/Home";
+import ButtonContainer from "@/components/views/Home/ButtonContainer";
 import LoginForm from "@/components/views/Home/LoginForm";
 import Dashboard from "@/components/views/Dashboard";
 import DatabaseView from "@/components/views/DatabaseView";
@@ -11,7 +14,6 @@ import ConsignmentTable from "@/components/views/DatabaseView/ConsignmentTable";
 import CustomTable from "@/components/views/DatabaseView/CustomTable";
 import SupplierTable from "@/components/views/DatabaseView/SupplierTable";
 import CreateView from "@/components/views/CreateView";
-import { Navigate } from "react-router-dom";
 import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
 import CreateInbound from "@/components/views/CreateView/CreateInbound";
 import MobileDatabaseView from "@/components/views/MobileDatabaseView";

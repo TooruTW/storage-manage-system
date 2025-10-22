@@ -1,18 +1,12 @@
-import { useState } from "react";
-import { Time } from "@/components/layout/Header/type";
+import { useState, useEffect } from "react";
+
 import dayjs from "dayjs";
 import "dayjs/locale/zh-tw";
-import { useEffect } from "react";
 
+import { INITIAL_TIME } from "@/components/layout/Header/data";
 
 const TimeComponent = () => {
-  const [time, setTime] = useState<Time>({
-    year: "",
-    month: "",
-    date: "",
-    week: "",
-    time: "",
-  });
+  const [time, setTime] = useState(INITIAL_TIME);
 
   const updateTime = () => {
     dayjs.locale("zh-tw");

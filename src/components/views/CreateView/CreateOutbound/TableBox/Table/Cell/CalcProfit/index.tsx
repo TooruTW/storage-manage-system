@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { CellContext } from "@tanstack/react-table";
-import { CreateOutbound } from "../../../../type";
+import { CreateOutbound } from "@/components/views/CreateView/CreateOutbound/type";
 
 // 計算總價的單元格組件
 const CalcProfitCell = <TData extends Record<string, unknown>>({
@@ -33,8 +33,11 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
     costPerUnit,
     pricePerUnit
   );
+  const warningStyle = useMemo(()=>{
+    if(calculatedTotalCost < 0) return "text-red-500";
+    return "";
+  },[calculatedTotalCost])
 
-  // We need to keep and update the state of the cell normally
   const [value, setValue] = useState<string>(formatValue(calculatedTotalCost));
 
   // 當數量或單價改變時，重新計算總價
@@ -50,9 +53,7 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
 
   return (
     <div
-      className={`text-center italic ${
-        calculatedTotalCost < 0 && "text-red-500"
-      }`}
+      className={`text-center italic ${warningStyle}`}
     >
       <span className="font-medium">{value}</span>
     </div>

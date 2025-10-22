@@ -3,7 +3,9 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
+
 import { columns } from "./column";
+
 import useCreateOutbound from "@/stores/useCreateOutbound";
 
 const Table = () => {

@@ -1,10 +1,10 @@
+import { useEffect } from "react";
 
 import { columns } from "./Columns";
-import { BaseTable } from "../shared";
+import { BaseTable, TableStateView } from "../shared";
+
 import { useGetCustomerApi } from "@/api/supabase/customerApi/useGetCustomerApi";
-import { TableStateView } from "../shared";
 import { usePatchCustomerApi } from "@/api/supabase/customerApi/usePatchCustomerApi";
-import { useEffect } from "react";
 
 const CustomTable = () => {
   const { data, isLoading } = useGetCustomerApi();
@@ -16,11 +16,18 @@ const CustomTable = () => {
       console.log("patchResult", patchResult);
     }
   }, [patchResult]);
+
   if (isLoading) return <TableStateView type="loading" />;
 
   if (!data) return <TableStateView type="empty" />;
 
-  return <BaseTable data={data} columns={columns} updateDataToServer={patchCustomer} />;
+  return (
+    <BaseTable
+      data={data}
+      columns={columns}
+      updateDataToServer={patchCustomer}
+    />
+  );
 };
 
 export default CustomTable;

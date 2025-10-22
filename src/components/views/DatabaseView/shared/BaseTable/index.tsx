@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,11 +7,15 @@ import {
   ColumnDef,
   VisibilityState,
 } from "@tanstack/react-table";
+
 import { Button } from "@/components/ui/button";
+
 import { Filter } from "../Filter";
-import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
-import { usePopupStore } from "@/stores/usePopupStore";
 import UpdateConfirm from "../UpdateConfirm";
+
+import { usePopupStore } from "@/stores/usePopupStore";
+
+import { EditDataMap } from "@/components/views/DatabaseView/shared/types/EditDataMap";
 
 interface BaseTableProps<TData> {
   data: TData[];
@@ -37,6 +41,16 @@ const BaseTable = <TData extends Record<string, unknown>>({
   });
   const { setContent } = usePopupStore();
 
+  const editingStyle = useMemo(() => {
+    return isEditing ? "bg-primary/10" : "";
+  }, [isEditing]);
+  const tableDataStyle = useMemo(() => {
+    if (isEditing) {
+      return "border-2";
+    }
+    return "border-y-2";
+  }, [isEditing]);
+
   // 根據 isEditing 狀態控制刪除欄位的顯示/隱藏
   useEffect(() => {
     setColumnVisibility({
@@ -54,7 +68,6 @@ const BaseTable = <TData extends Record<string, unknown>>({
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    // Provide our updateData function to our table meta
     meta: {
       collectData: (id: string, columnId: string, value: unknown) => {
         if (newData.has(id)) {
@@ -65,8 +78,6 @@ const BaseTable = <TData extends Record<string, unknown>>({
         setNewData(new Map(newData));
       },
       updateData: (rowIndex, columnId, value) => {
-        console.log("updateData", rowIndex, columnId, value);
-        // Skip page index reset until after next rerender
         setData((old) =>
           old.map((row, index) => {
             if (index === rowIndex) {
@@ -116,9 +127,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
   };
 
   return (
-    <div
-      className={`w-full flex flex-col gap-4 ${isEditing && "bg-primary/10"}`}
-    >
+    <div className={`w-full flex flex-col gap-4 ${editingStyle}`}>
       <div className="flex justify-between items-center mt-4">
         <div>共 {table.getRowModel().rows.length} 筆資料</div>
         <div className="flex gap-2">
@@ -195,9 +204,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
                     return (
                       <td
                         key={cell.id}
-                        className={`${
-                          isEditing ? "border-2" : "border-y-2"
-                        }  border-primary/10 `}
+                        className={`border-primary/10 ${tableDataStyle}`}
                       >
                         {/* 單元格內容 */}
                         {flexRender(

@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { TIME_RANGE_CONSTANTS } from "./constants";
 
+import { TIME_RANGES } from "./constants";
+import { useCallback } from "react";
 
 const Tab = () => {
   const { timeRange } = useParams();
@@ -10,18 +11,24 @@ const Tab = () => {
     currentPath[2] = timeRange;
     const newPath = currentPath.join("/");
     navigate(newPath);
-    
   };
+
+  const activityStyle = useCallback(
+    (range: "month" | "quarter" | "year") => {
+      const activeStyle = "bg-primary-foreground shadow-xs";
+      if (timeRange === range) {
+        return activeStyle;
+      }
+    },
+    [timeRange]
+  );
   return (
-    <div
-      className={`grid grid-cols-${TIME_RANGE_CONSTANTS.length} gap-2 w-fit p-1 border-2 rounded-md bg-primary/10`}
-    >
-      {TIME_RANGE_CONSTANTS.map((item) => (
+    <div className="flex gap-2 w-fit p-1 border-2 rounded-md bg-primary/10">
+      {TIME_RANGES.map((item) => (
         <div
           key={item.id}
-          className={`rounded-md px-3 py-2 border-2 ${
-            timeRange === item.id && "bg-primary-foreground shadow-xs"
-          } hover:bg-primary-foreground cursor-pointer `}
+          className={`rounded-md px-3 py-2 border-2 hover:bg-primary-foreground cursor-pointer 
+            ${activityStyle(item.id)}`}
           onClick={() => switchTimeRange(item.id)}
         >
           {item.label}

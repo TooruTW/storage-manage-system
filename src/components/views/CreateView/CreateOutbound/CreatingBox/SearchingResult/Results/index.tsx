@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { CreateOutbound } from "../../../type";
-import { Inventory } from "@/api/supabase/inventoryApi/useGetInventoryApi";
+import { Inventory } from "@/types/inventory";
 import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
 import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
 

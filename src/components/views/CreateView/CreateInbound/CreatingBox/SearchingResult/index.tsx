@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
-import { CreateInbound } from "../../type";
+
 import Tab from "./Tab";
-import { TabOption } from "./Tab/constants";
 import ManualAdd from "./ManualAdd";
 import SearchProduct from "./SearchProduct";
+
+import { CreateInbound } from "../../type";
+import { TabOption } from "./Tab/constants";
 
 type SearchingResultProps = {
   setValue: UseFormSetValue<CreateInbound>;

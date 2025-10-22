@@ -1,5 +1,5 @@
-import supabase from "..";
 import { useQuery } from "@tanstack/react-query";
+import supabase from "..";
 
 type Outbound = {
   id: string;

@@ -1,6 +1,6 @@
-
 import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
+
 import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
 import useDeleteOutboundApi from "@/api/supabase/outboundAPi/useDeleteOutboundApi";
 
@@ -11,7 +11,13 @@ const OutboundTable = () => {
 
   if (!outboundData) return <TableStateView type="empty" />;
 
-  return <BaseTable data={outboundData} columns={columns} deleteDataToServer={deleteOutbound} />;
+  return (
+    <BaseTable
+      data={outboundData}
+      columns={columns}
+      deleteDataToServer={deleteOutbound}
+    />
+  );
 };
 
 export default OutboundTable;

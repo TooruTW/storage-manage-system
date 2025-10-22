@@ -1,15 +1,15 @@
 import { create } from "zustand";
 
 type LoadingStore = {
-  loading: boolean;
+  isLoading: boolean;
   startLoading: () => void;
   endLoading: () => void;
 };
 
 const useLoading = create<LoadingStore>((set) => ({
-  loading: false,
-  startLoading: () => set({ loading: true }),
-  endLoading: () => set({ loading: false }),
+  isLoading: false,
+  startLoading: () => set({ isLoading: true }),
+  endLoading: () => set({ isLoading: false }),
 }));
 
 export default useLoading;

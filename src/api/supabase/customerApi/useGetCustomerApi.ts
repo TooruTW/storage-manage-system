@@ -21,8 +21,6 @@ const getCustomerApi = async () => {
     throw error;
   }
 
-  console.log("data", customer);
-
   return customer as Customer[];
 };
 

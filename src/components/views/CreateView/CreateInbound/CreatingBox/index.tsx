@@ -1,14 +1,18 @@
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import dayjs from "dayjs";
+
+import { Button } from "@/components/ui/button";
+
 import SearchingResult from "./SearchingResult";
 import SearchSupplier from "./SearchSupplier";
 import AddNewSupplier from "./AddNewSupplier";
-import { useForm } from "react-hook-form";
-import { CreateInbound } from "../type";
-import { SubmitHandler } from "react-hook-form";
+
 import useCreateInbound from "@/stores/useCreateInbound";
-import { Button } from "@/components/ui/button";
 import useLoading from "@/stores/useLoading";
-import dayjs from "dayjs";
+
+import { CreateInbound } from "../type";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
@@ -50,7 +54,6 @@ const CreatingBox = () => {
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateInbound.getState().createInbound;
-    console.log("上傳");
     console.log(data);
 
     await new Promise((resolve) => setTimeout(resolve, 3000));
