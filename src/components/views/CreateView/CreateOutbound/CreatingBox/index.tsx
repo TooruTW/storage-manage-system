@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import dayjs from "dayjs";
@@ -60,6 +60,10 @@ const CreatingBox = () => {
     useLoading.getState().endLoading();
   };
 
+  const activeStyle = useMemo(() => {
+    return isAddNewCustom && "w-100";
+  }, [isAddNewCustom]);
+
   return (
     <div className="flex flex-col gap-2 h-full w-fit">
       <div className=" flex items-center justify-between">
@@ -67,9 +71,8 @@ const CreatingBox = () => {
         <Button onClick={handleUpload}>上傳</Button>
       </div>
       <div
-        className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden ${
-          isAddNewCustom && "w-100"
-        }`}
+        className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden 
+          ${activeStyle}`}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <SearchCustom

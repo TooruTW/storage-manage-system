@@ -20,7 +20,7 @@ const Tab = ({ currentTab, setCurrentTab }: TabProps) => {
       {OUTBOUND_SEARCHING_TAB.map((item) => (
         <div
           key={item.id}
-          className={`rounded-md px-3 py-1 border-2 text-centerhover:bg-primary-foreground/50 cursor-pointer 
+          className={`rounded-md px-3 py-1 border-2 text-center hover:bg-primary-foreground/50 cursor-pointer 
             ${activeStyle(item.id)}`}
           onClick={() => setCurrentTab(item.id)}
         >

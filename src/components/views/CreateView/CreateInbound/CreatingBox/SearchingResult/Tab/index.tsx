@@ -21,9 +21,8 @@ const Tab = ({ activeTab, onTabChange }: TabProps) => {
         <button
           key={tab.value}
           type="button"
-          className={`px-4 py-2 text-paragraph transition-colors ${
-            activeStyle(tab.value)
-          }`}
+          className={`px-4 py-2 text-paragraph transition-colors 
+            ${activeStyle(tab.value)}`}
           onClick={() => onTabChange(tab.value)}
         >
           {tab.label}
