@@ -68,7 +68,6 @@ const BaseTable = <TData extends Record<string, unknown>>({
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    // Provide our updateData function to our table meta
     meta: {
       collectData: (id: string, columnId: string, value: unknown) => {
         if (newData.has(id)) {
@@ -79,7 +78,6 @@ const BaseTable = <TData extends Record<string, unknown>>({
         setNewData(new Map(newData));
       },
       updateData: (rowIndex, columnId, value) => {
-        // Skip page index reset until after next rerender
         setData((old) =>
           old.map((row, index) => {
             if (index === rowIndex) {
