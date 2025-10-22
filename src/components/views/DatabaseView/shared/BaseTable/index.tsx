@@ -44,6 +44,12 @@ const BaseTable = <TData extends Record<string, unknown>>({
   const editingStyle = useMemo(() => {
     return isEditing ? "bg-primary/10" : "";
   }, [isEditing]);
+  const tableDataStyle = useMemo(() => {
+    if (isEditing) {
+      return "border-2";
+    }
+    return "border-y-2";
+  }, [isEditing]);
 
   // 根據 isEditing 狀態控制刪除欄位的顯示/隱藏
   useEffect(() => {
@@ -200,9 +206,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
                     return (
                       <td
                         key={cell.id}
-                        className={`${
-                          isEditing ? "border-2" : "border-y-2"
-                        } border-primary/10`}
+                        className={`border-primary/10 ${tableDataStyle}`}
                       >
                         {/* 單元格內容 */}
                         {flexRender(
