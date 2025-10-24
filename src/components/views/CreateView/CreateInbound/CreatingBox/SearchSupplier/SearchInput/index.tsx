@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
-import { Supplier } from "@/api/supabase/supplierApi/useGetSupplierApi";
+import { SupplierType } from "@/types/SupplierType";
 import useClickOutSide from "@/components/hook/useClickOutSide";
 import { UseFormSetValue } from "react-hook-form";
 import { CreateInbound } from "../../../type";
@@ -15,7 +15,7 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
   const ref = useClickOutSide({ action: () => setIsOpen(false) });
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { data: supplierData } = useGetSupplierApi();
-  const [supplierList, setSupplierList] = useState<Supplier[]>([]);
+  const [supplierList, setSupplierList] = useState<SupplierType[]>([]);
 
   // init supplier list
   useEffect(() => {
@@ -35,7 +35,7 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
     );
   }, [value, supplierData]);
 
-  const handleSelectSupplier = (supplier: Supplier) => {
+  const handleSelectSupplier = (supplier: SupplierType) => {
     onChange(supplier.name);
     setValue("supplier_id", supplier.id);
     setIsOpen(false);

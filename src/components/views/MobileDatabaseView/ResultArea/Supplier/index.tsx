@@ -1,40 +1,45 @@
 import { useEffect, useState } from "react";
 
-import { FAKE_SUPPLIER_DATA } from "./constants";
-import { SupplierData } from "./type";
+import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
+import { TableStateView } from "@/components/views/DatabaseView/shared";
+import type { SupplierType } from "@/types/SupplierType";
 
-type CostProps = {
-  object: string;
-};
+const Supplier = ({ object }: { object: string }) => {
+  const { data: supplierData, isLoading } = useGetSupplierApi();
+  const [data, setData] = useState<SupplierType[]>([]);
 
-const Cost = ({ object }: CostProps) => {
-  const [data, setData] = useState<SupplierData[]>([]);
   useEffect(() => {
-    setData(FAKE_SUPPLIER_DATA);
-  }, []);
-  useEffect(() => {
-    const filteredData = FAKE_SUPPLIER_DATA.filter((item) =>
-      item.supplierName.includes(object)
-    );
-    setData(filteredData);
-  }, [object]);
+    if (!supplierData || isLoading) return;
+    if (object === "") {
+      setData(supplierData);
+    } else {
+      const filteredData = supplierData.filter((item) =>
+        item.name.includes(object)
+      );
+      setData(filteredData);
+    }
+  }, [object, supplierData, isLoading]);
+
+  if (isLoading) return <TableStateView type="loading" />;
+  if (!data) return <TableStateView type="empty" />;
+
   return (
-    <ul className="w-full h-full overflow-y-auto flex flex-col gap-2 pb-20">
+    <ul className="w-full flex-1 overflow-y-auto flex flex-col gap-2">
       {data.map(
         (item) => {
           return (
             <li
-              key={item.supplierName}
+              key={item.name}
               className="w-full flex gap-2 items-center rounded-md border-1 border-primary/10 p-2"
             >
               <div className="w-1/5 text-balance">
-                {item.supplierName.split(" ").map((item) => (
+                {item.name.split(" ").map((item) => (
                   <p key={item}>{item}</p>
                 ))}
               </div>
               <div className="w-4/5">
                 <p className="flex justify-between gap-4 items-center">
-                  <span className="text-nowrap">{item.contactPerson}</span>
+                  <span className="text-nowrap">{item.contact_person}</span>
                   <span className="text-paragraph-small text-primary/50">
                     {item.address}
                   </span>
@@ -42,11 +47,11 @@ const Cost = ({ object }: CostProps) => {
                 <div className="grid grid-cols-2">
                   <div className="flex flex-col">
                     <span className="text-label text-primary/50">市話:</span>
-                    <span className="self-end">{item.landlinePhone}</span>
+                    <span className="self-end">{item.landline_phone}</span>
                   </div>
                   <div className="flex flex-col">
                     <span className="text-label text-primary/50">手機:</span>
-                    <span className="self-end">{item.mobilePhone}</span>
+                    <span className="self-end">{item.mobile_phone}</span>
                   </div>
                 </div>
               </div>
@@ -59,4 +64,4 @@ const Cost = ({ object }: CostProps) => {
   );
 };
 
-export default Cost;
+export default Supplier;

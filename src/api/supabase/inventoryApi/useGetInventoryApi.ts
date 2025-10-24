@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
-import { Inventory } from "@/types/inventory";
+import { InventoryType } from "@/types/InventoryType";
 
 const getInventoryApi = async () => {
   const { data: inventory, error } = await supabase
@@ -13,7 +13,7 @@ const getInventoryApi = async () => {
     throw error;
   }
 
-  return (inventory as unknown as Inventory[]) || [];
+  return (inventory as unknown as InventoryType[]) || [];
 };
 
 const useGetInventoryApi = () => {

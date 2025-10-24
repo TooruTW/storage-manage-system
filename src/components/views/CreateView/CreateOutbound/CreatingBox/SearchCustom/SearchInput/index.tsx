@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import {
-  Customer,
   useGetCustomerApi,
 } from "@/api/supabase/customerApi/useGetCustomerApi";
 import useClickOutSide from "@/components/hook/useClickOutSide";
 import { UseFormSetValue } from "react-hook-form";
 import { CreateOutbound } from "../../../type";
+import { CustomerType } from "@/types/CustomerType";
 
 type SearchInputProps = {
   value: string;
@@ -15,7 +15,7 @@ type SearchInputProps = {
 
 const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
   const { data: customerData } = useGetCustomerApi();
-  const [customList, setCustomList] = useState<Customer[]>([]);
+  const [customList, setCustomList] = useState<CustomerType[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useClickOutSide({ action: () => setIsOpen(false) });
   // init customer list
@@ -36,7 +36,7 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
     );
   }, [value, customerData]);
 
-  const handleSelectCustomer = (customer: Customer) => {
+  const handleSelectCustomer = (customer: CustomerType) => {
     onChange(customer.name);
     setValue("customer_id", customer.id);
     setIsOpen(false);

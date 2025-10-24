@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { CreateInbound } from "../../../type";
 import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
-import { Inventory } from "@/types/inventory";
+import { InventoryType } from "@/types/InventoryType";
 
 type ResultsProps = {
   keyword: string;
@@ -12,7 +12,7 @@ type ResultsProps = {
 
 const Results = ({ keyword, setValue, onSubmit }: ResultsProps) => {
   const { data: inventoryData } = useGetInventoryApi();
-  const [results, setResults] = useState<Inventory[]>([]);
+  const [results, setResults] = useState<InventoryType[]>([]);
 
   // init inventory list
   useEffect(() => {
@@ -32,7 +32,7 @@ const Results = ({ keyword, setValue, onSubmit }: ResultsProps) => {
     }
   }, [keyword, inventoryData]);
 
-  const handleClickItem = (item: Inventory) => {
+  const handleClickItem = (item: InventoryType) => {
     // 填入商品 ID、名稱、單位和成本單價
     setValue("product_id", item.id);
     setValue("product_name", item.product_name);

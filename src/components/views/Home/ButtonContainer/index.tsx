@@ -49,7 +49,7 @@ const ButtonContainer = () => {
       setButtonList(unLoginButtonList);
     } else if (loginState === "success") {
       if (isMobile) {
-        setButtonList(mobileLoginButtonList);
+        setButtonList(mobileLoginButtonList); 
       } else {
         setButtonList(loginButtonList);
       }
@@ -57,7 +57,7 @@ const ButtonContainer = () => {
   }, [loginState, isMobile]);
 
   return (
-    <div className="flex w-fit max-lg:w-1/3 max-lg:min-w-75 gap-2 max-lg:flex-col max-lg:gap-7">
+    <div className="flex w-fit max-lg:w-1/3 max-lg:min-w-75 gap-2 max-lg:flex-col">
       {isChecking && <Loading />}
 
       {buttonList.map((button, index) => (

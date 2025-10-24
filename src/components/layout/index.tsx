@@ -21,7 +21,7 @@ const Layout = () => {
         </div>
       )}
       {isLoading && <LoadingView />}
-      <main className="w-full h-full flex justify-center">
+      <main className="w-full flex-1 flex justify-center">
         <Outlet />
       </main>
     </div>

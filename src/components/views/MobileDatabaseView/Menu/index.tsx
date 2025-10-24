@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { ChevronRight } from "lucide-react";
 
-import { MENU_CONSTANTS } from "./constants";
+import { MENU } from "./constants";
 
 type MenuProps = {
   isOpen: boolean;
@@ -12,13 +12,14 @@ type MenuProps = {
 
 const Menu = ({ isOpen, setIsOpen }: MenuProps) => {
   const { tab } = useParams();
-  const menuConstants = MENU_CONSTANTS;
+  const menuConstants = MENU;
   const navigate = useNavigate();
   const menuColors = [
     "bg-primary/90",
     "bg-primary/80",
     "bg-primary/70",
     "bg-primary/60",
+    "bg-primary/50",
   ];
   const openStyle = useMemo(() => {
     return isOpen ? "rotate-90" : "rotate-0";
