@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
 
-export type Supplier = {
+export type SupplierType = {
   address: "台中市北區三民路三段678號";
   contact_person: string;
   id: string;
@@ -22,7 +22,7 @@ const getSupplierApi = async () => {
     throw error;
   }
 
-  return supplier as Supplier[];
+  return supplier as SupplierType[];
 };
 
 const useGetSupplierApi = () => {
