@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { CreateOutbound } from "../../../type";
-import { Inventory } from "@/types/InventoryType";
+import { InventoryType } from "@/types/InventoryType";
 import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
 import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
 
@@ -20,7 +20,7 @@ const Results = ({
   watch,
   onSubmit,
 }: ResultsProps) => {
-  const [results, setResults] = useState<Inventory[]>([]);
+  const [results, setResults] = useState<InventoryType[]>([]);
   const { data: inventoryData } = useGetInventoryApi();
   const { data: outboundData } = useGetOutboundApi();
 
@@ -30,7 +30,7 @@ const Results = ({
   // filter
   useEffect(() => {
     if (!inventoryData || !outboundData) return;
-    let filteredInventory: Inventory[] = inventoryData;
+    let filteredInventory: InventoryType[] = inventoryData;
     // filter by tab
     if (currentTab !== "all") {
       const purchaseHistory = outboundData?.filter(
@@ -51,7 +51,7 @@ const Results = ({
     setResults(filteredInventory);
   }, [keyword, currentTab, inventoryData, outboundData, customerName]);
 
-  const handleClickItem = (item: Inventory) => {
+  const handleClickItem = (item: InventoryType) => {
     // 填入商品 ID、名稱、單位和成本單價
     setValue("product_id", item.id);
     setValue("product_name", item.product_name);

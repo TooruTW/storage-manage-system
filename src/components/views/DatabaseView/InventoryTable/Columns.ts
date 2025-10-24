@@ -1,8 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { Inventory } from "@/types/InventoryType";
+import { InventoryType } from "@/types/InventoryType";
 import { EditableNumberCell, ReadOnlyCell } from "../shared";
 
-const columnHelper = createColumnHelper<Inventory>();
+const columnHelper = createColumnHelper<InventoryType>();
 
 const columns = [
   columnHelper.accessor("product_name", {

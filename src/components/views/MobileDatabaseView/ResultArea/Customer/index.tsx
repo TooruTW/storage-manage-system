@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { TableStateView } from "@/components/views/DatabaseView/shared";
 import { useGetCustomerApi } from "@/api/supabase/customerApi/useGetCustomerApi";
-import { CustomerType } from "@/api/supabase/customerApi/useGetCustomerApi";
+import { CustomerType } from "@/types/CustomerType";
 
 
 

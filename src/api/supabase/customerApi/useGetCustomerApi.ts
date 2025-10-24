@@ -1,14 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
-
-export type CustomerType = {
-  address: string;
-  contact_person: string;
-  id: string;
-  landline_phone: string;
-  mobile_phone: string;
-  name: string;
-};
+import { CustomerType } from "@/types/CustomerType";
 
 const getCustomerApi = async () => {
   const { data: customer, error } = await supabase

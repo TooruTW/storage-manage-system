@@ -1,15 +1,12 @@
 import { useEffect, useState, useMemo } from "react";
-import { InboundType } from "@/api/supabase/inboundAPi/useGetInboundApi";
 import { useGetInboundApi } from "@/api/supabase/inboundAPi/useGetInboundApi";
 import { TableStateView } from "@/components/views/DatabaseView/shared";
 import ConditionRequired from "../shared/ConditionRequired";
 
-type CostProps = {
-  object: string;
-  product: string;
-};
+import { InboundType } from "@/types/InboundType";
 
-const Cost = ({ object, product }: CostProps) => {
+
+const Cost = ({ object, product }: { object: string; product: string }) => {
   const [data, setData] = useState<InboundType[]>([]);
   const { data: inboundData, isLoading } = useGetInboundApi();
   const isFiltering = useMemo(() => {

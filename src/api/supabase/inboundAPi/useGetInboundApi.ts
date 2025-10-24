@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
 
-type Inbound = {
+type InboundResponseType = {
   id: string;
   supplier: {
     id: string;
@@ -12,19 +12,6 @@ type Inbound = {
     product_name: string;
     unit: string;
   };
-  quantity: number;
-  price_per_unit: number;
-  inbound_date: string;
-  remark: string;
-};
-
-export type InboundType = {
-  id: string;
-  supplier_id: string;
-  supplier_name: string;
-  product_id: string;
-  product_name: string;
-  unit: string;
   quantity: number;
   price_per_unit: number;
   inbound_date: string;
@@ -42,7 +29,7 @@ const getInboundApi = async () => {
     throw error;
   }
 
-  const result = inbound as unknown as Inbound[];
+  const result = inbound as unknown as InboundResponseType[];
 
   const joinedData = result.map((item) => {
     return {

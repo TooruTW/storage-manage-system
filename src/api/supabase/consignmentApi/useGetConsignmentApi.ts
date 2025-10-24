@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
 
-type Consignment = {
+type ConsignmentResponseType = {
   id: string;
   product: {
     product_name: string;
@@ -26,7 +26,7 @@ const getConsignmentApi = async () => {
   }
 
 
-  const result = consignment as unknown as Consignment[];
+  const result = consignment as unknown as ConsignmentResponseType[];
   const joinedData = result.map((item) => {
     return {
       id: item.id,

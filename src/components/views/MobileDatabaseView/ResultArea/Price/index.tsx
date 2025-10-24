@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  OutboundType,
-  useGetOutboundApi,
-} from "@/api/supabase/outboundAPi/useGetOutboundApi";
+import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
 import { TableStateView } from "@/components/views/DatabaseView/shared";
 import ConditionRequired from "../shared/ConditionRequired";
+
+import { OutboundType } from "@/types/OutboundType";
 
 const Price = ({ object, product }: { object: string; product: string }) => {
   const [data, setData] = useState<OutboundType[]>([]);
@@ -38,7 +37,7 @@ const Price = ({ object, product }: { object: string; product: string }) => {
   if (!isFiltering) {
     return <ConditionRequired />;
   }
-  
+
   return (
     <ul className="w-full h-full overflow-y-auto flex flex-col gap-2 pb-20">
       {data.map(
