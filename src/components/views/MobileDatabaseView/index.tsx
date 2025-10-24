@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowUp } from 'lucide-react';
 
 import Menu from "./Menu";
 import SearchArea from "./SearchArea";
@@ -15,7 +15,10 @@ const MobileDatabaseView = () => {
   useEffect(() => {
     setIsOpen(false);
   }, [tab]);
-  const navigate = useNavigate();
+
+  const handleGoTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="h-full w-full flex flex-col gap-4 relative">
@@ -35,9 +38,9 @@ const MobileDatabaseView = () => {
         setProduct={setProduct}
       />
       <ResultArea object={object} product={product} />
-      <ArrowLeft
+      <ArrowUp
         className="size-10 fixed right-4 bottom-4 rounded-full bg-primary/10 p-2 shadow-md"
-        onClick={() => navigate("/home")}
+        onClick={handleGoTop}
       />
     </div>
   );
