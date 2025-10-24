@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Box } from "lucide-react";
 
 import { FAKE_COST_DATA } from "./constants";
 import { CostData } from "./type";
@@ -20,6 +21,15 @@ const Cost = ({ object, product }: CostProps) => {
     );
     setData(filteredData);
   }, [object, product]);
+
+  if (object === "" && product === "")
+    return (
+      <div className="w-full h-full flex flex-col gap-2 items-center justify-center">
+        <Box className="size-30" strokeWidth={0.5} />
+        <h2 className="text-h2 font-normal">請輸入篩選條件</h2>
+      </div>
+    );
+    
   return (
     <ul className="w-full h-full overflow-y-auto flex flex-col gap-2 pb-20">
       {data.map(
