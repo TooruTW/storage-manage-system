@@ -19,6 +19,7 @@ const Menu = ({ isOpen, setIsOpen }: MenuProps) => {
     "bg-primary/80",
     "bg-primary/70",
     "bg-primary/60",
+    "bg-primary/50",
   ];
   const openStyle = useMemo(() => {
     return isOpen ? "rotate-90" : "rotate-0";

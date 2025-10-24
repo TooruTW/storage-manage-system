@@ -1,4 +1,4 @@
-export type Inventory = {
+export type InventoryType = {
   id: string; // 商品ID
   product_name: string; // 商品名
   unit: string; // 單位

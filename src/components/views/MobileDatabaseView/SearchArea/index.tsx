@@ -17,8 +17,18 @@ const SearchArea = ({
   setProduct,
 }: SearchAreaProps) => {
   const { tab } = useParams();
-
-  const isProduct = useMemo(() => tab === "price" || tab === "cost", [tab]);
+  const hasObject = useMemo(
+    () =>
+      tab === "price" ||
+      tab === "cost" ||
+      tab === "customer" ||
+      tab === "supplier",
+    [tab]
+  );
+  const hasProduct = useMemo(
+    () => tab === "price" || tab === "cost" || tab === "inventory",
+    [tab]
+  );
   const isFilterActive = useMemo(
     () => !!(object || product),
     [object, product]
@@ -28,8 +38,9 @@ const SearchArea = ({
   const [cleanerStyle, setCleanerStyle] = useState<string>("opacity-0");
 
   useEffect(() => {
-    setInputStyle(isProduct ? "w-1/2" : "w-full");
-  }, [isProduct]);
+    const inputWidth = (hasObject && hasProduct) ? "w-1/2" : "w-full";
+    setInputStyle(inputWidth);
+  }, [hasProduct, hasObject]);
 
   useEffect(() => {
     setCleanerStyle(isFilterActive ? "opacity-100" : "opacity-20");
@@ -51,22 +62,24 @@ const SearchArea = ({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-2 w-full">
-        <div
-          className={`flex items-center justify-between border-1 rounded-md px-4 py-1 border-primary/10 ${inputStyle}`}
-        >
-          <input
-            type="text"
-            name=""
-            placeholder="搜尋對象"
-            id="object"
-            value={object}
-            onChange={(e) => setObject(e.target.value)}
-            className="w-full outline-none"
-          />
-          <Search className="size-4" />
-        </div>
-        {isProduct && (
-          <div className="flex items-center justify-between border-1 rounded-md px-4 py-1 border-primary/10 w-1/2">
+        {hasObject && (
+          <div
+            className={`flex items-center justify-between border-1 rounded-md px-4 py-1 border-primary/10 ${inputStyle}`}
+          >
+            <input
+              type="text"
+              name=""
+              placeholder="搜尋對象"
+              id="object"
+              value={object}
+              onChange={(e) => setObject(e.target.value)}
+              className="w-full outline-none"
+            />
+            <Search className="size-4" />
+          </div>
+        )}
+        {hasProduct && (
+          <div className={`flex items-center justify-between border-1 rounded-md px-4 py-1 border-primary/10 ${inputStyle}`}>
             <input
               type="text"
               name=""

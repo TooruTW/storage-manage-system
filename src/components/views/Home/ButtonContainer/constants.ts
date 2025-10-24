@@ -31,6 +31,7 @@ const mobileLoginButtonList = [
   {label: "查成本", path: "/mobile-database/cost"},
   {label: "查客戶", path: "/mobile-database/customer"},
   {label: "查廠商", path: "/mobile-database/supplier"},
+  {label: "查庫存", path: "/mobile-database/inventory"},
   {label: "登出", path: "/logout"},
 ];
 

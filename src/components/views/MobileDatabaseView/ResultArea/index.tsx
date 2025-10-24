@@ -7,6 +7,7 @@ import Price from "./Price";
 import Cost from "./Cost";
 import Customer from "./Customer";
 import Supplier from "./Supplier";
+import Inventory from "./Inventory";
 
 type ResultAreaProps = {
   object: string;
@@ -26,6 +27,8 @@ const ResultArea = ({ object, product }: ResultAreaProps) => {
         return <Customer object={object} />;
       case "supplier":
         return <Supplier object={object} />;
+      case "inventory":
+        return <Inventory product={product} />;
       default:
         return null;
     }
