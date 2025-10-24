@@ -32,7 +32,7 @@ const SearchArea = ({
   }, [isProduct]);
 
   useEffect(() => {
-    setCleanerStyle(isFilterActive ? "opacity-100" : "opacity-0");
+    setCleanerStyle(isFilterActive ? "opacity-100" : "opacity-20");
   }, [isFilterActive]);
 
   function handleCleanAllFilters() {

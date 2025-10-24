@@ -36,7 +36,7 @@ const MobileDatabaseView = () => {
       />
       <ResultArea object={object} product={product} />
       <ArrowLeft
-        className="size-10 absolute left-0 bottom-4 rounded-full bg-primary/10 p-2 shadow-md"
+        className="size-10 fixed right-4 bottom-4 rounded-full bg-primary/10 p-2 shadow-md"
         onClick={() => navigate("/home")}
       />
     </div>
