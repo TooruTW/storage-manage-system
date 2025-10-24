@@ -4,11 +4,7 @@ import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi"
 import { TableStateView } from "@/components/views/DatabaseView/shared";
 import type { SupplierType } from "@/api/supabase/supplierApi/useGetSupplierApi";
 
-type SupplierProps = {
-  object: string;
-};
-
-const Supplier = ({ object }: SupplierProps) => {
+const Supplier = ({ object }: { object: string }) => {
   const { data: supplierData, isLoading } = useGetSupplierApi();
   const [data, setData] = useState<SupplierType[]>([]);
 

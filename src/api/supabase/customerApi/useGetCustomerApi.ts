@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
 
-export type Customer = {
+export type CustomerType = {
   address: string;
   contact_person: string;
   id: string;
@@ -21,7 +21,7 @@ const getCustomerApi = async () => {
     throw error;
   }
 
-  return customer as Customer[];
+  return customer as CustomerType[];
 };
 
 const useGetCustomerApi = () => {
