@@ -60,12 +60,12 @@ const CreatingBox = () => {
         },
         {
           onSuccess: (result) => {
-            data.product_id = result[0].id;            
+            data.product_id = result[0].id;
             addDataToLocalStorage(data);
           },
           onError: (error) => {
             console.error("新增商品失敗", error);
-            if(error.message.includes("duplicate key")){
+            if (error.message.includes("duplicate key")) {
               alert("商品已存在，請重新整理後，選擇已存在的商品");
             }
           },

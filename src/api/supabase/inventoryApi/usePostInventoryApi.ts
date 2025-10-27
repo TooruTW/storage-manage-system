@@ -1,5 +1,5 @@
 import supabase from "..";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { InventoryType } from "@/types/InventoryType";
 
 type newProductData = {
@@ -22,8 +22,16 @@ const postInventoryApi = async (product: newProductData) => {
 };
 
 const usePostInventoryApi = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postInventoryApi,
+    onSuccess: (data) => {
+      console.log("新增商品成功", data);
+      queryClient.invalidateQueries({ queryKey: ["inventory"] });
+    },
+    onError: (error) => {
+      console.error("新增商品失敗", error);
+    },
   });
 };
 
