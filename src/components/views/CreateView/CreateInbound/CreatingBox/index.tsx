@@ -13,11 +13,14 @@ import useCreateInbound from "@/stores/useCreateInbound";
 import useLoading from "@/stores/useLoading";
 
 import { CreateInbound } from "../type";
+import usePostInventoryApi from "@/api/supabase/inventoryApi/usePostInventoryApi";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
   const { handleSubmit, control, setValue, formState } =
     useForm<CreateInbound>();
+
+  const { mutate: postInventory } = usePostInventoryApi();
 
   // 新增資料到本地儲存
   const addDataToLocalStorage = (data: CreateInbound) => {
@@ -47,7 +50,30 @@ const CreatingBox = () => {
 
   // 提交表單
   const onSubmit: SubmitHandler<CreateInbound> = (data) => {
-    addDataToLocalStorage(data);
+    console.log(data);
+    if (data.product_id === "") {
+      console.log("新增商品");
+      postInventory(
+        {
+          product_name: data.product_name,
+          unit: data.unit,
+        },
+        {
+          onSuccess: (result) => {
+            data.product_id = result[0].id;            
+            addDataToLocalStorage(data);
+          },
+          onError: (error) => {
+            console.error("新增商品失敗", error);
+            if(error.message.includes("duplicate key")){
+              alert("商品已存在，請重新整理後，選擇已存在的商品");
+            }
+          },
+        }
+      );
+    } else {
+      addDataToLocalStorage(data);
+    }
   };
 
   // 上傳資料
