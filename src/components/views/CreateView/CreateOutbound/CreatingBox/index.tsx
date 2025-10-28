@@ -13,6 +13,7 @@ import useCreateOutbound from "@/stores/useCreateOutbound";
 import useLoading from "@/stores/useLoading";
 
 import { CreateOutbound } from "../type";
+import usePostOutboundApi from "@/api/supabase/outboundAPi/usePostOutboundApi";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
@@ -49,15 +50,23 @@ const CreatingBox = () => {
     addDataToLocalStorage(data);
   };
 
+  const { mutate: postOutbound } = usePostOutboundApi();
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateOutbound.getState().createOutbound;
-    console.log(data);
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    useCreateOutbound.getState().resetCreateOutbound();
-    useCreateOutbound.getState().saveCreateOutbound();
-    useLoading.getState().endLoading();
+    postOutbound(data, {
+      onSuccess: () => {
+        useCreateOutbound.getState().resetCreateOutbound();
+        useCreateOutbound.getState().saveCreateOutbound();
+        useLoading.getState().endLoading();
+      },
+      onError: (error) => {
+        console.error("Post outbound error", error);
+        alert("上傳失敗，請重新整理後再試");
+        useLoading.getState().endLoading();
+      },
+    });
   };
 
   const activeStyle = useMemo(() => {
