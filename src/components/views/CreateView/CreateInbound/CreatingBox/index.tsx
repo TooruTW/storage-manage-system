@@ -14,6 +14,7 @@ import useLoading from "@/stores/useLoading";
 
 import { CreateInbound } from "../type";
 import usePostInventoryApi from "@/api/supabase/inventoryApi/usePostInventoryApi";
+import usePostInboundApi from "@/api/supabase/inboundAPi/usePostInboundApi";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
@@ -28,7 +29,7 @@ const CreatingBox = () => {
     const prevData = useCreateInbound.getState().createInbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].last_inbound_date;
+      newDataDate = prevData[prevData.length - 1].inbound_date;
     }
 
     const newData: CreateInbound = {
@@ -41,7 +42,7 @@ const CreatingBox = () => {
       price_per_unit: data.price_per_unit,
       total_price: 0,
       remark: "",
-      last_inbound_date: newDataDate,
+      inbound_date: newDataDate,
     };
 
     useCreateInbound.getState().addCreateInbound(newData);
@@ -76,17 +77,24 @@ const CreatingBox = () => {
     }
   };
 
+  const { mutate: postInbound } = usePostInboundApi();
   // 上傳資料
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateInbound.getState().createInbound;
-    console.log(data);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    useCreateInbound.getState().resetCreateInbound();
-    useCreateInbound.getState().saveCreateInbound();
-    useLoading.getState().endLoading();
+    postInbound(data, {
+      onSuccess: () => {
+        useCreateInbound.getState().resetCreateInbound();
+        useCreateInbound.getState().saveCreateInbound();
+        useLoading.getState().endLoading();
+      },
+      onError: (error) => {
+        console.error("Post inbound error", error);
+        alert("上傳失敗，請重新整理後再試");
+        useLoading.getState().endLoading();
+      },
+    });
   };
 
   return (

@@ -53,7 +53,7 @@ const columns = [
     enableColumnFilter: true,
     size: 100,
   }),
-  columnHelper.accessor("last_inbound_date", {
+  columnHelper.accessor("inbound_date", {
     cell: DateCell,
     header: "進貨日",
     enableColumnFilter: true,
