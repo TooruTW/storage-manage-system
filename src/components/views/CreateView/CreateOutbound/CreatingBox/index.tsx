@@ -16,7 +16,7 @@ import { CreateOutbound } from "../type";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
-  const { handleSubmit, control, setValue, watch } = useForm<CreateOutbound>();
+  const { handleSubmit, control, setValue, watch, formState } = useForm<CreateOutbound>();
 
   const addDataToLocalStorage = (data: CreateOutbound) => {
     let newDataDate = dayjs().format("YYYY-MM-DD");
@@ -79,6 +79,7 @@ const CreatingBox = () => {
             setIsAddNewCustom={setIsAddNewCustom}
             control={control}
             setValue={setValue}
+            error={formState.errors.customer_name}
           />
           <SearchingResult
             setValue={setValue}
