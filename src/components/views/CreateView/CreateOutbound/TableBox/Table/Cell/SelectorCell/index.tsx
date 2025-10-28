@@ -21,18 +21,23 @@ const SelectorCell = <TData extends Record<string, unknown>>({
   }, [initialValue]);
 
   return (
-    <select
-      value={value}
-      onChange={(e) => setValue(e.target.value as typeof initialValue)}
-      onBlur={onBlur}
-      className="w-full text-center h-full py-4 cursor-text"
-    >
-      <option value=""></option>
-      <option value="出庫">出庫</option>
-      <option value="寄庫">寄庫</option>
-      <option value="贈品">贈品</option>
-      <option value="成本異常">成本異常</option>
-    </select>
+    <>
+      <input
+        type="text"
+        list={`selector-options-${id}-${index}`}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={onBlur}
+        className="w-full text-center h-full py-4"
+        placeholder="請選擇或輸入"
+      />
+      <datalist id={`selector-options-${id}-${index}`}>
+        <option value="出庫" />
+        <option value="寄庫" />
+        <option value="贈品" />
+        <option value="成本異常" />
+      </datalist>
+    </>
   );
 };
 

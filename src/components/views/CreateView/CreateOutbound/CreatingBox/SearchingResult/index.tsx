@@ -22,7 +22,7 @@ const SearchingResult = ({
   const [keyword, setKeyword] = useState("");
 
   return (
-    <div className="flex flex-col justify-between h-full min-h-0">
+    <div className="flex flex-col gap-2 h-full min-h-0">
       <div className="relative">
         <Search className="absolute right-2 top-1/2 -translate-y-1/2 text-primary/50 size-4" />
         <input

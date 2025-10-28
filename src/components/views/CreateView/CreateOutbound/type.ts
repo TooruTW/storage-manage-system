@@ -10,5 +10,5 @@ export type CreateOutbound = {
     shipment_date: string;
     total_price: number;
     net_profit: number;
-    remark: "" | "贈品" | "出庫" | "寄庫" | "贈品" | "成本異常";
+    remark: string ;
 }
