@@ -1,10 +1,10 @@
 import { UseFormRegister, FieldErrors, Control } from "react-hook-form";
 
 export type FormDataType = {
-  storeName: string;
-  contactPerson?: string;
-  landlinePhone?: string;
-  mobilePhone?: string;
+  name: string;
+  contact_person?: string;
+  landline_phone?: string;
+  mobile_phone?: string;
   address?: string;
 };
 
