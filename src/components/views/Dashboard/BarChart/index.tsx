@@ -39,7 +39,7 @@ const BarChart = () => {
           <YAxis
             axisLine={false}
             tickLine={false}
-            tickFormatter={(value) => `$ ${value}`}
+            tickFormatter={(value) => `$ ${value.toLocaleString()}`}
           />
           <Tooltip />
           <Bar
