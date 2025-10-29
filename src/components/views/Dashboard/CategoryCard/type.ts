@@ -1,5 +1,5 @@
 export type CategoryProps = {
-    id: "purchaseAmount" | "salesAmount";
-    label: "進貨額" | "營業額";
+    id: "profitAmount" | "salesAmount";
+    label: "損益額" | "營業額";
     value: number;
   };
