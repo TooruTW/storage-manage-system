@@ -8,7 +8,7 @@ const EditableCell = <TData extends Record<string, unknown>>({
   column: { id },
   table,
 }: CellContext<TData, unknown>) => {
-  const initialValue = getValue();
+  const initialValue = getValue() || "";
   const isEditing = table.options.meta?.isEditing || false;
 
   const [value, setValue] = useState(initialValue);

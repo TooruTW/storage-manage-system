@@ -13,11 +13,15 @@ import useCreateInbound from "@/stores/useCreateInbound";
 import useLoading from "@/stores/useLoading";
 
 import { CreateInbound } from "../type";
+import usePostInventoryApi from "@/api/supabase/inventoryApi/usePostInventoryApi";
+import usePostInboundApi from "@/api/supabase/inboundAPi/usePostInboundApi";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
   const { handleSubmit, control, setValue, formState } =
     useForm<CreateInbound>();
+
+  const { mutate: postInventory } = usePostInventoryApi();
 
   // 新增資料到本地儲存
   const addDataToLocalStorage = (data: CreateInbound) => {
@@ -25,7 +29,7 @@ const CreatingBox = () => {
     const prevData = useCreateInbound.getState().createInbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].last_inbound_date;
+      newDataDate = prevData[prevData.length - 1].inbound_date;
     }
 
     const newData: CreateInbound = {
@@ -38,7 +42,7 @@ const CreatingBox = () => {
       price_per_unit: data.price_per_unit,
       total_price: 0,
       remark: "",
-      last_inbound_date: newDataDate,
+      inbound_date: newDataDate,
     };
 
     useCreateInbound.getState().addCreateInbound(newData);
@@ -47,20 +51,50 @@ const CreatingBox = () => {
 
   // 提交表單
   const onSubmit: SubmitHandler<CreateInbound> = (data) => {
-    addDataToLocalStorage(data);
+    console.log(data);
+    if (data.product_id === "") {
+      console.log("新增商品");
+      postInventory(
+        {
+          product_name: data.product_name,
+          unit: data.unit,
+        },
+        {
+          onSuccess: (result) => {
+            data.product_id = result[0].id;
+            addDataToLocalStorage(data);
+          },
+          onError: (error) => {
+            console.error("新增商品失敗", error);
+            if (error.message.includes("duplicate key")) {
+              alert("商品已存在，請重新整理後，選擇已存在的商品");
+            }
+          },
+        }
+      );
+    } else {
+      addDataToLocalStorage(data);
+    }
   };
 
+  const { mutate: postInbound } = usePostInboundApi();
   // 上傳資料
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateInbound.getState().createInbound;
-    console.log(data);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    useCreateInbound.getState().resetCreateInbound();
-    useCreateInbound.getState().saveCreateInbound();
-    useLoading.getState().endLoading();
+    postInbound(data, {
+      onSuccess: () => {
+        useCreateInbound.getState().resetCreateInbound();
+        useCreateInbound.getState().saveCreateInbound();
+        useLoading.getState().endLoading();
+      },
+      onError: (error) => {
+        console.error("Post inbound error", error);
+        alert("上傳失敗，請重新整理後再試");
+        useLoading.getState().endLoading();
+      },
+    });
   };
 
   return (

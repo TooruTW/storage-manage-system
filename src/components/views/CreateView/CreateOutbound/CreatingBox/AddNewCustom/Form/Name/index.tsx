@@ -5,14 +5,14 @@ const Name = ({ register, errors }: FormComponentProps) => {
     <div className="flex gap-1">
       <div>
         <label
-          htmlFor="storeName"
+          htmlFor="name"
           className="text-paragraph flex items-center gap-1"
         >
           店名
-          {errors.storeName?.type === "required" && (
+          {errors.name?.type === "required" && (
             <span className="text-label text-destructive">此為必填</span>
           )}
-          {errors.storeName?.type === "pattern" && (
+          {errors.name?.type === "pattern" && (
             <span className="text-label text-destructive">
               格式錯誤，請輸入「地名 店名」
             </span>
@@ -20,9 +20,9 @@ const Name = ({ register, errors }: FormComponentProps) => {
         </label>
         <input
           className="border-1 rounded-md px-2 py-1 border-primary/10 text-label"
-          id="storeName"
+          id="name"
           placeholder="ex: 地區 店名"
-          {...register("storeName", {
+          {...register("name", {
             required: true,
             pattern: {
               value: /^[\u4e00-\u9fa5]+ .+$/,
@@ -33,16 +33,16 @@ const Name = ({ register, errors }: FormComponentProps) => {
       </div>
       <div>
         <label
-          htmlFor="contactPerson"
+          htmlFor="contact_person"
           className="text-paragraph flex items-center gap-1"
         >
           聯絡人
         </label>
         <input
           className="border-1 rounded-md px-2 py-1 border-primary/10 text-label"
-          id="contactPerson"
+          id="contact_person"
           placeholder="輸入聯絡人名稱"
-          {...register("contactPerson")}
+          {...register("contact_person")}
         />
       </div>
     </div>
