@@ -15,3 +15,9 @@ export const MONTH_INITIAL_DATA: BarChartData[] = [
     { name: "十二月", value: 0 },
   ];
   
+export const QUARTER_INITIAL_DATA: BarChartData[] = [
+    { name: "第一季", value: 0 },
+    { name: "第二季", value: 0 },
+    { name: "第三季", value: 0 },
+    { name: "第四季", value: 0 },
+  ];
