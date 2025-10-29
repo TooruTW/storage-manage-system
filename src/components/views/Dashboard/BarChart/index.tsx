@@ -17,9 +17,7 @@ const BarChart = () => {
   const [categoryText, setCategoryText] = useState("");
 
   useEffect(() => {
-    setTimeRangeText(
-      timeRange === "month" ? "月度" : "季度" 
-    );
+    setTimeRangeText(timeRange === "month" ? "月度" : "季度");
     setCategoryText(category === "profitAmount" ? "損益額" : "營業額");
   }, [timeRange, category]);
 
@@ -35,17 +33,19 @@ const BarChart = () => {
       </p>
       <ResponsiveContainer width="100%" height="100%">
         <RechartsBarChart width={1000} height={1000} data={result}>
-          <XAxis dataKey="name" axisLine={false} tickLine={false} />
+          <XAxis dataKey="name" axisLine={true} tickLine={false} />
           <YAxis
-            axisLine={false}
+            width={100}
+            axisLine={true}
             tickLine={false}
-            tickFormatter={(value) => `$ ${value.toLocaleString()}`}
+            tickFormatter={(value) => `${value.toLocaleString()}`}
           />
           <Tooltip />
           <Bar
             dataKey="value"
             fill="var(--color-primary)"
             radius={[8, 8, 0, 0]}
+            maxBarSize={100}
           />
         </RechartsBarChart>
       </ResponsiveContainer>
