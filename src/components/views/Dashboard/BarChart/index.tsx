@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import useGetDashboardData from "../hook/useGetDashboardData";
 import {
   BarChart as RechartsBarChart,
   ResponsiveContainer,
@@ -8,50 +9,43 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
-
-const FAKE_BAR_CHART_DATA = [
-  { name: "一月", value: 100 },
-  { name: "二月", value: 200 },
-  { name: "三月", value: 300 },
-  { name: "四月", value: 400 },
-  { name: "五月", value: 500 },
-  { name: "六月", value: 600 },
-  { name: "七月", value: 700 },
-  { name: "八月", value: 800 },
-  { name: "九月", value: 900 },
-  { name: "十月", value: 1000 },
-  { name: "十一月", value: 1100 },
-  { name: "十二月", value: 1200 },
-];
+import { TimeRange, Category } from "../hook/useGetDashboardData";
 
 const BarChart = () => {
-    const { timeRange, category } = useParams();
-    const [ timeRangeText, setTimeRangeText ] = useState("");
-    const [ categoryText, setCategoryText ] = useState("");
+  const { timeRange, category } = useParams();
+  const [timeRangeText, setTimeRangeText] = useState("");
+  const [categoryText, setCategoryText] = useState("");
 
-    // convert timeRange and category to text
-    useEffect(()=>{
-        setTimeRangeText(timeRange === "month" ? "月度" : timeRange === "quarter" ? "季度" : "年度");
-        setCategoryText(category === "purchaseAmount" ? "進貨額" : "營業額");
+  useEffect(() => {
+    setTimeRangeText(timeRange === "month" ? "月度" : "季度");
+    setCategoryText(category === "profitAmount" ? "損益額" : "營業額");
+  }, [timeRange, category]);
 
-    },[timeRange, category])
+  const { result } = useGetDashboardData(
+    timeRange as TimeRange,
+    category as Category
+  );
 
   return (
     <div className="w-full h-140 flex flex-col gap-6 border-2 rounded-md p-6 shadow-xs">
-      <p className="text-paragraph text-primary/80">{timeRangeText} {categoryText}</p>
+      <p className="text-paragraph text-primary/80">
+        {timeRangeText} {categoryText}
+      </p>
       <ResponsiveContainer width="100%" height="100%">
-        <RechartsBarChart width={1000} height={1000} data={FAKE_BAR_CHART_DATA}>
-          <XAxis dataKey="name" axisLine={false} tickLine={false} />
+        <RechartsBarChart width={1000} height={1000} data={result}>
+          <XAxis dataKey="name" axisLine={true} tickLine={false} />
           <YAxis
-            axisLine={false}
+            width={100}
+            axisLine={true}
             tickLine={false}
-            tickFormatter={(value) => `$ ${value}`}
+            tickFormatter={(value) => `${value.toLocaleString()}`}
           />
           <Tooltip />
           <Bar
             dataKey="value"
             fill="var(--color-primary)"
             radius={[8, 8, 0, 0]}
+            maxBarSize={100}
           />
         </RechartsBarChart>
       </ResponsiveContainer>

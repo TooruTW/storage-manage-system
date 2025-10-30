@@ -1,19 +1,14 @@
 import { useEffect, useState } from "react";
-import { Box } from "lucide-react";
-import type { Time } from "./type";
-import dayjs from "dayjs";
-import converter from "number-to-chinese-words";
 import { useNavigate } from "react-router-dom";
 
+import { Box } from "lucide-react";
+import dayjs from "dayjs";
+import converter from "number-to-chinese-words";
+
+import { INITIAL_TIME } from "./data";
+
 export const Header = () => {
-  const [time, setTime] = useState<Time>({
-    year: "",
-    month: "",
-    date: "",
-    week: "",
-    hour: 0,
-    minute: 0,
-  });
+  const [time, setTime] = useState(INITIAL_TIME);
   const navigate = useNavigate();
   const updateTime = () => {
     const now = dayjs();
@@ -38,8 +33,12 @@ export const Header = () => {
 
   return (
     <div className="flex items-center justify-start gap-4">
-      <Box className="cursor-pointer" strokeWidth={1} onClick={() => navigate("/home")}/>
-      {/* Date and Time */}
+      <Box
+        className="cursor-pointer"
+        strokeWidth={1}
+        onClick={() => navigate("/home")}
+      />
+      {/* 日曆和時間 */}
       <div>
         <p className="text-label">
           <span>

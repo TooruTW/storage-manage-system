@@ -1,6 +1,9 @@
-import { ChevronRight } from "lucide-react";
+import { useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { MENU_CONSTANTS } from "./constants";
+
+import { ChevronRight } from "lucide-react";
+
+import { MENU } from "./constants";
 
 type MenuProps = {
   isOpen: boolean;
@@ -9,22 +12,25 @@ type MenuProps = {
 
 const Menu = ({ isOpen, setIsOpen }: MenuProps) => {
   const { tab } = useParams();
-  const menuConstants = MENU_CONSTANTS;
+  const menuConstants = MENU;
   const navigate = useNavigate();
   const menuColors = [
     "bg-primary/90",
     "bg-primary/80",
     "bg-primary/70",
     "bg-primary/60",
+    "bg-primary/50",
   ];
-
+  const openStyle = useMemo(() => {
+    return isOpen ? "rotate-90" : "rotate-0";
+  }, [isOpen]);
   return (
     <ul className="flex flex-col gap-2">
       <li
         className="flex items-center justify-between bg-primary rounded-md p-2 text-primary-foreground"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <ChevronRight className={`size-10 ${isOpen && "rotate-90"}`} />
+        <ChevronRight className={`size-10 ${openStyle}`} />
         <h2 className="text-h2 font-normal">
           {menuConstants.find((item) => item.id === tab)?.label}
         </h2>

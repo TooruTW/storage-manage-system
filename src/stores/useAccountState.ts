@@ -1,21 +1,19 @@
 import { create } from "zustand";
 
 type AccountStore = {
-  isLogin: boolean | "checking";
+  loginState: "success" | "failed" | "checking";
   user: string;
   lastLogin: string;
-  setIsLogin: (isLogin: boolean) => void;
+  setLoginState: (loginState: "success" | "failed" | "checking") => void;
   setUser: (user: string) => void;
   reset: () => void;
-
 };
 
 export const useAccountStore = create<AccountStore>((set) => ({
-  isLogin: "checking",
+  loginState: "checking",
   user: "",
   lastLogin: "",
-  setIsLogin: (isLogin) => set({ isLogin }),
+  setLoginState: (loginState) => set({ loginState }),
   setUser: (user) => set({ user }),
-  reset: () => set({ isLogin: "checking", user: "", lastLogin: "" }),
+  reset: () => set({ loginState: "checking", user: "", lastLogin: "" }),
 }));
-

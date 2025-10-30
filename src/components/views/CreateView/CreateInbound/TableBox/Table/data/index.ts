@@ -3,7 +3,7 @@ import { CreateInbound } from "../../../type";
 const localStorageData = localStorage.getItem("createInbound");
 let data: CreateInbound[] = [];
 
-const getCreateInboundData = () => {
+const getCreateInboundDataFromLocalStorage = () => {
 if (localStorageData) {
   const formateData = JSON.parse(localStorageData);
     data = formateData as CreateInbound[];
@@ -12,4 +12,4 @@ if (localStorageData) {
 }
 
 
-export { getCreateInboundData };
+export { getCreateInboundDataFromLocalStorage };

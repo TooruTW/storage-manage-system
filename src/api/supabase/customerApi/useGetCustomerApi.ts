@@ -1,18 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
+import { CustomerType } from "@/types/CustomerType";
 
 const getCustomerApi = async () => {
-  const { data: customer, error } = await supabase.from("customer").select("*");
-
+  const { data: customer, error } = await supabase
+    .from("customer")
+    .select("*")
+    .order("name", { ascending: true });
 
   if (error) {
     console.error("Get customer error", error);
     throw error;
   }
 
-  console.log("data", customer);
-
-  return customer;
+  return customer as CustomerType[];
 };
 
 const useGetCustomerApi = () => {

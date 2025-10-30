@@ -1,18 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import supabase from "..";
-
+import { SupplierType } from "@/types/SupplierType";
 const getSupplierApi = async () => {
-  const { data: supplier, error } = await supabase.from("supplier").select("*");
-
+  const { data: supplier, error } = await supabase
+    .from("supplier")
+    .select("*")
+    .order("address", { ascending: true });
 
   if (error) {
     console.error("Get supplier error", error);
     throw error;
   }
 
-  console.log("data", supplier);
-
-  return supplier;
+  return supplier as SupplierType[];
 };
 
 const useGetSupplierApi = () => {

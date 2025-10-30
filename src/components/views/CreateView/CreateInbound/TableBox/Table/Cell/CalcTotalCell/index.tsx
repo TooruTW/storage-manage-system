@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CellContext } from "@tanstack/react-table";
-import { CreateInbound } from "../../../../type";
+import { CreateInbound } from "@/components/views/CreateView/CreateInbound/type";
 
 // 計算總價的單元格組件
 const CalcTotalCell = <TData extends Record<string, unknown>>({
@@ -20,12 +20,11 @@ const CalcTotalCell = <TData extends Record<string, unknown>>({
   // 從原始數據獲取數量和單價
   const rowData = original as unknown as CreateInbound;
   const quantity = rowData?.quantity || 0;
-  const pricePerUnit = rowData?.pricePerUnit || 0;
+  const pricePerUnit = rowData?.price_per_unit || 0;
 
   // 計算總價
   const calculatedTotal = calculateTotal(quantity, pricePerUnit);
 
-  // We need to keep and update the state of the cell normally
   const [value, setValue] = useState<string>(formatValue(calculatedTotal));
 
   // 當數量或單價改變時，重新計算總價

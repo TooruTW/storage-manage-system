@@ -1,5 +1,6 @@
-import Tab from "./Tab";
 import { Outlet } from "react-router-dom";
+
+import Tab from "./Tab";
 
 const CreateView = () => {
   return (

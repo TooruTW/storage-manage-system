@@ -3,7 +3,9 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
+
 import { columns } from "./column";
+
 import useCreateInbound from "@/stores/useCreateInbound";
 
 const Table = () => {
@@ -47,7 +49,7 @@ const Table = () => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} >
+            <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
                 <td key={cell.id} style={{ width: cell.column.getSize() }}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

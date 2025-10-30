@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useAccountStore } from "@/stores/useAccountState";
-import { usePostLogoutApi } from "@/api/supabase/authApi/usePostLogoutApi";
+import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+
+import { useAccountStore } from "@/stores/useAccountState";
+
+import { usePostLogoutApi } from "@/api/supabase/authApi/usePostLogoutApi";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -14,7 +16,6 @@ const Logout = () => {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["checkState"] });
         useAccountStore.getState().reset();
-
         navigate("/home");
       },
       onError: () => {

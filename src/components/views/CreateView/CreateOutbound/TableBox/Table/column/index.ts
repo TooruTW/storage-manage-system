@@ -2,7 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { CreateOutbound } from "../../../type";
 import NumberCell from "../Cell/NumberCell";
 import MoneyCell from "../Cell/MoneyCell";
-import SelecterCell from "../Cell/SelecterCell";
+import SelectorCell from "../Cell/SelectorCell";
 import CalcTotalCell from "../Cell/CalcTotalCell";
 import ReadOnlyCell from "../Cell/ReadOnlyCell";
 import CalcProfitCell from "../Cell/CalcProfit";
@@ -12,13 +12,13 @@ import DeleteCell from "../Cell/DeleteCell";
 const columnHelper = createColumnHelper<CreateOutbound>();
 
 const columns = [
-  columnHelper.accessor("customerName", {
+  columnHelper.accessor("customer_name", {
     cell: ReadOnlyCell,
     header: "客戶名",
     enableColumnFilter: true,
     size: 120,
   }),
-  columnHelper.accessor("productName", {
+  columnHelper.accessor("product_name", {
     cell: ReadOnlyCell,
     header: "商品名",
     enableColumnFilter: true,
@@ -30,13 +30,13 @@ const columns = [
     enableColumnFilter: false,
     size: 50,
   }),
-  columnHelper.accessor("costPerUnit", {
+  columnHelper.accessor("cost_per_unit", {
     cell: MoneyCell,
     header: "單位成本 $",
     enableColumnFilter: false,
     size: 100,
   }),
-  columnHelper.accessor("pricePerUnit", {
+  columnHelper.accessor("price_per_unit", {
     cell: MoneyCell,
     header: "單位價格 $",
     enableColumnFilter: false,
@@ -48,25 +48,25 @@ const columns = [
     enableColumnFilter: false,
     size: 50,
   }),
-  columnHelper.accessor("totalPrice", {
+  columnHelper.accessor("total_price", {
     cell: CalcTotalCell,
     header: "小計 $",
     enableColumnFilter: false,
     size: 100,
   }),
-  columnHelper.accessor("netProfit", {
+  columnHelper.accessor("net_profit", {
     cell: CalcProfitCell,
     header: "損益 $",
     enableColumnFilter: false,
     size: 100,
   }),
   columnHelper.accessor("remark", {
-    cell: SelecterCell,
+    cell: SelectorCell,
     header: "備註",
     enableColumnFilter: true,
     size: 100,
   }),
-  columnHelper.accessor("shipmentDate", {
+  columnHelper.accessor("shipment_date", {
     cell: DateCell,
     header: "出貨日期",
     enableColumnFilter: true,

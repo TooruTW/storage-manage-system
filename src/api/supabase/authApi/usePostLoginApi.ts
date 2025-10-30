@@ -9,11 +9,10 @@ const loginApi = async (email: string, password: string) => {
 
   if (error) {
     console.error("Login error", error);
-    throw error; // 拋出錯誤讓 TanStack Query 可以捕捉
+    throw error;
   }
 
-  console.log("data", data);
-  return data; // 只返回 data
+  return data;
 };
 
 const usePostLoginApi = () => {

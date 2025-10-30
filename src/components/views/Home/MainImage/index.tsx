@@ -1,20 +1,27 @@
 import { Box } from "lucide-react";
+
 import { useAccountStore } from "@/stores/useAccountState";
+import { useMemo } from "react";
 
 const MainImage = () => {
-  const isLoading = useAccountStore((state) => state.isLogin);
+  const loginState = useAccountStore((state) => state.loginState);
+  const stateStyle = useMemo(()=>{
+    switch(loginState){
+      case "success":
+        return "text-green-500";
+      case "checking":
+        return "text-primary";
+      case "failed":
+        return "text-red-500";
+    }
+    
+  },[loginState])
 
   return (
     <div className="size-1/3 min-w-70">
       <Box
         strokeWidth={0.3}
-        className={`size-full ${
-          isLoading === true
-            ? "text-green-500"
-            : isLoading === "checking"
-            ? "text-primary"
-            : "text-red-500"
-        }`}
+        className={`size-full ${stateStyle}`}
       />
     </div>
   );

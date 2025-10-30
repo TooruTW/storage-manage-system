@@ -13,22 +13,17 @@ const ManualAdd = ({ setValue, onSubmit }: ManualAddProps) => {
   const [unit, setUnit] = useState("");
 
   const handleSubmit = () => {
-    if (!productName.trim() || !unit.trim()) {
-      return;
-    }
-    setValue("productName", productName);
+    if (!productName.trim() || !unit.trim()) return;
+      
+    // 手動新增的商品，設定 product_id 為空字串（表示為新商品，尚未存在於資料庫）
+    setValue("product_id", "");
+    setValue("product_name", productName);
     setValue("unit", unit);
+    setValue("price_per_unit", 0);
     onSubmit();
     // 清空輸入框
     setProductName("");
     setUnit("");
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSubmit();
-    }
   };
 
   return (
@@ -50,7 +45,6 @@ const ManualAdd = ({ setValue, onSubmit }: ManualAddProps) => {
           id="productName"
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
-          onKeyDown={handleKeyDown}
         />
         <input
           className="border-b-1 border-primary/10 w-1/3"
@@ -59,7 +53,6 @@ const ManualAdd = ({ setValue, onSubmit }: ManualAddProps) => {
           id="unit"
           value={unit}
           onChange={(e) => setUnit(e.target.value)}
-          onKeyDown={handleKeyDown}
         />
       </div>
     </div>

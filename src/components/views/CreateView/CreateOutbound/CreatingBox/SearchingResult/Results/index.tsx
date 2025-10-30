@@ -1,48 +1,62 @@
 import { useEffect, useState } from "react";
-import {
-  FAKE_CONSTANTS_ALL,
-  FAKE_CONSTANTS_PURCHASE_HISTORY,
-} from "./FAKE_CONSTANTS";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { CreateOutbound } from "../../../type";
+import { InventoryType } from "@/types/InventoryType";
+import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
+import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
 
 type ResultsProps = {
   currentTab: "all" | "purchaseHistory";
   keyword: string;
   setValue: UseFormSetValue<CreateOutbound>;
+  watch: UseFormWatch<CreateOutbound>;
   onSubmit: () => void;
 };
 
-type ProductItem = {
-  productName: string;
-  unit: string;
-  costPerUnit: number;
-};
+const Results = ({
+  currentTab,
+  keyword,
+  setValue,
+  watch,
+  onSubmit,
+}: ResultsProps) => {
+  const [results, setResults] = useState<InventoryType[]>([]);
+  const { data: inventoryData } = useGetInventoryApi();
+  const { data: outboundData } = useGetOutboundApi();
 
-const Results = ({ currentTab, keyword, setValue, onSubmit }: ResultsProps) => {
-  const [results, setResults] = useState<ProductItem[]>([]);
+  // 現在可以取得當前的 customer name
+  const customerName = watch("customer_name");
 
+  // filter
   useEffect(() => {
-    if (currentTab === "all") {
-      setResults(
-        FAKE_CONSTANTS_ALL.filter((result) =>
-          result.productName.includes(keyword)
+    if (!inventoryData || !outboundData) return;
+    let filteredInventory: InventoryType[] = inventoryData;
+    // filter by tab
+    if (currentTab !== "all") {
+      const purchaseHistory = outboundData?.filter(
+        (outbound) => outbound.customer_name === customerName
+      );
+      const purchaseHistoryProducts = inventoryData.filter((inventory) =>
+        purchaseHistory?.some(
+          (outbound) => outbound.product_name === inventory.product_name
         )
       );
-    } else {
-      setResults(
-        FAKE_CONSTANTS_PURCHASE_HISTORY.filter((result) =>
-          result.productName.includes(keyword)
-        )
+      filteredInventory = purchaseHistoryProducts;
+    }
+    if (keyword !== "") {
+      filteredInventory = filteredInventory.filter((inventory) =>
+        inventory.product_name.includes(keyword)
       );
     }
-  }, [currentTab, keyword]);
+    setResults(filteredInventory);
+  }, [keyword, currentTab, inventoryData, outboundData, customerName]);
 
-  const handleClickItem = (item: ProductItem) => {
-    // 填入商品名稱、單位和成本單價
-    setValue("productName", item.productName);
+  const handleClickItem = (item: InventoryType) => {
+    // 填入商品 ID、名稱、單位和成本單價
+    setValue("product_id", item.id);
+    setValue("product_name", item.product_name);
     setValue("unit", item.unit);
-    setValue("costPerUnit", item.costPerUnit);
+    setValue("cost_per_unit", item.last_cost_per_unit);
     // 自動提交表單
     onSubmit();
   };
@@ -51,11 +65,11 @@ const Results = ({ currentTab, keyword, setValue, onSubmit }: ResultsProps) => {
     <ul className="flex flex-col overflow-y-auto border-1 border-primary/10 rounded-md h-160 divide-y-1 divide-primary/10">
       {results.map((result) => (
         <li
-          key={result.productName}
+          key={result.product_name}
           className="text-paragraph text-center py-2 hover:bg-primary/10 cursor-pointer"
           onClick={() => handleClickItem(result)}
         >
-          {result.productName}
+          {result.product_name}
           <span className="text-label text-primary/50 ml-2">
             ({result.unit})
           </span>

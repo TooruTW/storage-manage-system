@@ -1,37 +1,44 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import dayjs from "dayjs";
+
+import { Button } from "@/components/ui/button";
+
 import SearchingResult from "./SearchingResult";
 import SearchCustom from "./SearchCustom";
 import AddNewCustom from "./AddNewCustom";
-import { useForm } from "react-hook-form";
-import { CreateOutbound } from "../type";
-import { SubmitHandler } from "react-hook-form";
-import dayjs from "dayjs";
+
 import useCreateOutbound from "@/stores/useCreateOutbound";
-import { Button } from "@/components/ui/button";
 import useLoading from "@/stores/useLoading";
+
+import { CreateOutbound } from "../type";
+import usePostOutboundApi from "@/api/supabase/outboundAPi/usePostOutboundApi";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
-  const { handleSubmit, control, setValue } = useForm<CreateOutbound>();
+  const { handleSubmit, control, setValue, watch, formState } = useForm<CreateOutbound>();
 
   const addDataToLocalStorage = (data: CreateOutbound) => {
     let newDataDate = dayjs().format("YYYY-MM-DD");
     const prevData = useCreateOutbound.getState().createOutbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].shipmentDate;
+      newDataDate = prevData[prevData.length - 1].shipment_date;
     }
 
     const newData: CreateOutbound = {
-      customerName: data.customerName,
-      productName: data.productName,
+      customer_id: data.customer_id,
+      product_id: data.product_id,
+      customer_name: data.customer_name,
+      product_name: data.product_name,
       unit: data.unit,
-      costPerUnit: data.costPerUnit,
+      cost_per_unit: data.cost_per_unit,
       quantity: 0,
-      pricePerUnit: 0,
-      shipmentDate: newDataDate,
-      totalPrice: 0,
-      netProfit: 0,
+      price_per_unit: 0,
+      shipment_date: newDataDate,
+      total_price: 0,
+      net_profit: 0,
       remark: "",
     };
 
@@ -43,18 +50,28 @@ const CreatingBox = () => {
     addDataToLocalStorage(data);
   };
 
+  const { mutate: postOutbound } = usePostOutboundApi();
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateOutbound.getState().createOutbound;
-    console.log("上傳");
-    console.log(data);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    useCreateOutbound.getState().resetCreateOutbound();
-    useCreateOutbound.getState().saveCreateOutbound();
-    useLoading.getState().endLoading();
+    postOutbound(data, {
+      onSuccess: () => {
+        useCreateOutbound.getState().resetCreateOutbound();
+        useCreateOutbound.getState().saveCreateOutbound();
+        useLoading.getState().endLoading();
+      },
+      onError: (error) => {
+        console.error("Post outbound error", error);
+        alert("上傳失敗，請重新整理後再試");
+        useLoading.getState().endLoading();
+      },
+    });
   };
+
+  const activeStyle = useMemo(() => {
+    return isAddNewCustom && "w-100";
+  }, [isAddNewCustom]);
 
   return (
     <div className="flex flex-col gap-2 h-full w-fit">
@@ -63,17 +80,19 @@ const CreatingBox = () => {
         <Button onClick={handleUpload}>上傳</Button>
       </div>
       <div
-        className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden ${
-          isAddNewCustom && "w-100"
-        }`}
+        className={`border-1 border-primary rounded-md p-4 shadow-xs flex-1 text-nowrap flex flex-col gap-2 relative overflow-hidden 
+          ${activeStyle}`}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
           <SearchCustom
             setIsAddNewCustom={setIsAddNewCustom}
             control={control}
+            setValue={setValue}
+            error={formState.errors.customer_name}
           />
           <SearchingResult
             setValue={setValue}
+            watch={watch}
             onSubmit={handleSubmit(onSubmit)}
           />
         </form>

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { CellContext } from "@tanstack/react-table";
-import { CreateInbound } from "../../../../type";
+import { CreateInbound } from "@/components/views/CreateView/CreateInbound/type";
 
 // 計算總價的單元格組件
 const CalcProfitCell = <TData extends Record<string, unknown>>({
@@ -8,6 +8,8 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
   column: { id },
   table,
 }: CellContext<TData, unknown>) => {
+
+
   function formatValue(value: number) {
     return value.toLocaleString();
   }
@@ -24,8 +26,8 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
   // 從原始數據獲取數量和單價
   const rowData = original as unknown as CreateInbound;
   const quantity = rowData?.quantity || 0;
-  const pricePerUnit = rowData?.pricePerUnit || 0;
-  const totalPrice = rowData?.totalPrice || 0;
+  const pricePerUnit = rowData?.price_per_unit || 0;
+  const totalPrice = rowData?.total_price || 0;
 
   // 計算總價
   const calculatedTotalCost = calculateTotal(
@@ -33,6 +35,12 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
     pricePerUnit,
     totalPrice
   );
+
+  const warningStyle = useMemo(()=>{
+    if(calculatedTotalCost < 0) return "text-red-500";
+    return "";
+  },[calculatedTotalCost])
+
 
   // We need to keep and update the state of the cell normally
   const [value, setValue] = useState<string>(formatValue(calculatedTotalCost));
@@ -50,9 +58,7 @@ const CalcProfitCell = <TData extends Record<string, unknown>>({
 
   return (
     <div
-      className={`text-center italic ${
-        calculatedTotalCost < 0 && "text-red-500"
-      }`}
+      className={`text-center italic ${warningStyle}`}
     >
       <span className="font-medium">{value}</span>
     </div>

@@ -1,13 +1,6 @@
-import supabase from "..";
 import { useQuery } from "@tanstack/react-query";
-
-type Inventory = {
-  id: string;
-  product_name: string;
-  unit: string;
-  quantity: number;
-  last_inbound_date: string;
-}
+import supabase from "..";
+import { InventoryType } from "@/types/InventoryType";
 
 const getInventoryApi = async () => {
   const { data: inventory, error } = await supabase
@@ -15,12 +8,12 @@ const getInventoryApi = async () => {
     .select("*")
     .order("last_inbound_date", { ascending: false });
 
-    if (error) {
-        console.error("Get inventory error", error);
-        throw error;
-    }
+  if (error) {
+    console.error("Get inventory error", error);
+    throw error;
+  }
 
-    return inventory as unknown as Inventory[] || [];
+  return (inventory as unknown as InventoryType[]) || [];
 };
 
 const useGetInventoryApi = () => {

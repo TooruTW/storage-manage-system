@@ -1,19 +1,27 @@
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import dayjs from "dayjs";
+
+import { Button } from "@/components/ui/button";
+
 import SearchingResult from "./SearchingResult";
 import SearchSupplier from "./SearchSupplier";
 import AddNewSupplier from "./AddNewSupplier";
-import { useForm } from "react-hook-form";
-import { CreateInbound } from "../type";
-import { SubmitHandler } from "react-hook-form";
+
 import useCreateInbound from "@/stores/useCreateInbound";
-import { Button } from "@/components/ui/button";
 import useLoading from "@/stores/useLoading";
-import dayjs from "dayjs";
+
+import { CreateInbound } from "../type";
+import usePostInventoryApi from "@/api/supabase/inventoryApi/usePostInventoryApi";
+import usePostInboundApi from "@/api/supabase/inboundAPi/usePostInboundApi";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
   const { handleSubmit, control, setValue, formState } =
     useForm<CreateInbound>();
+
+  const { mutate: postInventory } = usePostInventoryApi();
 
   // 新增資料到本地儲存
   const addDataToLocalStorage = (data: CreateInbound) => {
@@ -21,18 +29,20 @@ const CreatingBox = () => {
     const prevData = useCreateInbound.getState().createInbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].lastInboundDate;
+      newDataDate = prevData[prevData.length - 1].inbound_date;
     }
 
     const newData: CreateInbound = {
-      supplierName: data.supplierName,
-      productName: data.productName,
+      supplier_id: data.supplier_id,
+      product_id: data.product_id,
+      supplier_name: data.supplier_name,
+      product_name: data.product_name,
       unit: data.unit,
       quantity: 0,
-      pricePerUnit: 0,
-      totalPrice: 0,
+      price_per_unit: data.price_per_unit,
+      total_price: 0,
       remark: "",
-      lastInboundDate: newDataDate,
+      inbound_date: newDataDate,
     };
 
     useCreateInbound.getState().addCreateInbound(newData);
@@ -41,21 +51,50 @@ const CreatingBox = () => {
 
   // 提交表單
   const onSubmit: SubmitHandler<CreateInbound> = (data) => {
-    addDataToLocalStorage(data);
+    console.log(data);
+    if (data.product_id === "") {
+      console.log("新增商品");
+      postInventory(
+        {
+          product_name: data.product_name,
+          unit: data.unit,
+        },
+        {
+          onSuccess: (result) => {
+            data.product_id = result[0].id;
+            addDataToLocalStorage(data);
+          },
+          onError: (error) => {
+            console.error("新增商品失敗", error);
+            if (error.message.includes("duplicate key")) {
+              alert("商品已存在，請重新整理後，選擇已存在的商品");
+            }
+          },
+        }
+      );
+    } else {
+      addDataToLocalStorage(data);
+    }
   };
 
+  const { mutate: postInbound } = usePostInboundApi();
   // 上傳資料
   const handleUpload = async () => {
     useLoading.getState().startLoading();
     const data = useCreateInbound.getState().createInbound;
-    console.log("上傳");
-    console.log(data);
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    useCreateInbound.getState().resetCreateInbound();
-    useCreateInbound.getState().saveCreateInbound();
-    useLoading.getState().endLoading();
+    postInbound(data, {
+      onSuccess: () => {
+        useCreateInbound.getState().resetCreateInbound();
+        useCreateInbound.getState().saveCreateInbound();
+        useLoading.getState().endLoading();
+      },
+      onError: (error) => {
+        console.error("Post inbound error", error);
+        alert("上傳失敗，請重新整理後再試");
+        useLoading.getState().endLoading();
+      },
+    });
   };
 
   return (
@@ -76,7 +115,8 @@ const CreatingBox = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <SearchSupplier
             control={control}
-            error={formState.errors.supplierName}
+            setValue={setValue}
+            error={formState.errors.supplier_name}
           />
           <SearchingResult
             setValue={setValue}

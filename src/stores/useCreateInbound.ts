@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { CreateInbound } from "@/components/views/CreateView/CreateInbound/type";
-import { getCreateInboundData } from "@/components/views/CreateView/CreateInbound/TableBox/Table/data";
+import { getCreateInboundDataFromLocalStorage } from "@/components/views/CreateView/CreateInbound/TableBox/Table/data";
 
 type CreateInboundStore = {
   createInbound: CreateInbound[];
@@ -12,7 +12,7 @@ type CreateInboundStore = {
 };
 
 const useCreateInbound = create<CreateInboundStore>((set, get) => ({
-  createInbound: getCreateInboundData(),
+  createInbound: getCreateInboundDataFromLocalStorage(),
   addCreateInbound: (newInbound: CreateInbound) =>
     set((state) => ({
       createInbound: [newInbound, ...state.createInbound],

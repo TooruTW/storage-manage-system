@@ -1,36 +1,51 @@
-import { DollarSign } from "lucide-react";
+import { useCallback, useMemo } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { CategoryProps } from "./type";
 
-const FakeCategoryList: CategoryProps[] = [
-  { id: "purchaseAmount", label: "進貨額", value: 100 },
-  { id: "salesAmount", label: "營業額", value: 200 },
-];
+import { DollarSign } from "lucide-react";
 
+import useGetDashboardData from "../hook/useGetDashboardData";
 
 const CategoryCard = () => {
-  const { category } = useParams();
+  const { timeRange, category } = useParams();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const switchCategory = (category: CategoryProps["id"]) => {
+  const switchCategory = (category: string) => {
     const currentPath = location.pathname.split("/");
     currentPath[3] = category;
     const newPath = currentPath.join("/");
     navigate(newPath);
   };
 
+  const activeStyle = useCallback(
+    (id: string) => {
+      const style = "bg-primary/20";
+      const inactiveStyle = "border-2 border-primary/10";
+      return category === id ? style : inactiveStyle;
+    },
+    [category]
+  );
+
+  const { profitAmount, salesAmount } = useGetDashboardData(
+    timeRange as "month" | "quarter" ,
+    category as "profitAmount" | "salesAmount"
+  );
+
+  const categoryList = useMemo(() => {
+    return [
+      { id: "profitAmount", label: "損益額", value: profitAmount },
+      { id: "salesAmount", label: "營業額", value: salesAmount },
+    ];
+  }, [profitAmount, salesAmount]);
+
   return (
     <div className="w-full flex gap-7">
-      {FakeCategoryList.map((item) => (
+      {categoryList.map((item) => (
         <div
           key={item.id}
-          className={`w-full rounded-md p-6 shadow-xs cursor-pointer ${
-            category === item.id
-              ? "bg-primary/20"
-              : "border-2 border-primary/10"
-          }`}
+          className={`w-full rounded-md p-6 shadow-xs cursor-pointer 
+            ${activeStyle(item.id)}`}
           onClick={() => switchCategory(item.id)}
         >
           <div>
@@ -39,7 +54,7 @@ const CategoryCard = () => {
               <DollarSign size={16} className="text-muted-foreground" />
             </p>
           </div>
-          <h2 className="text-h2 font-bold">$ {item.value}</h2>
+          <h2 className="text-h2 font-bold">$ {item.value.toLocaleString()}</h2>
         </div>
       ))}
     </div>
