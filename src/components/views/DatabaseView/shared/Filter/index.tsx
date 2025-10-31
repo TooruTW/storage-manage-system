@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Column } from "@tanstack/react-table";
 
 interface FilterProps<TData> {
@@ -13,15 +13,19 @@ const Filter = <TData extends Record<string, unknown>>({
     (columnFilterValue ?? "") as string
   );
 
+  useEffect(() => {
+    if (!columnFilterValue) setInputValue("");
+  }, [columnFilterValue]);
+
   const handleBlur = () => {
     column.setFilterValue(inputValue);
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>)=>{
-    if(event.key === "Enter"){
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
       handleBlur();
     }
-  }
+  };
 
   return (
     <input
