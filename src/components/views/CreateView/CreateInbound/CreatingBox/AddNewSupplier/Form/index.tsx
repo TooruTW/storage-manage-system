@@ -7,17 +7,23 @@ import PhoneNumber from "./PhoneNumber";
 import { FormDataType } from "./type";
 import usePostSupplierApi from "@/api/supabase/supplierApi/usePostSupplierApi";
 
-export default function App() {
+export default function Form() {
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<FormDataType>();
 
   const { mutate: postSupplier } = usePostSupplierApi();
   const onSubmit: SubmitHandler<FormDataType> = (data) => {
-    postSupplier(data);
+    postSupplier(data,{
+      onSuccess: () => {
+        alert("新增成功" +"  "+ data.name);
+        reset();
+      },
+    });
   };
 
   return (
