@@ -17,12 +17,19 @@ const Filter = <TData extends Record<string, unknown>>({
     column.setFilterValue(inputValue);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>)=>{
+    if(event.key === "Enter"){
+      handleBlur();
+    }
+  }
+
   return (
     <input
       type="text"
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
       onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
       placeholder={`搜尋...`}
       className="w-36 border shadow rounded px-4 py-1"
     />
