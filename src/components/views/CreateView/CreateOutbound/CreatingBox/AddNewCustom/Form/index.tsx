@@ -12,11 +12,17 @@ export default function Form() {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm<FormDataType>();
   const { mutate: postCustomer } = usePostCustomerApi();
   const onSubmit: SubmitHandler<FormDataType> = (data) => {
-    postCustomer(data);
+    postCustomer(data,{
+      onSuccess: () => {
+        alert("新增成功" +"  "+ data.name);
+        reset();
+      },
+    });
   };
 
   return (
