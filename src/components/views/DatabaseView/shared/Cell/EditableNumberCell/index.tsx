@@ -14,10 +14,8 @@ const EditableCell = <TData extends Record<string, unknown>>({
     if (isEditing) return "italic";
     return "cursor-text";
   }, [isEditing]);
-  // We need to keep and update the state of the cell normally
   const [value, setValue] = useState(initialValue);
 
-  // When the input is blurred, we'll call our table meta's updateData function
   const onBlur = () => {
     table.options.meta?.collectData?.(
       original.id as string,
@@ -27,7 +25,6 @@ const EditableCell = <TData extends Record<string, unknown>>({
     table.options.meta?.updateData(index, id, value);
   };
 
-  // If the initialValue is changed external, sync it up with our state
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
