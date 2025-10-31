@@ -19,8 +19,7 @@ const usePostSupplierApi = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postSupplierApi,
-    onSuccess: (data) => {
-      console.log("新增進貨商成功", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["supplier"] });
     },
     onError: (error) => {
