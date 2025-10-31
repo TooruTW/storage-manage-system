@@ -5,6 +5,7 @@ import { Box } from "lucide-react";
 import dayjs from "dayjs";
 import converter from "number-to-chinese-words";
 
+import { Button } from "@/components/ui/button";
 import { INITIAL_TIME } from "./data";
 
 export const Header = () => {
@@ -32,23 +33,25 @@ export const Header = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-start gap-4">
-      <Box
-        className="cursor-pointer"
-        strokeWidth={1}
-        onClick={() => navigate("/home")}
-      />
-      {/* 日曆和時間 */}
-      <div>
-        <p className="text-label">
-          <span>
-            民國<span> {time.year} </span>年<span> {time.month} </span>月
-            <span> {time.date} </span> 日 <span>（{time.week}）</span>
-          </span>
-          <span> {time.hour} </span> 點<span> {time.minute} </span>分
-          <span></span>
-        </p>
+    <div className="flex items-center justify-between">
+      <div className="flex items-center justify-start gap-4">
+        <Box
+          className="cursor-pointer"
+          strokeWidth={1}
+          onClick={() => navigate("/home")}
+        />
+        {/* 日曆和時間 */}
+        <div>
+          <p className="text-label">
+            <span>
+              民國<span> {time.year} </span>年<span> {time.month} </span>月
+              <span> {time.date} </span> 日 <span>（{time.week}）</span>
+            </span>
+            <span> {time.hour} </span> 點<span> {time.minute} </span>分
+          </p>
+        </div>
       </div>
+      <Button onClick={() => navigate("/home")}>回首頁</Button>
     </div>
   );
 };
