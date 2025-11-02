@@ -9,14 +9,13 @@ const Inventory = ({ product }: { product: string }) => {
 
   useEffect(() => {
     if (!inventoryData || isLoading) return;
+    let tempData = [...inventoryData];
     if (product !== "") {
-      const filteredData = inventoryData.filter((item) =>
+      tempData = tempData.filter((item) =>
         item.product_name.includes(product)
       );
-      setData(filteredData);
-    } else {
-      setData(inventoryData);
     }
+    setData(tempData);
   }, [product, inventoryData, isLoading]);
 
   if (isLoading) return <TableStateView type="loading" />;

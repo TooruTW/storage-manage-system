@@ -9,15 +9,14 @@ const Supplier = ({ object }: { object: string }) => {
   const [data, setData] = useState<SupplierType[]>([]);
 
   useEffect(() => {
-    if (!supplierData || isLoading) return;
-    if (object === "") {
-      setData(supplierData);
-    } else {
-      const filteredData = supplierData.filter((item) =>
+    if (!supplierData || isLoading) return;    
+    let tempData = [...supplierData];
+    if (object !== "") {
+      tempData = tempData.filter((item) =>
         item.name.includes(object)
       );
-      setData(filteredData);
     }
+    setData(tempData);
   }, [object, supplierData, isLoading]);
 
   if (isLoading) return <TableStateView type="loading" />;
@@ -26,10 +25,10 @@ const Supplier = ({ object }: { object: string }) => {
   return (
     <ul className="w-full flex-1 overflow-y-auto flex flex-col gap-2">
       {data.map(
-        (item) => {
+        (item, index) => {
           return (
             <li
-              key={item.name}
+              key={`${item.id}-${index}-${item.name}`}
               className="w-full flex gap-2 items-center rounded-md border-1 border-primary/10 p-2"
             >
               <div className="w-1/5 text-balance">
