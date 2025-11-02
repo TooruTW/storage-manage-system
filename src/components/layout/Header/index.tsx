@@ -16,7 +16,7 @@ export const Header = () => {
     const year = converter.toWords(now.year() - 1911);
     const month = converter.toWords(now.month() + 1);
     const date = converter.toWords(now.date());
-    const week = converter.toWords(now.day());
+    const week = now.day() === 0 ? "日" : converter.toWords(now.day());
     const hour = now.hour();
     const minute = now.minute();
 
@@ -42,12 +42,14 @@ export const Header = () => {
         />
         {/* 日曆和時間 */}
         <div>
-          <p className="text-label">
+          <p className="text-label max-md:flex max-md:flex-col ">
             <span>
               民國<span> {time.year} </span>年<span> {time.month} </span>月
               <span> {time.date} </span> 日 <span>（{time.week}）</span>
             </span>
-            <span> {time.hour} </span> 點<span> {time.minute} </span>分
+            <span>
+              <span> {time.hour} </span> 點<span> {time.minute} </span>分
+            </span>
           </p>
         </div>
       </div>
