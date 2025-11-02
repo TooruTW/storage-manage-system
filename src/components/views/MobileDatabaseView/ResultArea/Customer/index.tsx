@@ -13,25 +13,24 @@ const Customer = ({ object }: { object: string }) => {
   useEffect(() => {
     if (!customerData || isLoading) return;
     let tempData = [...customerData];
-    if (object === "") {
+    if (object !== "") {
       tempData = tempData.filter((item) =>
         item.name.includes(object)
       );
-    setData(tempData);
     }
+    setData(tempData);
   }, [object, customerData, isLoading]);
 
   if (isLoading) return <TableStateView type="loading" />;
   if (!data) return <TableStateView type="empty" />;
 
-
   return (
     <ul className="w-full h-full overflow-y-auto flex flex-col gap-2 pb-20">
       {data.map(
-        (item) => {
+        (item, index) => {
           return (
             <li
-              key={item.name}
+              key={`${item.id}-${index}-${item.name}`}
               className="w-full flex gap-2 items-center rounded-md border-1 border-primary/10 p-2"
             >
               <div className="w-1/5 text-balance">
