@@ -12,13 +12,12 @@ const Customer = ({ object }: { object: string }) => {
 
   useEffect(() => {
     if (!customerData || isLoading) return;
+    let tempData = [...customerData];
     if (object === "") {
-      setData(customerData);
-    } else {
-      const filteredData = customerData.filter((item) =>
+      tempData = tempData.filter((item) =>
         item.name.includes(object)
       );
-      setData(filteredData);
+    setData(tempData);
     }
   }, [object, customerData, isLoading]);
 
