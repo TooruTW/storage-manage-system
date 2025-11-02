@@ -15,20 +15,18 @@ const Cost = ({ object, product }: { object: string; product: string }) => {
 
   useEffect(() => {
     if (!inboundData || isLoading) return;
-    if (!isFiltering) return;
-
+    let tempData = [...inboundData];
     if (object !== "") {
-      const filteredData = inboundData.filter((item) =>
+      tempData = tempData.filter((item) =>
         item.supplier_name.includes(object)
       );
-      setData(filteredData);
     }
     if (product !== "") {
-      const filteredData = inboundData.filter((item) =>
+      tempData = tempData.filter((item) =>
         item.product_name.includes(product)
       );
-      setData(filteredData);
     }
+    setData(tempData);
   }, [object, product, inboundData, isLoading, isFiltering]);
 
   if (isLoading) return <TableStateView type="loading" />;
@@ -40,9 +38,9 @@ const Cost = ({ object, product }: { object: string; product: string }) => {
   return (
     <ul className="w-full h-full overflow-y-auto flex flex-col gap-2 pb-20">
       {data.map(
-        (item) => {
+        (item, index) => {
           return (
-            <li key={item.product_name} className="w-full flex flex-col">
+            <li key={`${item.id}-${index}-${item.inbound_date}`} className="w-full flex flex-col">
               <div className="w-fit text-balance rounded-t-md bg-primary text-primary-foreground px-2">
                 <p>{item.supplier_name}</p>
               </div>
