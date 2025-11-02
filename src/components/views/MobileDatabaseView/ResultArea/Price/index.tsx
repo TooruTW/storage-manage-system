@@ -15,20 +15,16 @@ const Price = ({ object, product }: { object: string; product: string }) => {
 
   useEffect(() => {
     if (!outboundData || isLoading) return;
-    if (!isFiltering) return;
+    let tempData = [...outboundData];
 
     if (object !== "") {
-      const filteredData = outboundData.filter((item) =>
-        item.customer_name.includes(object)
-      );
-      setData(filteredData);
+      tempData = tempData.filter((item) => item.customer_name.includes(object));
     }
     if (product !== "") {
-      const filteredData = outboundData.filter((item) =>
-        item.product_name.includes(product)
-      );
-      setData(filteredData);
+      tempData = tempData.filter((item) => item.product_name.includes(product));
     }
+
+    setData(tempData);
   }, [object, product, outboundData, isLoading, isFiltering]);
 
   if (isLoading) return <TableStateView type="loading" />;
@@ -41,9 +37,12 @@ const Price = ({ object, product }: { object: string; product: string }) => {
   return (
     <ul className="w-full h-full overflow-y-auto flex flex-col gap-2 pb-20">
       {data.map(
-        (item) => {
+        (item, index) => {
           return (
-            <li key={item.product_name} className="w-full flex flex-col">
+            <li
+              key={`${item.id}-${index}-${item.shipment_date}`}
+              className="w-full flex flex-col"
+            >
               <div className="w-fit text-balance rounded-t-md bg-primary text-primary-foreground px-2">
                 <p>{item.customer_name}</p>
               </div>
