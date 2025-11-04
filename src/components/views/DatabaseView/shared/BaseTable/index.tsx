@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,6 +7,7 @@ import {
   ColumnDef,
   VisibilityState,
 } from "@tanstack/react-table";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 import { Button } from "@/components/ui/button";
 
@@ -40,6 +41,10 @@ const BaseTable = <TData extends Record<string, unknown>>({
     actions: false, // 預設隱藏刪除欄位
   });
   const { setContent } = usePopupStore();
+
+  // 虛擬化相關 ref
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const rowHeight = 40; // 每行的高度（根據實際樣式調整）
 
   const editingStyle = useMemo(() => {
     return isEditing ? "bg-primary/10" : "";
@@ -136,6 +141,15 @@ const BaseTable = <TData extends Record<string, unknown>>({
     table.resetColumnFilters();
   };
 
+  // 虛擬化設定
+  const { rows } = table.getRowModel();
+  const rowVirtualizer = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => tableContainerRef.current,
+    estimateSize: () => rowHeight,
+    overscan: 5, // 預渲染的行數
+  });
+
   return (
     <div className={`w-full flex flex-col gap-4 ${editingStyle}`}>
       {/* 操作區 */}
@@ -177,10 +191,14 @@ const BaseTable = <TData extends Record<string, unknown>>({
         </div>
       </div>
       {/* 表格 */}
-      <div>
+      <div
+        ref={tableContainerRef}
+        className="h-[70vh] overflow-auto"
+        style={{ contain: "strict" }}
+      >
         <table className="w-full border-collapse min-w-full">
           {/* 表格標題 */}
-          <thead className="w-full">
+          <thead className="w-full sticky top-0 bg-white z-10">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -188,7 +206,12 @@ const BaseTable = <TData extends Record<string, unknown>>({
                     <th
                       key={header.id}
                       colSpan={header.colSpan}
-                      className="border-primary/10"
+                      className="border-primary/10 "
+                      style={
+                        header.column.columnDef.size
+                          ? { width: `${header.getSize()}px` }
+                          : undefined
+                      }
                     >
                       {header.isPlaceholder ? null : (
                         <div className="flex flex-col justify-center items-center gap-1">
@@ -210,31 +233,86 @@ const BaseTable = <TData extends Record<string, unknown>>({
               </tr>
             ))}
           </thead>
-          {/* 表格內容 */}
-          <tbody className="w-full">
-            {/* 表格內容的空行 */}
-            <tr>
-              <td colSpan={columns.length} className="h-8"></td>
-            </tr>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id} className="border-primary/10">
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td
-                        key={cell.id}
-                        className={`border-primary/10 ${tableDataStyle}`}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
+          {/* 虛擬化的表格內容 */}
+          <tbody>
+            {rows.length > 0 ? (
+              <>
+                {/* 表格內容的空行 */}
+                <tr>
+                  <td colSpan={columns.length} className="h-8"></td>
                 </tr>
-              );
-            })}
+                {/* 上方填充空間 */}
+                {rowVirtualizer.getVirtualItems().length > 0 && (
+                  <tr>
+                    <td
+                      colSpan={columns.length}
+                      style={{
+                        height: `${
+                          rowVirtualizer.getVirtualItems()[0]?.start ?? 0
+                        }px`,
+                        padding: 0,
+                        border: "none",
+                      }}
+                    />
+                  </tr>
+                )}
+                {/* 渲染可見的行 */}
+                {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                  const row = rows[virtualRow.index];
+                  if (!row) return null;
+                  return (
+                    <tr
+                      key={row.id}
+                      className="border-primary/10"
+                      style={{
+                        height: `${virtualRow.size}px`,
+                      }}
+                    >
+                      {row.getVisibleCells().map((cell) => {
+                        return (
+                          <td
+                            key={cell.id}
+                            className={`border-primary/10 ${tableDataStyle}`}
+                            style={
+                              cell.column.columnDef.size
+                                ? { width: `${cell.column.getSize()}px` }
+                                : undefined
+                            }
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+                {/* 下方填充空間 */}
+                {rowVirtualizer.getVirtualItems().length > 0 && (
+                  <tr>
+                    <td
+                      colSpan={columns.length}
+                      style={{
+                        height: `${
+                          rowVirtualizer.getTotalSize() -
+                          (rowVirtualizer.getVirtualItems()[
+                            rowVirtualizer.getVirtualItems().length - 1
+                          ]?.end ?? rowVirtualizer.getTotalSize())
+                        }px`,
+                        padding: 0,
+                        border: "none",
+                      }}
+                    />
+                  </tr>
+                )}
+              </>
+            ) : (
+              <tr>
+                <td colSpan={columns.length} className="h-8"></td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
