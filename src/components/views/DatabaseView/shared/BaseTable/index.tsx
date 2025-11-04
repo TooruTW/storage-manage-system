@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 
 import { Filter } from "../Filter";
 import UpdateConfirm from "../UpdateConfirm";
+import ScrollTopBtn from "../ScrollTopBtn";
 
 import { usePopupStore } from "@/stores/usePopupStore";
 
@@ -316,6 +317,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
           </tbody>
         </table>
       </div>
+      <ScrollTopBtn targetRef={tableContainerRef} />
     </div>
   );
 };
