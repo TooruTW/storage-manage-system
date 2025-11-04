@@ -9,11 +9,10 @@ import {
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 
-import { Button } from "@/components/ui/button";
-
 import { Filter } from "../Filter";
 import UpdateConfirm from "../UpdateConfirm";
 import ScrollTopBtn from "../ScrollTopBtn";
+import { TableActions } from "./TableActions";
 
 import { usePopupStore } from "@/stores/usePopupStore";
 
@@ -105,7 +104,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
     },
   });
 
-  const showConfirmUpdate = () => {
+  const handleShowConfirmUpdate = () => {
     setContent(
       <UpdateConfirm
         warningContent="確定要將資料修改為以下內容嗎？"
@@ -119,7 +118,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
     );
   };
 
-  const showConfirmReset = () => {
+  const handleShowConfirmReset = () => {
     setContent(
       <UpdateConfirm
         warningContent="確定要重置資料嗎？"
@@ -138,7 +137,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
     return filters.length > 0;
   }, [filters]);
 
-  const clearFilter = () => {
+  const handleClearFilter = () => {
     table.resetColumnFilters();
   };
 
@@ -154,43 +153,15 @@ const BaseTable = <TData extends Record<string, unknown>>({
   return (
     <div className={`w-full flex flex-col rounded-md gap-4 ${editingStyle}`}>
       {/* 操作區 */}
-      <div className="flex justify-between items-center mt-4 px-4">
-        <div>共 {table.getRowModel().rows.length} 筆資料</div>
-        <div className="flex gap-2">
-          {hasFilter && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={clearFilter}
-            >
-              清除過濾
-            </Button>
-          )}
-          {!isEditing && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={() => setIsEditing(true)}
-            >
-              編輯
-            </Button>
-          )}
-          {isEditing && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={showConfirmReset}
-            >
-              重置資料
-            </Button>
-          )}
-          {isEditing && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={showConfirmUpdate}
-            >
-              確認修改
-            </Button>
-          )}
-        </div>
-      </div>
+      <TableActions
+        totalRows={table.getRowModel().rows.length}
+        hasFilter={hasFilter}
+        isEditing={isEditing}
+        onClearFilter={handleClearFilter}
+        onEdit={() => setIsEditing(true)}
+        onReset={handleShowConfirmReset}
+        onUpdate={handleShowConfirmUpdate}
+      />
       {/* 表格 */}
       <div
         ref={tableContainerRef}
