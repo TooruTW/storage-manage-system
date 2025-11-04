@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 import { InventoryType } from "@/types/InventoryType";
@@ -18,7 +18,6 @@ const Inventory = ({ product }: { product: string }) => {
     setData(tempData);
   }, [product, inventoryData, isLoading]);
 
-  const containerRef = useRef<HTMLUListElement>(null);
 
   const rowVirtualizer = useWindowVirtualizer({
     count: data.length,
@@ -32,8 +31,7 @@ const Inventory = ({ product }: { product: string }) => {
 
   return (
     <ul
-      ref={containerRef}
-      className="w-full overflow-y-auto flex flex-col gap-2 pb-20"
+      className="w-full flex flex-col gap-2"
       style={{
         height: `${rowVirtualizer.getTotalSize()}px`,
         position: "relative",
