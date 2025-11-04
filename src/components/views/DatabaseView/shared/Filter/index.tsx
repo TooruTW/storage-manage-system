@@ -35,7 +35,7 @@ const Filter = <TData extends Record<string, unknown>>({
       onBlur={handleBlur}
       onKeyDown={handleKeyDown}
       placeholder={`搜尋...`}
-      className="w-36 border shadow rounded px-4 py-1"
+      className="w-9/10 border shadow rounded px-4 py-1 bg-white"
     />
   );
 };

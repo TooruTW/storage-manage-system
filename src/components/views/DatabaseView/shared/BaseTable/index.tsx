@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -7,11 +7,12 @@ import {
   ColumnDef,
   VisibilityState,
 } from "@tanstack/react-table";
-
-import { Button } from "@/components/ui/button";
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 import { Filter } from "../Filter";
 import UpdateConfirm from "../UpdateConfirm";
+import ScrollTopBtn from "../ScrollTopBtn";
+import { TableActions } from "./TableActions";
 
 import { usePopupStore } from "@/stores/usePopupStore";
 
@@ -40,6 +41,10 @@ const BaseTable = <TData extends Record<string, unknown>>({
     actions: false, // 預設隱藏刪除欄位
   });
   const { setContent } = usePopupStore();
+
+  // 虛擬化相關 ref
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+  const rowHeight = 40; // 每行的高度（根據實際樣式調整）
 
   const editingStyle = useMemo(() => {
     return isEditing ? "bg-primary/10" : "";
@@ -99,7 +104,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
     },
   });
 
-  const showConfirmUpdate = () => {
+  const handleShowConfirmUpdate = () => {
     setContent(
       <UpdateConfirm
         warningContent="確定要將資料修改為以下內容嗎？"
@@ -113,7 +118,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
     );
   };
 
-  const showConfirmReset = () => {
+  const handleShowConfirmReset = () => {
     setContent(
       <UpdateConfirm
         warningContent="確定要重置資料嗎？"
@@ -127,68 +132,61 @@ const BaseTable = <TData extends Record<string, unknown>>({
   };
 
   const filters = table.getState().columnFilters;
-  
+
   const hasFilter = useMemo(() => {
     return filters.length > 0;
   }, [filters]);
 
-  const clearFilter = () => {
+  const handleClearFilter = () => {
     table.resetColumnFilters();
   };
 
+  // 虛擬化設定
+  const { rows } = table.getRowModel();
+  const rowVirtualizer = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => tableContainerRef.current,
+    estimateSize: () => rowHeight,
+    overscan: 5, // 預渲染的行數
+  });
+
   return (
-    <div className={`w-full flex flex-col gap-4 ${editingStyle}`}>
-      <div className="flex justify-between items-center mt-4">
-        <div>共 {table.getRowModel().rows.length} 筆資料</div>
-        <div className="flex gap-2">
-          {hasFilter && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={clearFilter}
-            >
-              清除過濾
-            </Button>
-          )}
-          {!isEditing && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={() => setIsEditing(true)}
-            >
-              編輯
-            </Button>
-          )}
-          {isEditing && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={showConfirmReset}
-            >
-              重置資料
-            </Button>
-          )}
-          {isEditing && (
-            <Button
-              className="active:scale-95 transition-all"
-              onClick={showConfirmUpdate}
-            >
-              確認修改
-            </Button>
-          )}
-        </div>
-      </div>
+    <div className={`w-full flex flex-col rounded-md gap-4 ${editingStyle}`}>
+      {/* 操作區 */}
+      <TableActions
+        totalRows={table.getRowModel().rows.length}
+        hasFilter={hasFilter}
+        isEditing={isEditing}
+        onClearFilter={handleClearFilter}
+        onEdit={() => setIsEditing(true)}
+        onReset={handleShowConfirmReset}
+        onUpdate={handleShowConfirmUpdate}
+      />
       {/* 表格 */}
-      <div className="overflow-x-auto">
+      <div
+        ref={tableContainerRef}
+        className="h-[70vh] overflow-auto rounded-md"
+        style={{ contain: "strict" }}
+      >
         <table className="w-full border-collapse min-w-full">
-          <thead className="w-full">
-            {/* Header 組合 */}
+          {/* 表格標題 */}
+          <thead className="w-full sticky top-0 z-10 backdrop-blur-2xl">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
-                {/* Header 組合內的 Header */}
                 {headerGroup.headers.map((header) => {
                   return (
-                    <th key={header.id} colSpan={header.colSpan}>
+                    <th
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      className="border-primary/10 "
+                      style={
+                        header.column.columnDef.size
+                          ? { width: `${header.getSize()}px` }
+                          : undefined
+                      }
+                    >
                       {header.isPlaceholder ? null : (
-                        <div className="flex flex-col justify-center items-center gap-1">
-                          {/* Header 內容 */}
+                        <div className="flex flex-col justify-center items-center py-2">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
@@ -207,37 +205,90 @@ const BaseTable = <TData extends Record<string, unknown>>({
               </tr>
             ))}
           </thead>
-          {/* 表格內容 */}
-          <tbody className="w-full">
-            {/* 表格內容的空行 */}
-            <tr>
-              <td colSpan={columns.length} className="h-8"></td>
-            </tr>
-            {/* 表格內容的行 */}
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {/* 表格內容的行內的單元格 */}
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td
-                        key={cell.id}
-                        className={`border-primary/10 ${tableDataStyle}`}
-                      >
-                        {/* 單元格內容 */}
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    );
-                  })}
+          {/* 虛擬化的表格內容 */}
+          <tbody>
+            {rows.length > 0 ? (
+              <>
+                {/* 表格內容的空行 */}
+                <tr>
+                  <td colSpan={columns.length} className="h-8"></td>
                 </tr>
-              );
-            })}
+                {/* 上方填充空間 */}
+                {rowVirtualizer.getVirtualItems().length > 0 && (
+                  <tr>
+                    <td
+                      colSpan={columns.length}
+                      style={{
+                        height: `${
+                          rowVirtualizer.getVirtualItems()[0]?.start ?? 0
+                        }px`,
+                        padding: 0,
+                        border: "none",
+                      }}
+                    />
+                  </tr>
+                )}
+                {/* 渲染可見的行 */}
+                {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                  const row = rows[virtualRow.index];
+                  if (!row) return null;
+                  return (
+                    <tr
+                      key={row.id}
+                      className="border-primary/10"
+                      style={{
+                        height: `${virtualRow.size}px`,
+                      }}
+                    >
+                      {row.getVisibleCells().map((cell) => {
+                        return (
+                          <td
+                            key={cell.id}
+                            className={`border-primary/10 ${tableDataStyle}`}
+                            style={
+                              cell.column.columnDef.size
+                                ? { width: `${cell.column.getSize()}px` }
+                                : undefined
+                            }
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  );
+                })}
+                {/* 下方填充空間 */}
+                {rowVirtualizer.getVirtualItems().length > 0 && (
+                  <tr>
+                    <td
+                      colSpan={columns.length}
+                      style={{
+                        height: `${
+                          rowVirtualizer.getTotalSize() -
+                          (rowVirtualizer.getVirtualItems()[
+                            rowVirtualizer.getVirtualItems().length - 1
+                          ]?.end ?? rowVirtualizer.getTotalSize())
+                        }px`,
+                        padding: 0,
+                        border: "none",
+                      }}
+                    />
+                  </tr>
+                )}
+              </>
+            ) : (
+              <tr>
+                <td colSpan={columns.length} className="h-8"></td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
+      <ScrollTopBtn targetRef={tableContainerRef} />
     </div>
   );
 };
