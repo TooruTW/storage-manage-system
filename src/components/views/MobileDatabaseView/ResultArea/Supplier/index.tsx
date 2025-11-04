@@ -87,41 +87,7 @@ const Supplier = ({ object }: { object: string }) => {
             );
           })}
       </div>
-      {/* {data.map(
-        (item, index) => {
-          return (
-            <li
-              key={`${item.id}-${index}-${item.name}`}
-              className="w-full flex gap-2 items-center rounded-md border-1 border-primary/10 p-2"
-            >
-              <div className="w-1/5 text-balance">
-                {item.name.split(" ").map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
-              <div className="w-4/5">
-                <p className="flex justify-between gap-4 items-center">
-                  <span className="text-nowrap">{item.contact_person}</span>
-                  <span className="text-paragraph-small text-primary/50">
-                    {item.address}
-                  </span>
-                </p>
-                <div className="grid grid-cols-2">
-                  <div className="flex flex-col">
-                    <span className="text-label text-primary/50">市話:</span>
-                    <span className="self-end">{item.landline_phone}</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-label text-primary/50">手機:</span>
-                    <span className="self-end">{item.mobile_phone}</span>
-                  </div>
-                </div>
-              </div>
-            </li>
-          );
-        },
-        [data]
-      )} */}
+  
     </ul>
   );
 };
