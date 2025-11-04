@@ -35,7 +35,7 @@ const ResultArea = ({ object, product }: ResultAreaProps) => {
   },[tab, object, product])
 
   return (
-    <div className="w-full h-full overflow-y-auto flex flex-col gap-2 items-center justify-center">
+    <div className="w-full h-full overflow-y-auto flex flex-col gap-2 items-center ">
       {currentContent}
     </div>
   );
