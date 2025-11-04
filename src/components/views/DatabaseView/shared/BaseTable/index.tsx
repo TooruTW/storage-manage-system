@@ -152,9 +152,9 @@ const BaseTable = <TData extends Record<string, unknown>>({
   });
 
   return (
-    <div className={`w-full flex flex-col gap-4 ${editingStyle}`}>
+    <div className={`w-full flex flex-col rounded-md gap-4 ${editingStyle}`}>
       {/* 操作區 */}
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex justify-between items-center mt-4 px-4">
         <div>共 {table.getRowModel().rows.length} 筆資料</div>
         <div className="flex gap-2">
           {hasFilter && (
@@ -194,12 +194,12 @@ const BaseTable = <TData extends Record<string, unknown>>({
       {/* 表格 */}
       <div
         ref={tableContainerRef}
-        className="h-[70vh] overflow-auto"
+        className="h-[70vh] overflow-auto rounded-md"
         style={{ contain: "strict" }}
       >
         <table className="w-full border-collapse min-w-full">
           {/* 表格標題 */}
-          <thead className="w-full sticky top-0 bg-white z-10">
+          <thead className="w-full sticky top-0 z-10 backdrop-blur-2xl">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -215,7 +215,7 @@ const BaseTable = <TData extends Record<string, unknown>>({
                       }
                     >
                       {header.isPlaceholder ? null : (
-                        <div className="flex flex-col justify-center items-center gap-1">
+                        <div className="flex flex-col justify-center items-center py-2">
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext()
