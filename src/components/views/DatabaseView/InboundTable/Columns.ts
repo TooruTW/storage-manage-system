@@ -19,6 +19,7 @@ const columns = [
     cell: ReadOnlyCell,
     header: "單位",
     enableColumnFilter: false,
+    size: 50,
   }),
   columnHelper.accessor("quantity", {
     cell: ReadOnlyCell,
