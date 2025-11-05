@@ -18,7 +18,6 @@ const Inventory = ({ product }: { product: string }) => {
     setData(tempData);
   }, [product, inventoryData, isLoading]);
 
-
   const rowVirtualizer = useWindowVirtualizer({
     count: data.length,
     estimateSize: () => 90,
@@ -49,6 +48,7 @@ const Inventory = ({ product }: { product: string }) => {
         {virtualItems.length > 0 &&
           virtualItems.map((virtualItem) => {
             const {
+              id,
               product_name,
               unit,
               quantity,
@@ -57,7 +57,10 @@ const Inventory = ({ product }: { product: string }) => {
             } = data[virtualItem.index];
 
             return (
-              <li key={product_name} className="w-full flex flex-col my-2">
+              <li
+                key={`${id}-${virtualItem.index}-${product_name}`}
+                className="w-full flex flex-col my-2"
+              >
                 <div className="w-full flex gap-4 rounded-md bg-primary/10 p-2">
                   <div className="flex flex-col w-30">
                     <div className="text-balance">{product_name}</div>
@@ -77,7 +80,10 @@ const Inventory = ({ product }: { product: string }) => {
                     </div>
                     <div className="flex flex-col justify-center items-end text-label">
                       <p>{last_inbound_date.split("-")[0]}</p>
-                      <p>{last_inbound_date.split("-")[1]} / {last_inbound_date.split("-")[2]}</p>
+                      <p>
+                        {last_inbound_date.split("-")[1]} /{" "}
+                        {last_inbound_date.split("-")[2]}
+                      </p>
                     </div>
                   </div>
                 </div>

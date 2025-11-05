@@ -30,6 +30,7 @@ const Cost = ({ object, product }: { object: string; product: string }) => {
     estimateSize: () => 90,
     overscan: 5,
   });
+  
   const virtualItems = rowVirtualizer.getVirtualItems();
 
   if (isLoading) return <TableStateView type="loading" />;
