@@ -11,7 +11,7 @@ import InventoryTable from "@/components/views/DatabaseView/InventoryTable";
 import InboundTable from "@/components/views/DatabaseView/InboundTable";
 import OutboundTable from "@/components/views/DatabaseView/OutboundTable";
 import ConsignmentTable from "@/components/views/DatabaseView/ConsignmentTable";
-import CustomTable from "@/components/views/DatabaseView/CustomTable";
+import CustomerTable from "@/components/views/DatabaseView/CustomerTable";
 import SupplierTable from "@/components/views/DatabaseView/SupplierTable";
 import CreateView from "@/components/views/CreateView";
 import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
@@ -67,7 +67,7 @@ export const routers = [
           },
           {
             path: "customer",
-            element: <CustomTable />,
+            element: <CustomerTable />,
           },
           {
             path: "supplier",

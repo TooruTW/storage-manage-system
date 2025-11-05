@@ -6,7 +6,7 @@ import { BaseTable, TableStateView } from "../shared";
 import { useGetCustomerApi } from "@/api/supabase/customerApi/useGetCustomerApi";
 import { usePatchCustomerApi } from "@/api/supabase/customerApi/usePatchCustomerApi";
 
-const CustomTable = () => {
+const CustomerTable = () => {
   const { data, isLoading } = useGetCustomerApi();
 
   const { mutate: patchCustomer, data: patchResult } = usePatchCustomerApi();
@@ -30,4 +30,4 @@ const CustomTable = () => {
   );
 };
 
-export default CustomTable;
+export default CustomerTable;
