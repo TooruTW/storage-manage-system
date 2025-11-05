@@ -38,7 +38,7 @@ export const TableActions = ({
         )}
         {isEditing && (
           <Button className="active:scale-95 transition-all" onClick={onReset}>
-            重置資料
+            取消編輯
           </Button>
         )}
         {isEditing && (
