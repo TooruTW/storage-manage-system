@@ -1,4 +1,4 @@
-export type Custom = {
+export type Customer = {
   id: string; // 店家ID
   name: string; // 店名
   contact_person: string; // 聯絡人

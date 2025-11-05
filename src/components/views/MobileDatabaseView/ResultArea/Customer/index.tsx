@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
 import { TableStateView } from "@/components/views/DatabaseView/shared";
-import { useGetCustomerApi } from "@/api/supabase/customerApi/useGetCustomerApi";
+
 import VirtualList from "../shared/VirtualList";
+
+import { useGetCustomerApi } from "@/api/supabase/customerApi/useGetCustomerApi";
+
 import { CustomerType } from "@/types/CustomerType";
 
 const Customer = ({ object }: { object: string }) => {

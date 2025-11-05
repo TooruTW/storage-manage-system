@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
-import useGetDashboardData from "../hook/useGetDashboardData";
 import {
+  Bar,
   BarChart as RechartsBarChart,
   ResponsiveContainer,
-  Bar,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
 } from "recharts";
-import { TimeRange, Category } from "../hook/useGetDashboardData";
+
+import useGetDashboardData, {
+  Category,
+  TimeRange,
+} from "../hook/useGetDashboardData";
 
 const BarChart = () => {
   const { timeRange, category } = useParams();

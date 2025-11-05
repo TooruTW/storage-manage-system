@@ -1,23 +1,22 @@
 import { Navigate } from "react-router-dom";
 
 import Layout from "@/components/layout";
-
-import Home from "@/components/views/Home";
 import ButtonContainer from "@/components/views/Home/ButtonContainer";
 import LoginForm from "@/components/views/Home/LoginForm";
-import Dashboard from "@/components/views/Dashboard";
-import DatabaseView from "@/components/views/DatabaseView";
-import InventoryTable from "@/components/views/DatabaseView/InventoryTable";
-import InboundTable from "@/components/views/DatabaseView/InboundTable";
-import OutboundTable from "@/components/views/DatabaseView/OutboundTable";
+import Home from "@/components/views/Home";
 import ConsignmentTable from "@/components/views/DatabaseView/ConsignmentTable";
-import CustomTable from "@/components/views/DatabaseView/CustomTable";
+import CustomerTable from "@/components/views/DatabaseView/CustomerTable";
+import DatabaseView from "@/components/views/DatabaseView";
+import InboundTable from "@/components/views/DatabaseView/InboundTable";
+import InventoryTable from "@/components/views/DatabaseView/InventoryTable";
+import OutboundTable from "@/components/views/DatabaseView/OutboundTable";
 import SupplierTable from "@/components/views/DatabaseView/SupplierTable";
-import CreateView from "@/components/views/CreateView";
-import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
 import CreateInbound from "@/components/views/CreateView/CreateInbound";
-import MobileDatabaseView from "@/components/views/MobileDatabaseView";
+import CreateOutbound from "@/components/views/CreateView/CreateOutbound";
+import CreateView from "@/components/views/CreateView";
+import Dashboard from "@/components/views/Dashboard";
 import Logout from "@/components/views/Logout";
+import MobileDatabaseView from "@/components/views/MobileDatabaseView";
 
 export const routers = [
   {
@@ -67,7 +66,7 @@ export const routers = [
           },
           {
             path: "customer",
-            element: <CustomTable />,
+            element: <CustomerTable />,
           },
           {
             path: "supplier",

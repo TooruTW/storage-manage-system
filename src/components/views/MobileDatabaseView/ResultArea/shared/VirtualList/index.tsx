@@ -1,4 +1,5 @@
 import React from "react";
+
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 
 type VirtualListProps<T> = {
@@ -60,4 +61,3 @@ const VirtualList = <T,>({
 };
 
 export default VirtualList;
-

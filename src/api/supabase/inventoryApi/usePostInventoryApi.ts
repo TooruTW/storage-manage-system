@@ -1,6 +1,8 @@
-import supabase from "..";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { InventoryType } from "@/types/InventoryType";
+
+import supabase from "..";
 
 type newProductData = {
   product_name: string;

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
 
 import "dayjs/locale/zh-tw";
+import { Outlet, useLocation } from "react-router-dom";
 
 import MainImage from "./MainImage";
 import TimeComponent from "./TimeComponent";

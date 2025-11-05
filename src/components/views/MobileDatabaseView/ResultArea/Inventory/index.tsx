@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 
-import { InventoryType } from "@/types/InventoryType";
-import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
 import { TableStateView } from "@/components/views/DatabaseView/shared";
+
 import VirtualList from "../shared/VirtualList";
+
+import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
+
+import { InventoryType } from "@/types/InventoryType";
 
 const Inventory = ({ product }: { product: string }) => {
   const [data, setData] = useState<InventoryType[]>([]);

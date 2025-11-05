@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 
-import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
+
+import { columns } from "./Columns";
 
 import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
 import { usePatchSupplierApi } from "@/api/supabase/supplierApi/usePatchSupplierApi";

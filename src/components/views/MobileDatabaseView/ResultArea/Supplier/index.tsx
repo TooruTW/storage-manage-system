@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
 import { TableStateView } from "@/components/views/DatabaseView/shared";
+
 import VirtualList from "../shared/VirtualList";
+
+import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
+
 import type { SupplierType } from "@/types/SupplierType";
 
 const Supplier = ({ object }: { object: string }) => {

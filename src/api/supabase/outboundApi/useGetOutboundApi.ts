@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import supabase from "..";
 
 type OutboundResponseType = {
@@ -26,7 +27,8 @@ const getOutboundApi = async () => {
     .from("outbound")
     .select(
       "id, customer:customer_id(id, name), product:product_id(id, product_name,unit), cost_per_unit, quantity, price_per_unit, shipment_date, total_price, net_profit, remark"
-    ).order("shipment_date", { ascending: false });
+    )
+    .order("shipment_date", { ascending: false });
   if (error) {
     console.error("Get outbound error", error);
     throw error;

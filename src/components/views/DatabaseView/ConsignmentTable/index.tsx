@@ -1,5 +1,6 @@
-import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
+
+import { columns } from "./Columns";
 
 import { useGetConsignmentApi } from "@/api/supabase/consignmentApi/useGetConsignmentApi";
 import { usePatchConsignmentApi } from "@/api/supabase/consignmentApi/usePatchConsignmentApi";

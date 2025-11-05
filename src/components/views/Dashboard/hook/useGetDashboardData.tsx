@@ -1,4 +1,4 @@
-import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
+import { useGetOutboundApi } from "@/api/supabase/outboundApi/useGetOutboundApi";
 import { useEffect, useMemo, useState } from "react";
 import { BarChartData } from "../BarChart/type";
 import { MONTH_INITIAL_DATA } from "../BarChart/constants";
