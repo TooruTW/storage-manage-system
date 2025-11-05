@@ -1,7 +1,8 @@
-import supabase from "..";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CreateInbound } from "@/components/views/CreateView/CreateInbound/type";
+
+import supabase from "..";
 
 const postInboundApi = async (inbound: CreateInbound[]) => {
   const { error } = await supabase.rpc("insert_inbound_array", {
@@ -11,8 +12,8 @@ const postInboundApi = async (inbound: CreateInbound[]) => {
     console.error("Post inbound error", error);
     throw error;
   }
-  
-  return 
+
+  return;
 };
 
 const usePostInboundApi = () => {

@@ -1,11 +1,12 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import { useParams } from "react-router-dom";
 
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp } from "lucide-react";
 
 import Menu from "./Menu";
-import SearchArea from "./SearchArea";
 import ResultArea from "./ResultArea";
+import SearchArea from "./SearchArea";
 
 const MobileDatabaseView = () => {
   const [isOpen, setIsOpen] = useState(false);

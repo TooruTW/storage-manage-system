@@ -1,23 +1,25 @@
 import { useMemo, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
 
 import dayjs from "dayjs";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 
-import SearchingResult from "./SearchingResult";
-import SearchCustom from "./SearchCustom";
 import AddNewCustom from "./AddNewCustom";
+import SearchCustom from "./SearchCustom";
+import SearchingResult from "./SearchingResult";
 
 import useCreateOutbound from "@/stores/useCreateOutbound";
 import useLoading from "@/stores/useLoading";
 
-import { CreateOutbound } from "../type";
 import usePostOutboundApi from "@/api/supabase/outboundApi/usePostOutboundApi";
+
+import { CreateOutbound } from "../type";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
-  const { handleSubmit, control, setValue, watch, formState } = useForm<CreateOutbound>();
+  const { handleSubmit, control, setValue, watch, formState } =
+    useForm<CreateOutbound>();
 
   const addDataToLocalStorage = (data: CreateOutbound) => {
     let newDataDate = dayjs().format("YYYY-MM-DD");

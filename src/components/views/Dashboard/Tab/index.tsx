@@ -1,7 +1,8 @@
+import { useCallback } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 
 import { TIME_RANGES } from "./constants";
-import { useCallback } from "react";
 
 const Tab = () => {
   const { timeRange } = useParams();

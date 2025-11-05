@@ -1,7 +1,8 @@
+import { useMemo } from "react";
+
 import { Box } from "lucide-react";
 
 import { useAccountStore } from "@/stores/useAccountState";
-import { useMemo } from "react";
 
 const MainImage = () => {
   const loginState = useAccountStore((state) => state.loginState);

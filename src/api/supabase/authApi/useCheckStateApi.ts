@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import supabase from "..";
+
 import { useAccountStore } from "@/stores/useAccountState";
+
+import supabase from "..";
 
 const checkStateApi = async () => {
   const globalState = useAccountStore.getState();
