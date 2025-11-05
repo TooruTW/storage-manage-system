@@ -25,6 +25,14 @@ const EditableCell = <TData extends Record<string, unknown>>({
     table.options.meta?.updateData(index, id, value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      onBlur();
+      e.currentTarget.blur();
+    }
+  };
+
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
@@ -34,6 +42,7 @@ const EditableCell = <TData extends Record<string, unknown>>({
       value={value as number}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
+      onKeyDown={handleKeyDown}
       type="number"
       className={`w-full text-center h-full py-4 ${inputStyle}`}
       disabled={!isEditing}

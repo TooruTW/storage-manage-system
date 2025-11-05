@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
+
+import dayjs from "dayjs";
+import converter from "number-to-chinese-words";
 import { useNavigate } from "react-router-dom";
 
 import { Box } from "lucide-react";
-import dayjs from "dayjs";
-import converter from "number-to-chinese-words";
 
 import { Button } from "@/components/ui/button";
+
 import { INITIAL_TIME } from "./data";
 
 export const Header = () => {

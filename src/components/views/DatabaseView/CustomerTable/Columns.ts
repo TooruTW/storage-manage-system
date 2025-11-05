@@ -1,8 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { Custom } from "./type/dataType";
+import { Customer } from "./type/dataType";
 import {EditableCell} from "../shared";
 
-const columnHelper = createColumnHelper<Custom>();
+const columnHelper = createColumnHelper<Customer>();
 
 const columns = [
   columnHelper.accessor("name", {

@@ -9,11 +9,9 @@ const CenterSection = () => {
 
   return (
     <div className="rounded-xl border border-primary/10 shadow-md w-full p-6 h-full flex flex-col overflow-hidden">
-      <div className=" flex justify-between items-center mb-4">
-        <h2 className="text-h2 font-normal">
-          {TABS_CONSTANTS.find((item) => item.id === currentTab)?.label}
-        </h2>
-      </div>
+      <h2 className="text-h2 font-normal">
+        {TABS_CONSTANTS.find((item) => item.id === currentTab)?.label}
+      </h2>
       <div className="flex-1 overflow-y-auto">
         <Outlet />
       </div>

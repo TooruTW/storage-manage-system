@@ -1,6 +1,6 @@
-import Tab from "./Tab";
-import CategoryCard from "./CategoryCard";
 import BarChart from "./BarChart";
+import CategoryCard from "./CategoryCard";
+import Tab from "./Tab";
 
 const Dashboard = () => {
   return (

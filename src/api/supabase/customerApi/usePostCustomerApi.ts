@@ -1,18 +1,20 @@
-import supabase from "..";
-import { SupplierType } from "@/types/SupplierType";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const postCustomerApi = async (supplier: Partial<SupplierType>) => {
+import { CustomerType } from "@/types/CustomerType";
+
+import supabase from "..";
+
+const postCustomerApi = async (customer: Partial<CustomerType>) => {
   const { data, error } = await supabase
     .from("customer")
-    .insert([supplier])
+    .insert([customer])
     .select();
 
   if (error) {
-    console.error("Post supplier error", error);
+    console.error("Post customer error", error);
     throw error;
   }
-  return data as unknown as SupplierType[];
+  return data as unknown as CustomerType[];
 };
 
 const usePostCustomerApi = () => {

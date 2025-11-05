@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+
 import supabase from "..";
 
 type InboundResponseType = {
@@ -23,7 +24,8 @@ const getInboundApi = async () => {
     .from("inbound")
     .select(
       "id, supplier:supplier_id(id, name), product:product_id(id, product_name,unit), quantity, price_per_unit, inbound_date, remark"
-    ).order("inbound_date", { ascending: false });
+    )
+    .order("inbound_date", { ascending: false });
   if (error) {
     console.error("Get inbound error", error);
     throw error;

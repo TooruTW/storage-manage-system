@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
 import { TableStateView } from "@/components/views/DatabaseView/shared";
+
+import VirtualList from "../shared/VirtualList";
+
+import { useGetSupplierApi } from "@/api/supabase/supplierApi/useGetSupplierApi";
+
 import type { SupplierType } from "@/types/SupplierType";
 
 const Supplier = ({ object }: { object: string }) => {
@@ -9,12 +13,10 @@ const Supplier = ({ object }: { object: string }) => {
   const [data, setData] = useState<SupplierType[]>([]);
 
   useEffect(() => {
-    if (!supplierData || isLoading) return;    
+    if (!supplierData || isLoading) return;
     let tempData = [...supplierData];
     if (object !== "") {
-      tempData = tempData.filter((item) =>
-        item.name.includes(object)
-      );
+      tempData = tempData.filter((item) => item.name.includes(object));
     }
     setData(tempData);
   }, [object, supplierData, isLoading]);
@@ -23,43 +25,41 @@ const Supplier = ({ object }: { object: string }) => {
   if (!data) return <TableStateView type="empty" />;
 
   return (
-    <ul className="w-full flex-1 overflow-y-auto flex flex-col gap-2">
-      {data.map(
-        (item, index) => {
-          return (
-            <li
-              key={`${item.id}-${index}-${item.name}`}
-              className="w-full flex gap-2 items-center rounded-md border-1 border-primary/10 p-2"
-            >
-              <div className="w-1/5 text-balance">
-                {item.name.split(" ").map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
-              <div className="w-4/5">
-                <p className="flex justify-between gap-4 items-center">
-                  <span className="text-nowrap">{item.contact_person}</span>
-                  <span className="text-paragraph-small text-primary/50">
-                    {item.address}
-                  </span>
-                </p>
-                <div className="grid grid-cols-2">
-                  <div className="flex flex-col">
-                    <span className="text-label text-primary/50">市話:</span>
-                    <span className="self-end">{item.landline_phone}</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-label text-primary/50">手機:</span>
-                    <span className="self-end">{item.mobile_phone}</span>
-                  </div>
+    <VirtualList
+      data={data}
+      getItemKey={(item, index) => `${item.id}-${index}-${item.name}`}
+      renderItem={(item) => {
+        const { name, contact_person, address, landline_phone, mobile_phone } =
+          item;
+        return (
+          <div className="w-full flex gap-2 items-center rounded-md border-1 border-primary/10 p-2 mb-2">
+            <div className="w-1/5 text-balance">
+              {name.split(" ").map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
+            <div className="w-4/5">
+              <p className="flex justify-between gap-4 items-center">
+                <span className="text-nowrap">{contact_person}</span>
+                <span className="text-paragraph-small text-primary/50">
+                  {address}
+                </span>
+              </p>
+              <div className="grid grid-cols-2">
+                <div className="flex flex-col">
+                  <span className="text-label text-primary/50">市話:</span>
+                  <span className="self-end">{landline_phone}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-label text-primary/50">手機:</span>
+                  <span className="self-end">{mobile_phone}</span>
                 </div>
               </div>
-            </li>
-          );
-        },
-        [data]
-      )}
-    </ul>
+            </div>
+          </div>
+        );
+      }}
+    />
   );
 };
 

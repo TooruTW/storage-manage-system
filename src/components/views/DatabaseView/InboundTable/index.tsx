@@ -1,8 +1,9 @@
-import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
 
-import { useGetInboundApi } from "@/api/supabase/inboundAPi/useGetInboundApi";
-import useDeleteInboundApi from "@/api/supabase/inboundAPi/useDeleteInboundApi";
+import { columns } from "./Columns";
+
+import useDeleteInboundApi from "@/api/supabase/inboundApi/useDeleteInboundApi";
+import { useGetInboundApi } from "@/api/supabase/inboundApi/useGetInboundApi";
 
 const InboundTable = () => {
   const { data: inboundData, isLoading } = useGetInboundApi();

@@ -1,5 +1,6 @@
-import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
+
+import { columns } from "./Columns";
 
 import { useGetInventoryApi } from "@/api/supabase/inventoryApi/useGetInventoryApi";
 import { usePatchInventoryApi } from "@/api/supabase/inventoryApi/usePatchInventoryApi";
