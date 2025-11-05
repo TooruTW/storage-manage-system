@@ -123,9 +123,9 @@ const BaseTable = <TData extends Record<string, unknown>>({
   const handleShowConfirmReset = () => {
     setContent(
       <UpdateConfirm
-        warningContent="確定要重置資料嗎？"
+        warningContent="確定要取消編輯嗎？"
         onConfirm={() => {
-          setData(originalData); // 重置資料
+          setData(originalData); // 取消編輯
           setNewData(new Map()); // 清空新資料
           setIsEditing(false); // 退出編輯模式
         }}
