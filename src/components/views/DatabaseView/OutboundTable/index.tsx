@@ -1,8 +1,8 @@
 import { columns } from "./Columns";
 import { BaseTable, TableStateView } from "../shared";
 
-import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
-import useDeleteOutboundApi from "@/api/supabase/outboundAPi/useDeleteOutboundApi";
+import { useGetOutboundApi } from "@/api/supabase/outboundApi/useGetOutboundApi";
+import useDeleteOutboundApi from "@/api/supabase/outboundApi/useDeleteOutboundApi";
 
 const OutboundTable = () => {
   const { data: outboundData, isLoading } = useGetOutboundApi();

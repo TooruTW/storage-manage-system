@@ -13,7 +13,7 @@ import useCreateOutbound from "@/stores/useCreateOutbound";
 import useLoading from "@/stores/useLoading";
 
 import { CreateOutbound } from "../type";
-import usePostOutboundApi from "@/api/supabase/outboundAPi/usePostOutboundApi";
+import usePostOutboundApi from "@/api/supabase/outboundApi/usePostOutboundApi";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);

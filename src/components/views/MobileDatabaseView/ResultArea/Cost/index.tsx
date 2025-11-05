@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { useGetInboundApi } from "@/api/supabase/inboundAPi/useGetInboundApi";
+import { useGetInboundApi } from "@/api/supabase/inboundApi/useGetInboundApi";
 import { TableStateView } from "@/components/views/DatabaseView/shared";
 import ConditionRequired from "../shared/ConditionRequired";
 import VirtualList from "../shared/VirtualList";

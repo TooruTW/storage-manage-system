@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
-import { useGetOutboundApi } from "@/api/supabase/outboundAPi/useGetOutboundApi";
+import { useGetOutboundApi } from "@/api/supabase/outboundApi/useGetOutboundApi";
 import { TableStateView } from "@/components/views/DatabaseView/shared";
 import ConditionRequired from "../shared/ConditionRequired";
 import VirtualList from "../shared/VirtualList";

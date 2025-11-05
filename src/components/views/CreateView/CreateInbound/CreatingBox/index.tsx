@@ -14,7 +14,7 @@ import useLoading from "@/stores/useLoading";
 
 import { CreateInbound } from "../type";
 import usePostInventoryApi from "@/api/supabase/inventoryApi/usePostInventoryApi";
-import usePostInboundApi from "@/api/supabase/inboundAPi/usePostInboundApi";
+import usePostInboundApi from "@/api/supabase/inboundApi/usePostInboundApi";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
