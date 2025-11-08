@@ -29,6 +29,7 @@ const NumberCell = <TData extends Record<string, unknown>>({
       value={value as number}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
+      name={String(id)}
       min={0}
       className={`w-full text-right h-full py-4 cursor-text `}
     />

@@ -48,6 +48,7 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
         className="border-b-1 border-primary/10 py-1 px-2 shadow-xs w-full"
         placeholder="請輸入進貨商名稱"
         value={value}
+        name="supplier_search_keyword"
         onFocus={() => setIsOpen(true)}
         onChange={(e) => {
           onChange(e.target.value);
