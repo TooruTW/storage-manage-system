@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  useGetCustomerApi,
-} from "@/api/supabase/customerApi/useGetCustomerApi";
+import { useGetCustomerApi } from "@/api/supabase/customerApi/useGetCustomerApi";
 import useClickOutSide from "@/components/hook/useClickOutSide";
 import { UseFormSetValue } from "react-hook-form";
 import { CreateOutbound } from "../../../type";
@@ -49,6 +47,7 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
         className="border-b-1 border-primary/10 py-1 px-2 shadow-xs w-full"
         placeholder="請輸入客戶名稱"
         value={value}
+        name="customer_search_keyword"
         onFocus={() => setIsOpen(true)}
         onChange={(e) => {
           onChange(e.target.value);

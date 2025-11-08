@@ -28,8 +28,8 @@ const SelectorCell = <TData extends Record<string, unknown>>({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onBlur={onBlur}
+        name={String(id)}
         className="w-full text-center h-full py-4"
-        placeholder="請選擇或輸入"
       />
       <datalist id={`selector-options-${id}-${index}`}>
         <option value="出庫" />
