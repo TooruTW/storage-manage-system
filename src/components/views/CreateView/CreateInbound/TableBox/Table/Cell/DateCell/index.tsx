@@ -19,7 +19,6 @@ const DateCell = <TData extends Record<string, unknown>>({
     setValue(e.target.value);
   };
 
-  // When the input is blurred, we'll call our table meta's updateData function
   const onBlur = () => {
     const date = dayjs(value as string);
     if (!date.isValid()) {
@@ -31,19 +30,22 @@ const DateCell = <TData extends Record<string, unknown>>({
     setPrevValue(date.format("YYYY-MM-DD"));
   };
 
-  // If the initialValue is changed external, sync it up with our state
   useEffect(() => {
     setValue(initialValue);
     setPrevValue(initialValue);
   }, [initialValue]);
 
   return (
-    <input
-      value={value as string}
-      onChange={handleChange}
-      onBlur={onBlur}
-      className="w-full text-center h-full py-4 cursor-text"
-    />
+    <div className="flex justify-center items-center h-full">
+      <input
+        value={value as string}
+        onChange={handleChange}
+        type="date"
+        onBlur={onBlur}
+        name={String(id)}
+        className="w-4/5 text-center h-full py-4 cursor-text"
+      />
+    </div>
   );
 };
 

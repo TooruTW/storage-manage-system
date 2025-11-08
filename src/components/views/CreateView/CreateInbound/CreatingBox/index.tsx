@@ -30,7 +30,7 @@ const CreatingBox = () => {
     const prevData = useCreateInbound.getState().createInbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].inbound_date;
+      newDataDate = prevData[0].inbound_date;
     }
 
     const newData: CreateInbound = {
@@ -52,7 +52,6 @@ const CreatingBox = () => {
 
   // 提交表單
   const onSubmit: SubmitHandler<CreateInbound> = (data) => {
-    console.log(data);
     if (data.product_id === "") {
       console.log("新增商品");
       postInventory(
