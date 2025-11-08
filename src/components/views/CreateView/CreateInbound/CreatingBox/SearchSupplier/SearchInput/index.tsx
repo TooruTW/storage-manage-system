@@ -4,6 +4,7 @@ import { SupplierType } from "@/types/SupplierType";
 import useClickOutSide from "@/components/hook/useClickOutSide";
 import { UseFormSetValue } from "react-hook-form";
 import { CreateInbound } from "../../../type";
+import { Skeleton } from "@/components/ui/skeleton"
 
 type SearchInputProps = {
   value: string;
@@ -14,7 +15,7 @@ type SearchInputProps = {
 const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
   const ref = useClickOutSide({ action: () => setIsOpen(false) });
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const { data: supplierData } = useGetSupplierApi();
+  const { data: supplierData, isLoading: isLoadingSupplier } = useGetSupplierApi();
   const [supplierList, setSupplierList] = useState<SupplierType[]>([]);
 
   // init supplier list
@@ -54,7 +55,12 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
           onChange(e.target.value);
         }}
       />
-      {isOpen && (
+      {isOpen && isLoadingSupplier && (
+        <div className="w-full h-fit absolute left-0 top-full border-1 border-primary rounded-md bg-white z-10 flex justify-center items-center p-2">
+          <Skeleton className="w-full h-8" />
+        </div>
+      )}
+      {isOpen && !isLoadingSupplier && (
         <div className="w-full h-fit max-h-200 overflow-y-auto absolute left-0 top-full translate-y-2 divide-y-1 divide-primary/10 border-1 border-primary rounded-md bg-white z-10 text-center">
           {supplierList.map((supplier) => (
             <p
