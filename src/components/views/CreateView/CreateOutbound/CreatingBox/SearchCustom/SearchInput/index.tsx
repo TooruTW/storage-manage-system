@@ -4,6 +4,8 @@ import useClickOutSide from "@/components/hook/useClickOutSide";
 import { UseFormSetValue } from "react-hook-form";
 import { CreateOutbound } from "../../../type";
 import { CustomerType } from "@/types/CustomerType";
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 type SearchInputProps = {
   value: string;
@@ -12,16 +14,19 @@ type SearchInputProps = {
 };
 
 const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
-  const { data: customerData } = useGetCustomerApi();
+  const { data: customerData, isLoading: isLoadingCustomer } = useGetCustomerApi();
   const [customList, setCustomList] = useState<CustomerType[]>([]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useClickOutSide({ action: () => setIsOpen(false) });
   // init customer list
   useEffect(() => {
+    if (isLoadingCustomer) {
+      setCustomList([]);
+    };
     if (customerData) {
       setCustomList(customerData);
     }
-  }, [customerData]);
+  }, [customerData, isLoadingCustomer]);
 
   useEffect(() => {
     if (!customerData) return;
@@ -53,7 +58,14 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
           onChange(e.target.value);
         }}
       />
-      {isOpen && (
+      {
+        isOpen && isLoadingCustomer && (
+          <div className="w-full h-fit absolute left-0 top-full border-1 border-primary rounded-md bg-white z-10 flex justify-center items-center p-2">
+            <Skeleton className="w-full h-8" />
+          </div>
+        )
+      }
+      {isOpen && !isLoadingCustomer && (
         <div className="w-full h-fit max-h-200 overflow-y-auto absolute left-0 top-full translate-y-2 divide-y-1 divide-primary/10 border-1 border-primary rounded-md bg-white z-10 text-center">
           {customList.map((custom) => (
             <p
