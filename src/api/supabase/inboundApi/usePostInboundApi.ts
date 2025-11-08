@@ -20,8 +20,7 @@ const usePostInboundApi = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postInboundApi,
-    onSuccess: (data) => {
-      console.log("Post inbound success", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["inbound"] });
     },
     onError: (error) => {

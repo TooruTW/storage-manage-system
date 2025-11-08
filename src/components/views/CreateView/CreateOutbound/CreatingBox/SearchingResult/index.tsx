@@ -30,6 +30,7 @@ const SearchingResult = ({
           className="border-1 border-primary/10 rounded-md py-1 px-3 shadow-xs w-full"
           placeholder="搜尋商品"
           value={keyword}
+          name="search_outbound_product_keyword"
           onChange={(e) => setKeyword(e.target.value)}
         />
       </div>

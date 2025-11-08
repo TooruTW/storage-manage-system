@@ -53,6 +53,7 @@ const MoneyCell = <TData extends Record<string, unknown>>({
           setValueType("number");
         }}
         onBlur={onBlur}
+        name={String(id)}
         className={`w-full text-center h-full py-4 cursor-text `}
       />
     </div>
