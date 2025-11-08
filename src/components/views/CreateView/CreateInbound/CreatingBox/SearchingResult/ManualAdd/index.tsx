@@ -1,19 +1,25 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { CreateInbound } from "../../../type";
 
 type ManualAddProps = {
   setValue: UseFormSetValue<CreateInbound>;
   onSubmit: () => void;
+  getValues: UseFormGetValues<CreateInbound>;
 };
 
-const ManualAdd = ({ setValue, onSubmit }: ManualAddProps) => {
+const ManualAdd = ({ setValue, onSubmit, getValues }: ManualAddProps) => {
   const [productName, setProductName] = useState("");
   const [unit, setUnit] = useState("");
 
   const handleSubmit = () => {
     if (!productName.trim() || !unit.trim()) return;
+    const supplierId = getValues("supplier_id");
+    if (!supplierId) {
+      alert("請先選擇進貨商");
+      return;
+    }
       
     // 手動新增的商品，設定 product_id 為空字串（表示為新商品，尚未存在於資料庫）
     setValue("product_id", "");
