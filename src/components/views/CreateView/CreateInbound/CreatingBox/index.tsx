@@ -19,7 +19,7 @@ import { CreateInbound } from "../type";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
-  const { handleSubmit, control, setValue, formState } =
+  const { handleSubmit, control, setValue, getValues, formState } =
     useForm<CreateInbound>();
 
   const { mutate: postInventory } = usePostInventoryApi();
@@ -52,8 +52,11 @@ const CreatingBox = () => {
 
   // 提交表單
   const onSubmit: SubmitHandler<CreateInbound> = (data) => {
+    if (!data.supplier_id) {
+      alert("請先選擇進貨商");
+      return;
+    }
     if (data.product_id === "") {
-      console.log("新增商品");
       postInventory(
         {
           product_name: data.product_name,
@@ -80,8 +83,17 @@ const CreatingBox = () => {
   const { mutate: postInbound } = usePostInboundApi();
   // 上傳資料
   const handleUpload = async () => {
-    useLoading.getState().startLoading();
     const data = useCreateInbound.getState().createInbound;
+    if (!data || data.length === 0) {
+      alert("沒有可上傳的資料");
+      return;
+    }
+    const invalidInbound = data.filter((item) => !item.supplier_id);
+    if (invalidInbound.length > 0) {
+      alert("有項目缺少進貨商，請檢查後再試");
+      return;
+    }
+    useLoading.getState().startLoading();
 
     postInbound(data, {
       onSuccess: () => {
@@ -121,6 +133,7 @@ const CreatingBox = () => {
           <SearchingResult
             setValue={setValue}
             onSubmit={handleSubmit(onSubmit)}
+            getValues={getValues}
           />
         </form>
         {isAddNewSupplier && (

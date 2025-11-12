@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 import Tab from "./Tab";
 import ManualAdd from "./ManualAdd";
@@ -11,9 +11,14 @@ import { TabOption } from "./Tab/constants";
 type SearchingResultProps = {
   setValue: UseFormSetValue<CreateInbound>;
   onSubmit: () => void;
+  getValues: UseFormGetValues<CreateInbound>;
 };
 
-const SearchingResult = ({ setValue, onSubmit }: SearchingResultProps) => {
+const SearchingResult = ({
+  setValue,
+  onSubmit,
+  getValues,
+}: SearchingResultProps) => {
   const [activeTab, setActiveTab] = useState<TabOption>("search");
 
   return (
@@ -24,7 +29,11 @@ const SearchingResult = ({ setValue, onSubmit }: SearchingResultProps) => {
         {activeTab === "search" ? (
           <SearchProduct setValue={setValue} onSubmit={onSubmit} />
         ) : (
-          <ManualAdd setValue={setValue} onSubmit={onSubmit} />
+          <ManualAdd
+            setValue={setValue}
+            onSubmit={onSubmit}
+            getValues={getValues}
+          />
         )}
       </div>
     </div>
