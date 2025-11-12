@@ -26,7 +26,7 @@ const CreatingBox = () => {
     const prevData = useCreateOutbound.getState().createOutbound;
 
     if (prevData && prevData.length > 0) {
-      newDataDate = prevData[prevData.length - 1].shipment_date;
+      newDataDate = prevData[0].shipment_date;
     }
 
     const newData: CreateOutbound = {
