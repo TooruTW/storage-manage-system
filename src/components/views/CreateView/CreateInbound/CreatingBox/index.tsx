@@ -57,7 +57,6 @@ const CreatingBox = () => {
       return;
     }
     if (data.product_id === "") {
-      console.log("新增商品");
       postInventory(
         {
           product_name: data.product_name,

@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { BaseTable, TableStateView } from "../shared";
 
 import { columns } from "./Columns";
@@ -10,13 +8,7 @@ import { usePatchCustomerApi } from "@/api/supabase/customerApi/usePatchCustomer
 const CustomerTable = () => {
   const { data, isLoading } = useGetCustomerApi();
 
-  const { mutate: patchCustomer, data: patchResult } = usePatchCustomerApi();
-
-  useEffect(() => {
-    if (patchResult) {
-      console.log("patchResult", patchResult);
-    }
-  }, [patchResult]);
+  const { mutate: patchCustomer } = usePatchCustomerApi();
 
   if (isLoading) return <TableStateView type="loading" />;
 

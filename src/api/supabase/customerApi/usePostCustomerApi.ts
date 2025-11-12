@@ -21,8 +21,7 @@ const usePostCustomerApi = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postCustomerApi,
-    onSuccess: (data) => {
-      console.log("新增客戶成功", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["customer"] });
     },
     onError: (error) => {

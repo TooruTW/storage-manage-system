@@ -23,7 +23,7 @@ const SearchCustom = ({
 }: SearchCustomProps) => {
   useEffect(() => {
     if (error) {
-      console.log(error);
+      console.error("SearchCustom error:", error);
     }
   }, [error]);
 
