@@ -20,8 +20,7 @@ const usePostOutboundApi = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postOutboundApi,
-    onSuccess: (data) => {
-      console.log("Post outbound success", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["outbound"] });
     },
     onError: (error) => {

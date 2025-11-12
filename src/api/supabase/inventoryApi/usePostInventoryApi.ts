@@ -27,8 +27,7 @@ const usePostInventoryApi = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: postInventoryApi,
-    onSuccess: (data) => {
-      console.log("新增商品成功", data);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["inventory"] });
     },
     onError: (error) => {
