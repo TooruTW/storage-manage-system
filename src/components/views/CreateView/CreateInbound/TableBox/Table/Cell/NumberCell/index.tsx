@@ -18,6 +18,10 @@ const NumberCell = <TData extends Record<string, unknown>>({
     table.options.meta?.updateData(index, id, value);
   };
 
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select();
+  };
+
   // If the initialValue is changed external, sync it up with our state
   useEffect(() => {
     setValue(initialValue);
@@ -29,6 +33,7 @@ const NumberCell = <TData extends Record<string, unknown>>({
       value={value as number}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
+      onFocus={onFocus}
       name={String(id)}
       min={0}
       autoComplete="off"
