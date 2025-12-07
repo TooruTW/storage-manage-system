@@ -35,6 +35,7 @@ const MoneyCell = <TData extends Record<string, unknown>>({
     setValueType("string");
   };
 
+
   useEffect(() => {
     setValue(formatValue(initialValue as number));
   }, [initialValue]);
@@ -45,7 +46,8 @@ const MoneyCell = <TData extends Record<string, unknown>>({
         type={valueType}
         value={value as number | string}
         onChange={(e) => setValue(e.target.value)}
-        onFocus={() => {
+        onFocus={(e) => {
+          e.target.select();
           setValue((prev) => {
             const numericValue = parseFormattedValue(prev as string);
             return numericValue;
