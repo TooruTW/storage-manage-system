@@ -50,6 +50,7 @@ const ManualAdd = ({ setValue, onSubmit, getValues }: ManualAddProps) => {
           type="text"
           id="productName"
           value={productName}
+          autoComplete="off"
           onChange={(e) => setProductName(e.target.value)}
         />
         <input
@@ -58,6 +59,7 @@ const ManualAdd = ({ setValue, onSubmit, getValues }: ManualAddProps) => {
           type="text"
           id="unit"
           value={unit}
+          autoComplete="off"
           onChange={(e) => setUnit(e.target.value)}
         />
       </div>

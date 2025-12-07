@@ -19,7 +19,7 @@ import { CreateInbound } from "../type";
 
 const CreatingBox = () => {
   const [isAddNewSupplier, setIsAddNewSupplier] = useState(false);
-  const { handleSubmit, control, setValue, getValues, formState } =
+  const { handleSubmit, control, setValue, getValues, formState ,resetField} =
     useForm<CreateInbound>();
 
   const { mutate: postInventory } = usePostInventoryApi();
@@ -53,7 +53,8 @@ const CreatingBox = () => {
   // 提交表單
   const onSubmit: SubmitHandler<CreateInbound> = (data) => {
     if (!data.supplier_id) {
-      alert("請先選擇進貨商");
+      alert("請重新選擇進貨商");
+      resetField("supplier_name");
       return;
     }
     if (data.product_id === "") {

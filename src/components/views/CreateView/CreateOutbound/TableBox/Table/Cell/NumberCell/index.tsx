@@ -16,6 +16,10 @@ const NumberCell = <TData extends Record<string, unknown>>({
     table.options.meta?.updateData(index, id, value);
   };
 
+  const onFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.select();
+  };
+
   useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
@@ -26,8 +30,10 @@ const NumberCell = <TData extends Record<string, unknown>>({
       value={value as number}
       onChange={(e) => setValue(e.target.value)}
       onBlur={onBlur}
+      onFocus={onFocus}
       name={String(id)}
       min={0}
+      autoComplete="off"
       className={`w-full text-right h-full py-4 cursor-text `}
     />
   );

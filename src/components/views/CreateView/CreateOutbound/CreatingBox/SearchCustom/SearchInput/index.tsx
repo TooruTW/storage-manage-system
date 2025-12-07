@@ -53,6 +53,7 @@ const SearchInput = ({ value, onChange, setValue }: SearchInputProps) => {
         placeholder="請輸入客戶名稱"
         value={value}
         name="customer_search_keyword"
+        autoComplete="off"
         onFocus={() => setIsOpen(true)}
         onChange={(e) => {
           onChange(e.target.value);

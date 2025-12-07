@@ -31,6 +31,7 @@ const PhoneNumber = ({ register, errors, control }: FormComponentProps) => {
             className="border-1 rounded-md px-2 py-1 border-primary/10 text-label"
             id="landline_phone"
             placeholder="ex: 02-12345678"
+            autoComplete="off"
             {...register("landline_phone", {
               pattern: {
                 value: /^0\d{1,2}-\d{6,8}$/,
@@ -51,6 +52,7 @@ const PhoneNumber = ({ register, errors, control }: FormComponentProps) => {
             className="border-1 rounded-md px-2 py-1 border-primary/10 text-label"
             id="mobile_phone"
             placeholder="ex: 0912-345-678"
+            autoComplete="off"
             {...register("mobile_phone", {
               pattern: {
                 value: /^09\d{2}-\d{3}-\d{3}$/,

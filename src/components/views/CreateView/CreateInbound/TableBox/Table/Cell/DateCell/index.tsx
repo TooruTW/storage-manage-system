@@ -43,6 +43,7 @@ const DateCell = <TData extends Record<string, unknown>>({
         type="date"
         onBlur={onBlur}
         name={String(id)}
+        autoComplete="off"
         className="w-4/5 text-center h-full py-4 cursor-text"
       />
     </div>

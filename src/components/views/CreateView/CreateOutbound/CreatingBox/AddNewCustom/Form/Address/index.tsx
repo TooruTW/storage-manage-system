@@ -16,6 +16,7 @@ const Address = ({ register, errors }: FormComponentProps) => {
         className="border-1 rounded-md px-2 py-1 border-primary/10 text-label w-full"
         id="address"
         placeholder="ex: 台北市信義區信義路五段7號之1"
+        autoComplete="off"
         {...register("address")}
       />
     </div>
