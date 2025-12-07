@@ -36,17 +36,17 @@ const columns = [
     enableColumnFilter: false,
     size: 100,
   }),
-  columnHelper.accessor("price_per_unit", {
-    cell: MoneyCell,
-    header: "單位價格 $",
-    enableColumnFilter: false,
-    size: 100,
-  }),
   columnHelper.accessor("quantity", {
     cell: NumberCell,
     header: "數量",
     enableColumnFilter: false,
     size: 50,
+  }),
+  columnHelper.accessor("price_per_unit", {
+    cell: MoneyCell,
+    header: "單位價格 $",
+    enableColumnFilter: false,
+    size: 100,
   }),
   columnHelper.accessor("total_price", {
     cell: CalcTotalCell,

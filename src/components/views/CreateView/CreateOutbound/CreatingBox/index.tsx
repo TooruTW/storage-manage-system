@@ -18,7 +18,7 @@ import { CreateOutbound } from "../type";
 
 const CreatingBox = () => {
   const [isAddNewCustom, setIsAddNewCustom] = useState(false);
-  const { handleSubmit, control, setValue, watch, formState } =
+  const { handleSubmit, control, setValue, watch, formState ,resetField} =
     useForm<CreateOutbound>();
 
   const addDataToLocalStorage = (data: CreateOutbound) => {
@@ -49,6 +49,11 @@ const CreatingBox = () => {
   };
 
   const onSubmit: SubmitHandler<CreateOutbound> = (data) => {
+    if (!data.customer_id) {
+      alert("請重新選擇客戶");
+      resetField("customer_name");
+      return;
+    }
     addDataToLocalStorage(data);
   };
 

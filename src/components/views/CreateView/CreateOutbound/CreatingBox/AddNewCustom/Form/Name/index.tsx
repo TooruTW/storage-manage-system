@@ -22,6 +22,7 @@ const Name = ({ register, errors }: FormComponentProps) => {
           className="border-1 rounded-md px-2 py-1 border-primary/10 text-label"
           id="name"
           placeholder="ex: 地區 店名"
+          autoComplete="off"
           {...register("name", {
             required: true,
             pattern: {
@@ -42,6 +43,7 @@ const Name = ({ register, errors }: FormComponentProps) => {
           className="border-1 rounded-md px-2 py-1 border-primary/10 text-label"
           id="contact_person"
           placeholder="輸入聯絡人名稱"
+          autoComplete="off"
           {...register("contact_person")}
         />
       </div>

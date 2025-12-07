@@ -48,7 +48,8 @@ const MoneyCell = <TData extends Record<string, unknown>>({
         type={valueType}
         value={value as number | string}
         onChange={(e) => setValue(e.target.value)}
-        onFocus={() => {
+        onFocus={(e) => {
+          e.target.select();
           setValue((prev) => {
             const numericValue = parseFormattedValue(prev as string);
             return numericValue;
@@ -57,6 +58,7 @@ const MoneyCell = <TData extends Record<string, unknown>>({
         }}
         onBlur={onBlur}
         name={String(id)}
+        autoComplete="off"
         className={`w-full text-center h-full py-4 cursor-text `}
       />
     </div>
