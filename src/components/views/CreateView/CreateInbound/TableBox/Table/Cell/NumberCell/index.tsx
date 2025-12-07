@@ -31,6 +31,7 @@ const NumberCell = <TData extends Record<string, unknown>>({
       onBlur={onBlur}
       name={String(id)}
       min={0}
+      autoComplete="off"
       className={`w-full text-right h-full py-4 cursor-text `}
     />
   );

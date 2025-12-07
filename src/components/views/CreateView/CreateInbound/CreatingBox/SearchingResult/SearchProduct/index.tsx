@@ -22,6 +22,7 @@ const SearchProduct = ({ setValue, onSubmit }: SearchProductProps) => {
           placeholder="搜尋商品"
           value={keyword}
           name="search_product_keyword"
+          autoComplete="off"
           onChange={(e) => setKeyword(e.target.value)}
         />
       </div>

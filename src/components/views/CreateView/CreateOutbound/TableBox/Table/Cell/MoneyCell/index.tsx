@@ -54,6 +54,7 @@ const MoneyCell = <TData extends Record<string, unknown>>({
         }}
         onBlur={onBlur}
         name={String(id)}
+        autoComplete="off"
         className={`w-full text-center h-full py-4 cursor-text `}
       />
     </div>
